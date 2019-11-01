@@ -40,10 +40,10 @@ func main() {
 	}
 	log.Printf("demoted %d expired highlighted 30days job ads\n", affected)
 
-	log.Printf("also cleaning up expired apply tokens")
-	err = database.CleanupExpiredApplyTokens(conn)
-	if err != nil {
-		log.Fatalf("unable to cleanup expired apply tokens err %v", err)
-	}
-	log.Printf("finished to cleanup expired apply tokens")
+	// log.Printf("also cleaning up expired apply tokens")
+	// err = database.CleanupExpiredApplyTokens(conn)
+	// if err != nil {
+	// 	log.Fatalf("unable to cleanup expired apply tokens err %v", err)
+	// }
+	// log.Printf("finished to cleanup expired apply tokens")
 }
