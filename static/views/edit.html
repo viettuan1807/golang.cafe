@@ -236,6 +236,7 @@
             }
             document.getElementById("spinner-0").style.display = "block";
             var token = document.getElementById('token').value;
+            var hasFiles = document.getElementById('company-icon-file').files.length > 0;
             if (document.getElementById("company-icon-allowed").value > 0 && document.getElementById("existing-company-icon-id").value != 0 && hasFiles) {
                 // update existing image
                 var mediaFile = document.getElementById('company-icon-file').files[0];
