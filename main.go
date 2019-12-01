@@ -187,12 +187,5 @@ func main() {
 	// @admin: permanently delete job and all child resources (image, clickouts, edit token)
 	svr.RegisterRoute("/x/j/d", handler.PermanentlyDeleteJobByToken(svr), []string{"POST"})
 
-	//
-	// deprecated routes
-	//
-
-	// @deprecated: view job by timestamp id
-	svr.RegisterRoute("/j/{id}", handler.JobByTimestampIDPageHandler(svr), []string{"GET"})
-
 	log.Fatal(svr.Run())
 }
