@@ -140,6 +140,8 @@ type SEOSkill struct {
 // ALTER TABLE job ADD COLUMN salary_min INTEGER NOT NULL DEFAULT 1;
 // ALTER TABLE job ADD COLUMN salary_max INTEGER NOT NULL DEFAULT 1;
 // ALTER TABLE job ADD COLUMN salary_currency VARCHAR(4) NOT NULL DEFAULT '$';
+// ALTER TABLE job ADD COLUMN external_id VARCHAR(28) NOT NULL;
+// ALTER TABLE job ADD COLUMN external_id VARCHAR(28) DROP DEFAULT;
 // ALTER TABLE job ADD COLUMN ad_type INTEGER NOT NULL DEFAULT 0;
 // ALTER TABLE job ALTER COLUMN company_url SET NOT NULL;
 // ALTER TABLE job ADD COLUMN company_icon_image_id VARCHAR(255) DEFAULT NULL;
@@ -242,6 +244,25 @@ func GetDbConn(databaseURL string) (*sql.DB, error) {
 		return nil, err
 	}
 	return db, nil
+}
+func GetAllJobIDs(conn *sql.DB) ([]int, error) {
+	var IDs []int
+	res, err := conn.Query(`SELECT id from job`)
+	if err != nil {
+		return IDs, err
+	}
+	for res.Next() {
+		var id int
+		res.Scan(&id)
+		IDs = append(IDs, id)
+	}
+
+	return IDs, nil
+}
+
+func AddExternalID(conn *sql.DB, jobID int, externalID string) error {
+	_, err := conn.Exec(`UPDATE job SET external_id = $1 WHERE id = $2`, externalID, jobID)
+	return err
 }
 
 // CloseDbConn closes db conn
@@ -509,13 +530,17 @@ func GetAffiliateConversions(conn *sql.DB, affiliateID string) ([]AffiliateConve
 }
 
 func SaveDraft(db *sql.DB, job *JobRq) (int, error) {
+	externalID, err := ksuid.NewRandom()
+	if err != nil {
+		return 0, err
+	}
 	sqlStatement := `
-			INSERT INTO job (job_title, company, company_url, salary_range, salary_min, salary_max, salary_currency, location, description, perks, interview_process, how_to_apply, created_at, url_id, slug, company_email, ad_type)
-			VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING id`
+			INSERT INTO job (job_title, company, company_url, salary_range, salary_min, salary_max, salary_currency, location, description, perks, interview_process, how_to_apply, created_at, url_id, slug, company_email, ad_type, external_id)
+			VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18) RETURNING id`
 	if job.CompanyIconID != "" {
 		sqlStatement = `
-			INSERT INTO job (job_title, company, company_url, salary_range, salary_min, salary_max, salary_currency, location, description, perks, interview_process, how_to_apply, created_at, url_id, slug, company_email, ad_type, company_icon_image_id)
-			VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18) RETURNING id`
+			INSERT INTO job (job_title, company, company_url, salary_range, salary_min, salary_max, salary_currency, location, description, perks, interview_process, how_to_apply, created_at, url_id, slug, company_email, ad_type, company_icon_image_id, external_id)
+			VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19) RETURNING id`
 	}
 	slugTitle := slug.Make(fmt.Sprintf("%s %s %d", job.JobTitle, job.Company, time.Now().UTC().Unix()))
 	createdAt := time.Now().UTC().Unix()
@@ -531,9 +556,9 @@ func SaveDraft(db *sql.DB, job *JobRq) (int, error) {
 	var lastInsertID int
 	var res *sql.Row
 	if job.CompanyIconID != "" {
-		res = db.QueryRow(sqlStatement, job.JobTitle, job.Company, job.CompanyURL, salaryRange, job.SalaryMin, job.SalaryMax, job.SalaryCurrency, job.Location, job.Description, job.Perks, job.InterviewProcess, job.HowToApply, time.Unix(createdAt, 0), createdAt, slugTitle, job.Email, job.AdType, job.CompanyIconID)
+		res = db.QueryRow(sqlStatement, job.JobTitle, job.Company, job.CompanyURL, salaryRange, job.SalaryMin, job.SalaryMax, job.SalaryCurrency, job.Location, job.Description, job.Perks, job.InterviewProcess, job.HowToApply, time.Unix(createdAt, 0), createdAt, slugTitle, job.Email, job.AdType, job.CompanyIconID, externalID)
 	} else {
-		res = db.QueryRow(sqlStatement, job.JobTitle, job.Company, job.CompanyURL, salaryRange, job.SalaryMin, job.SalaryMax, job.SalaryCurrency, job.Location, job.Description, job.Perks, job.InterviewProcess, job.HowToApply, time.Unix(createdAt, 0), createdAt, slugTitle, job.Email, job.AdType)
+		res = db.QueryRow(sqlStatement, job.JobTitle, job.Company, job.CompanyURL, salaryRange, job.SalaryMin, job.SalaryMax, job.SalaryCurrency, job.Location, job.Description, job.Perks, job.InterviewProcess, job.HowToApply, time.Unix(createdAt, 0), createdAt, slugTitle, job.Email, job.AdType, externalID)
 	}
 	res.Scan(&lastInsertID)
 	if err != nil {
@@ -617,16 +642,6 @@ func SalaryToSalaryRangeString(salaryMin, salaryMax int, currency string) string
 	}
 
 	return fmt.Sprintf("%s%s - %s%s", currency, salaryMinStr, currency, salaryMaxStr)
-}
-
-func SaveScrapedAngelistJob(db *sql.DB, job *ScrapedJob) error {
-	sqlStatement := `
-		INSERT INTO job (job_title, company, company_url, company_twitter, salary_range, salary_currency, location, description, how_to_apply, created_at, url_id, slug)
-		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`
-	slugTitle := slug.Make(fmt.Sprintf("%s %s %d", job.JobTitle, job.Company, time.Now().UTC().Unix()))
-	fmt.Printf("%s\n", slugTitle)
-	_, err := db.Exec(sqlStatement, job.JobTitle, job.Company, job.CompanyWebsite, job.CompanyTwitter, job.Salary, job.Currency, job.Location, job.Description, job.Href, time.Now().UTC(), time.Now().UTC().Unix(), slugTitle)
-	return err
 }
 
 func CompanyExists(db *sql.DB, company string) (bool, error) {
