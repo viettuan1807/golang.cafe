@@ -57,19 +57,35 @@
 </code></pre>
 <p>Bear in mind that in this way we load the entire file contents into memory at once. All of it is in <code>body</code> which is a slice of bytes.</p>
 <p>If you want more flexibility around the way you read the file you should check out the <a href="https://golang.org/pkg/os/">os</a>, specifically the <a href="https://golang.org/pkg/os/#Open">os.Open</a> function, which, given a string representing the file’s name returns a reference to a <a href="https://golang.org/pkg/os/#File">*File</a> struct</p>
-<pre><code class="language-go"><span class="hljs-keyword">func</span> Open(name <span class="hljs-typename">string</span>) (*File, error)
+<pre><code class="language-go">func Open(name string) (*File, error)</code></pre>
 </code></pre>
 <blockquote>
 <p>Open opens the named file for reading. If successful, methods on the returned file can be used for reading; the associated file descriptor has mode O_RDONLY. If there is an error, it will be of type *PathError.</p>
 </blockquote>
 <p>We are also going to be using <a href="https://golang.org/pkg/os/#File.Read">File.Read</a></p>
-<pre><code class="language-go"><span class="hljs-keyword">func</span> (f *File) Read(b []<span class="hljs-typename">byte</span>) (n <span class="hljs-typename">int</span>, err error)
+<pre><code class="language-go">func (f *File) Read(b []byte) (n int, err error)</code></pre>
 </code></pre>
 <blockquote>
 <p>Read reads up to len(b) bytes from the File. It returns the number of bytes read and any error encountered. At end of file, Read returns 0, io.EOF.</p>
 </blockquote>
 <p>Let’s see an example of how we can read a file using <code>os.Open</code></p>
-<script src="https://gist.github.com/0x13a/9f76086f50ce87c060745f1f71b9cd73.js"></script>
+<pre><code class="language-go">
+package main
+
+import (
+    "iotuil"
+    "fmt"
+    "log"
+)
+
+func main() {
+    body, err := iotuil.ReadFile("file.txt")
+    if err != nil {
+        log.Fatalf("unable to read file: %v", err)
+    }
+    fmt.Println(string(body))
+}
+</code></pre>
 <p>In the example above we read the file chunk by chunk, specifying which is the buffer size we want to read each time. Only <code>len(buf)</code> is allocated in memory and read at each iteration. This is specifically ideal for large files, where content cannot fit entirely into memory. Notice how we break the loop once we receive an <code>io.EOF</code> error, which defines the end of the file.</p>
         <br />
         <p>

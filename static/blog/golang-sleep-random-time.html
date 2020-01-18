@@ -33,14 +33,39 @@
       <article>
         <h1><a id="Golang_Sleep_Random_Time_Example_0"></a>Golang Sleep Random Time Example</h1>
 <p>If you ever wondered how to sleep a random number of seconds with Go there is a simple way to do that. You can combine the <a href="https://golang.org/pkg/math/rand">math/rand</a> package with the <a href="https://golang.org/pkg/time/">time</a> package</p>
-<script src="https://gist.github.com/0x13a/0575fd793b028cf93f977757225edb3c.js"></script>
+<pre><code class="language-go">
+package main
+
+import (
+  "fmt"
+  "time"
+  "math/rand"
+)
+  
+func main() {
+    rand.Seed(time.Now().UnixNano())
+    n := rand.Intn(10) // n will be between 0 and 10
+    fmt.Printf("Sleeping %d seconds...\n", n)
+    time.Sleep(time.Duration(n)*time.Second)
+    fmt.Println("Done")
+}
+</code></pre>
 <p>Here is the expected output</p>
 <pre><code class="language-sh">Sleeping <span class="hljs-number">4</span> seconds...
 Done
 </code></pre>
 <p>As explained already in <a href="https://golang.cafe/blog/golang-random-number-generator.html">this article</a> in order to use the <code>rand.Intn</code> function you first need to initialise the source with <code>rand.Seed</code>. Which in this case is being initialised with the current time expressed in microseconds</p>
 <p>In the example above in order to sleep the process for a number of seconds we use <a href="https://golang.org/pkg/time/#Sleep">time.Sleep</a>. An handy function that comes directly from the Go standard library. We can then specify a duration that can be expressed in different unit of time</p>
-<script src="https://gist.github.com/0x13a/083ddda915398ea696329f13a3d7f889.js"></script>
+<pre><code class="language-go">
+const (
+    Nanosecond  Duration = 1
+    Microsecond          = 1000 * Nanosecond
+    Millisecond          = 1000 * Microsecond
+    Second               = 1000 * Millisecond
+    Minute               = 60 * Second
+    Hour                 = 60 * Minute
+)
+</code></pre>
         <br />
         <p>
           Get
