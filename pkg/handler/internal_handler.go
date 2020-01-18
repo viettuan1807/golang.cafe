@@ -523,7 +523,7 @@ func TrackJobClickoutAndRedirectToJobPage(svr server.Server) http.HandlerFunc {
 		}
 		job, err := database.GetJobByExternalID(svr.Conn, externalID)
 		if err != nil {
-			svr.Log(err, "unable to get HowToApply from externalID")
+			svr.Log(err, fmt.Sprintf("unable to get HowToApply from externalID %s", externalID))
 			svr.JSON(w, http.StatusInternalServerError, nil)
 			return
 		}
