@@ -66,7 +66,7 @@
     <p>
         <input type="submit" value="Post a Job" id="post-btn" onclick="window.location.href='/Hire-Golang-Developers';">
         {{ if and .LocationFilter $isRemote }}
-            <h1 class="main-title">Remote {{ if .TagFilter }}{{ .TagFilter }} {{ else }}Golang {{ end }}jobs - Golang Cafe</h1><br/>
+            <h1 class="main-title">Remote {{ if .TagFilter }}{{ .TagFilter }} {{ else }}Golang {{ end }}Jobs - Golang Cafe</h1><br/>
         {{ else }}
             <h1 class="main-title">Golang {{ if .TagFilter }}{{ .TagFilter }}{{ end }} Jobs {{ if .LocationFilter }}in {{ .LocationFilter }}{{ end }} - Golang Cafe</h1><br/>
         {{ end }}
@@ -135,10 +135,10 @@
             </article>
     {{ end }}
           {{ if .ComplementaryRemote }}
-            <small><b>Do'h! No {{ if .TagFilter }}<b>{{ .TagFilter }}</b> {{ else }}Golang {{ end }}jobs have been found {{ if .LocationFilter }}in <b>{{ .LocationFilter }}</b>{{ end }}</b></small><br /><br />
-            <small>Showing {{ len .Jobs }} of {{ .TotalJobCount }} <b>Remote</b> {{ if .TagFilter }}<b>{{ .TagFilter }}</b> {{ else }}Golang {{ end }}jobs available instead</small><br />
+            <small><b>Do'h! No {{ if .TagFilter }}<b>{{ .TagFilter }}</b> {{ else }}Golang {{ end }}Jobs {{ if .LocationFilter }}in <b>{{ .LocationFilter }}</b>{{ end }}</b></small><br /><br />
+            <small>Showing {{ len .Jobs }} of {{ .TotalJobCount }} <b>Remote</b> {{ if .TagFilter }}<b>{{ .TagFilter }}</b> {{ else }}Golang {{ end }}Jobs available instead</small><br />
           {{ else }}
-            <small>{{ len .Jobs }} of {{ .TotalJobCount }} {{ if .TagFilter }}<b>{{ .TagFilter }}</b> {{ else }}Golang {{ end }}jobs found {{ if .LocationFilter }}in <b>{{ .LocationFilter }}</b>{{ end }}</small><br />
+            <small>{{ len .Jobs }} of {{ .TotalJobCount }} {{ if .TagFilter }}<b>{{ .TagFilter }}</b> {{ else }}Golang {{ end }}Jobs {{ if .LocationFilter }}in <b>{{ .LocationFilter }}</b>{{ end }}</small><br />
           {{ end }}
           <article class="line-item" id="email-subscribe-banner">
             Get
@@ -219,7 +219,7 @@
           {{ end }}
           {{ if .LocationFilter }}
                 {{ if not .ComplementaryRemote }}
-                    <small>{{ len .Jobs }} of {{ .TotalJobCount }} {{ if .TagFilter }}<b>{{ .TagFilter }}</b> {{ else }}Golang {{ end }}jobs found {{ if .LocationFilter }}in <b>{{ .LocationFilter }}</b>{{ end }}</small><br />
+                    <small>{{ len .Jobs }} of {{ .TotalJobCount }} {{ if .TagFilter }}<b>{{ .TagFilter }}</b> {{ else }}Golang {{ end }}jobs {{ if .LocationFilter }}in <b>{{ .LocationFilter }}</b>{{ end }}</small><br />
                 {{ end }}
             {{ else }}
                 <small>{{ len .Jobs }} of {{ .TotalJobCount }} {{ if .TagFilter }}<b>{{ .TagFilter }}</b> {{ else }}Golang {{ end }}jobs found</small><br />
