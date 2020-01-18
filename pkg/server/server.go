@@ -20,7 +20,6 @@ import (
 	"github.com/0x13a/golang.cafe/pkg/email"
 	"github.com/0x13a/golang.cafe/pkg/ipgeolocation"
 	"github.com/0x13a/golang.cafe/pkg/middleware"
-	"github.com/0x13a/golang.cafe/pkg/obfuscator"
 	"github.com/0x13a/golang.cafe/pkg/template"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
@@ -176,31 +175,27 @@ func (s Server) RenderPageForLocationAndTag(w http.ResponseWriter, location, tag
 	for i, j := firstPage, 1; i <= totalJobCount/s.cfg.JobsPerPage+1 && j <= pageLinksPerPage; i, j = i+1, j+1 {
 		pages = append(pages, i)
 	}
-	jobTrackIDs := make(map[int]string, len(jobsForPage))
 	for i, j := range jobsForPage {
 		jobsForPage[i].JobDescription = string(s.tmpl.MarkdownToHTML(j.JobDescription))
 		jobsForPage[i].Perks = string(s.tmpl.MarkdownToHTML(j.Perks))
 		jobsForPage[i].InterviewProcess = string(s.tmpl.MarkdownToHTML(j.InterviewProcess))
-		encryptedID, err := obfuscator.ObfuscateInt(j.ID)
-		if err != nil {
-			continue
+		emailRe := regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+		if emailRe.MatchString(j.HowToApply) {
+			jobsForPage[i].IsQuickApply = true
 		}
-		jobTrackIDs[j.ID] = encryptedID
 	}
 	for i, j := range pinnedJobs {
 		pinnedJobs[i].JobDescription = string(s.tmpl.MarkdownToHTML(j.JobDescription))
 		pinnedJobs[i].Perks = string(s.tmpl.MarkdownToHTML(j.Perks))
 		pinnedJobs[i].InterviewProcess = string(s.tmpl.MarkdownToHTML(j.InterviewProcess))
-		encryptedID, err := obfuscator.ObfuscateInt(j.ID)
-		if err != nil {
-			continue
+		emailRe := regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+		if emailRe.MatchString(j.HowToApply) {
+			pinnedJobs[i].IsQuickApply = true
 		}
-		jobTrackIDs[j.ID] = encryptedID
 	}
 
 	s.Render(w, http.StatusOK, htmlView, map[string]interface{}{
 		"Jobs":                jobsForPage,
-		"JobTrackIDs":         jobTrackIDs,
 		"PinnedJobs":          pinnedJobs,
 		"JobsMinusOne":        len(jobsForPage) - 1,
 		"LocationFilter":      location,

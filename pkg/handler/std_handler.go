@@ -11,7 +11,6 @@ import (
 
 	"github.com/0x13a/golang.cafe/pkg/database"
 	"github.com/0x13a/golang.cafe/pkg/middleware"
-	"github.com/0x13a/golang.cafe/pkg/obfuscator"
 	"github.com/0x13a/golang.cafe/pkg/server"
 	"github.com/gorilla/mux"
 )
@@ -96,26 +95,6 @@ func PostAJobForLocationFromURLPageHandler(svr server.Server) http.HandlerFunc {
 	}
 }
 
-func JobByTimestampIDPageHandler(svr server.Server) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		vars := mux.Vars(r)
-		rawID := vars["id"]
-		jobID, err := strconv.ParseInt(rawID, 10, 64)
-		if err != nil {
-			svr.Log(err, fmt.Sprintf("unable to parse job id %s", rawID))
-			svr.JSON(w, http.StatusOK, fmt.Sprintf("Job golang.cafe/j/%s not found", rawID))
-			return
-		}
-		job, err := database.JobPostByURLID(svr.Conn, jobID)
-		if err != nil || job == nil {
-			svr.Log(err, fmt.Sprintf("unable to retrieve job %s", rawID))
-			svr.JSON(w, http.StatusNotFound, fmt.Sprintf("Job golang.cafe/j/%s not found", rawID))
-			return
-		}
-		svr.Redirect(w, r, http.StatusMovedPermanently, fmt.Sprintf("https://golang.cafe/job/%s", job.Slug))
-	}
-}
-
 func JobBySlugPageHandler(svr server.Server) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
@@ -129,18 +108,20 @@ func JobBySlugPageHandler(svr server.Server) http.HandlerFunc {
 		if err := database.TrackJobView(svr.Conn, job); err != nil {
 			svr.Log(err, fmt.Sprintf("unable to track job view for %s: %v", slug, err))
 		}
-		encryptedID, err := obfuscator.ObfuscateInt(job.ID)
-		if err != nil {
-			svr.Log(err, fmt.Sprintf("unable to generate encrypted id for %s: %v", slug, err))
-		}
 		jobLocations := strings.Split(job.Location, "/")
+		var isQuickApply bool
+		emailRe := regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+		if emailRe.MatchString(job.HowToApply) {
+			isQuickApply = true
+		}
 		svr.Render(w, http.StatusOK, "job.html", map[string]interface{}{
 			"Job":                     job,
+			"IsQuickApply":            isQuickApply,
 			"HTMLJobDescription":      svr.MarkdownToHTML(job.JobDescription),
 			"HTMLJobPerks":            svr.MarkdownToHTML(job.Perks),
 			"HTMLJobInterviewProcess": svr.MarkdownToHTML(job.InterviewProcess),
 			"LocationFilter":          location,
-			"ExternalJobId":           encryptedID,
+			"ExternalJobId":           job.ExternalID,
 			"GoogleJobCreatedAt":      time.Unix(job.CreatedAt, 0).Format(time.RFC3339),
 			"GoogleJobValidThrough":   time.Unix(job.CreatedAt, 0).AddDate(0, 5, 0),
 			"GoogleJobLocation":       jobLocations[0],

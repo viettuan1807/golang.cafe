@@ -11,7 +11,6 @@ import (
 	"github.com/0x13a/golang.cafe/pkg/database"
 	"github.com/0x13a/golang.cafe/pkg/email"
 	"github.com/0x13a/golang.cafe/pkg/middleware"
-	"github.com/0x13a/golang.cafe/pkg/obfuscator"
 	"github.com/0x13a/golang.cafe/pkg/payment"
 	"github.com/0x13a/golang.cafe/pkg/server"
 	"github.com/gorilla/mux"
@@ -70,17 +69,11 @@ func ApplyForJobPageHandler(svr server.Server) http.HandlerFunc {
 			svr.JSON(w, http.StatusRequestEntityTooLarge, nil)
 			return
 		}
-		jobIDStr := r.FormValue("job-id")
+		externalID := r.FormValue("job-id")
 		emailAddr := r.FormValue("email")
-		jobID, err := obfuscator.RevealInt(jobIDStr)
+		job, err := database.JobPostByExternalIDForEdit(svr.Conn, externalID)
 		if err != nil {
-			svr.Log(err, fmt.Sprintf("unable to convert string int to int %s. %v", jobIDStr, err))
-			svr.JSON(w, http.StatusOK, nil)
-			return
-		}
-		job, err := database.JobPostByIDForEdit(svr.Conn, jobID)
-		if err != nil {
-			svr.Log(err, fmt.Sprintf("unable to retrieve job by id %d, %v", jobID, err))
+			svr.Log(err, fmt.Sprintf("unable to retrieve job by externalId %d, %v", externalID, err))
 			svr.JSON(w, http.StatusBadRequest, nil)
 			return
 		}
@@ -102,7 +95,7 @@ func ApplyForJobPageHandler(svr server.Server) http.HandlerFunc {
 			svr.JSON(w, http.StatusBadRequest, nil)
 			return
 		}
-		err = database.ApplyToJob(svr.Conn, jobID, fileBytes, emailAddr, randomTokenStr)
+		err = database.ApplyToJob(svr.Conn, job.ID, fileBytes, emailAddr, randomTokenStr)
 		if err != nil {
 			svr.Log(err, "unable to apply for job while saving to db")
 			svr.JSON(w, http.StatusBadRequest, nil)
@@ -499,24 +492,47 @@ func DisapproveJobPageHandler(svr server.Server) http.HandlerFunc {
 func TrackJobClickoutPageHandler(svr server.Server) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
-		id := vars["id"]
-		if id == "" {
-			svr.Log(errors.New("got empty id for tracking job"), "got empty id for tracking")
+		externalID := vars["id"]
+		if externalID == "" {
+			svr.Log(errors.New("got empty id for tracking job"), "got empty externalID for tracking")
 			svr.JSON(w, http.StatusBadRequest, nil)
 			return
 		}
-		ID, err := obfuscator.RevealInt(id)
+		job, err := database.GetJobByExternalID(svr.Conn, externalID)
 		if err != nil {
-			svr.Log(err, fmt.Sprintf("unable to convert string int to int %s. %v", id, err))
-			svr.JSON(w, http.StatusOK, nil)
+			svr.Log(err, "unable to get JobID from externalID")
+			svr.JSON(w, http.StatusInternalServerError, nil)
 			return
 		}
-		if err := database.TrackJobClickout(svr.Conn, ID); err != nil {
-			svr.Log(err, fmt.Sprintf("unable to save job clickout for job id %d. %v", ID, err))
+		if err := database.TrackJobClickout(svr.Conn, job.ID); err != nil {
+			svr.Log(err, fmt.Sprintf("unable to save job clickout for job id %d. %v", job.ID, err))
 			svr.JSON(w, http.StatusOK, nil)
 			return
 		}
 		svr.JSON(w, http.StatusOK, nil)
+	}
+}
+
+func TrackJobClickoutAndRedirectToJobPage(svr server.Server) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		externalID := r.URL.Query().Get("j")
+		if externalID == "" {
+			svr.Log(errors.New("TrackJobClickoutAndRedirectToJobPage: got empty id for tracking job"), "got empty externalID for tracking")
+			svr.JSON(w, http.StatusBadRequest, nil)
+			return
+		}
+		job, err := database.GetJobByExternalID(svr.Conn, externalID)
+		if err != nil {
+			svr.Log(err, "unable to get HowToApply from externalID")
+			svr.JSON(w, http.StatusInternalServerError, nil)
+			return
+		}
+		if err := database.TrackJobClickout(svr.Conn, job.ID); err != nil {
+			svr.Log(err, fmt.Sprintf("unable to save job clickout for job id %d. %v", job.ID, err))
+			svr.JSON(w, http.StatusOK, nil)
+			return
+		}
+		svr.Redirect(w, r, http.StatusTemporaryRedirect, job.HowToApply)
 	}
 }
 

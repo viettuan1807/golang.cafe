@@ -73,7 +73,11 @@
                 <h3>Interview Process</h3>
                 {{ .HTMLJobInterviewProcess }}
                 {{ end }}
-                <input type="submit" style="float:right;" value="Apply for this job" onclick="apply();">
+                {{ if .IsQuickApply }}
+                  <input type="submit" style="float:right;" class="apply-btn" value="Quick Apply" onclick="apply();">
+                {{ else }}
+                  <a href="/x/r?j={{ .ExternalID }}" style="float:right;" class="apply-btn">Apply</a>
+                {{ end }}
                 <br />
             </p>
       </article>
@@ -123,15 +127,11 @@
             }
         }
         function apply() {
-          http('{{ .ExternalJobId }}', function() {
-            if (isEmail('{{ .Job.HowToApply }}')) {
-              document.getElementById('apply-job-id').value = '{{ .ExternalJobId }}';
-              document.getElementById('apply-box-0').style.display = 'block';
-              document.getElementById('overlay-0').style.display = 'block';
-              document.getElementById('apply-email-poster').innerHTML = '{{ .Job.HowToApply }}';
-            } else {
-              window.location.href='{{ .Job.HowToApply }}';
-            }
+          http('{{ .Job.ExternalID }}', function() {
+            document.getElementById('apply-job-id').value = '{{ .Job.ExternalID }}';
+            document.getElementById('apply-box-0').style.display = 'block';
+            document.getElementById('overlay-0').style.display = 'block';
+            document.getElementById('apply-email-poster').innerHTML = '{{ .Job.HowToApply }}';
           })
         }
         function uploadCV() {

@@ -32,7 +32,6 @@
         <input type="submit" value="Search" id="search-btn"/>
     </div>
     {{ $locationFilter := .LocationFilter }}
-    {{ $jobTrackIDs := .JobTrackIDs }}
     {{ $tagFilter := .TagFilter }}
     <small>Jobs Pending Approval</small>
     <article>No Pending jobs</article>
@@ -60,8 +59,8 @@
                     <h3>Interview Process</h3>
                     {{ .InterviewProcess }}
                     {{ end }}
-                    <input type="submit" style="float:right;" class="apply-btn" data-how-to-apply="{{ .HowToApply }}" value="Apply for this job" onclick="apply('{{ .HowToApply }}', '{{index $jobTrackIDs .ID}}');">
-                        <a href="/job/{{ .Slug }}" rel="noreferrer" target="_blank" style="padding: 6.525px 23.4px; float: right;">🔗 Link</a>
+                    <input type="submit" style="float:right;" class="apply-btn" data-how-to-apply="{{ .HowToApply }}" value="Apply for this job" onclick="apply('{{ .HowToApply }}', '{{ .ExternalID }}');">
+                    <a href="/job/{{ .Slug }}" rel="noreferrer" target="_blank" style="padding: 6.525px 23.4px; float: right;">🔗 Link</a>
                 </div>
                 <div class="clearfix"></div>
             </article>

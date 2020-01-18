@@ -102,6 +102,9 @@ func main() {
 	// track job clickout
 	svr.RegisterRoute("/x/j/c/{id}", handler.TrackJobClickoutPageHandler(svr), []string{"GET"})
 
+	// track job clickout + redirect to job page
+	svr.RegisterRoute("/x/r", handler.TrackJobClickoutAndRedirectToJobPage(svr), []string{"GET"})
+
 	// view job by slug
 	svr.RegisterRoute("/job/{slug}", handler.JobBySlugPageHandler(svr), []string{"GET"})
 
