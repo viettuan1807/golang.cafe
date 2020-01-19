@@ -134,7 +134,6 @@ The function is <a href="https://golang.org/pkg/strconv/#Itoa" target="_blank" r
       get('/x/n/m/s?email='+encodeURIComponent(email)+'&frequency='+encodeURIComponent(frequency), function(success) {
           amplitude.getInstance().logEvent('golang_jobs_newsletter_subscribed', {source: 'blog', blog_slug_id: 'golang-int-to-string-conversion-example'});
           if (success) {
-              setCookie('__gcs', true, 365);
               alert('Thanks for subscribing. Please confirm your email before we can send any newsletter!');
               window.location.href='/';
           } else {

@@ -128,7 +128,6 @@ Hello World.
       get('/x/n/m/s?email='+encodeURIComponent(email)+'&frequency='+encodeURIComponent(frequency), function(success) {
         amplitude.getInstance().logEvent('golang_jobs_newsletter_subscribed', {source: 'blog', blog_slug_id: 'golang-base64-encode-example'});
           if (success) {
-              setCookie('__gcs', true, 365);
               alert('Thanks for subscribing. Please confirm your email before we can send any newsletter!');
               window.location.href='/';
           } else {
