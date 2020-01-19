@@ -146,7 +146,7 @@ Good morning! You are using verb: GET, URL: /goodmorning
         amplitude.getInstance().logEvent('golang_jobs_newsletter_subscribed', {source: 'blog', blog_slug_id: 'golang-http-server-example'});
           if (success) {
               alert('Thanks for subscribing. Please confirm your email before we can send any newsletter!');
-              window.location.href='/';
+              document.getElementById('job-email-subscription').value = '';
           } else {
               alert('Oops, there was an error with your subscription!');
           }
