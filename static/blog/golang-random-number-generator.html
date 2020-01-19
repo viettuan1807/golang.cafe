@@ -40,14 +40,42 @@
         <p>Intn returns, as an int, a non-negative pseudo-random number in [0,n) from the default Source. It panics if n &lt;= 0.</p>
         </blockquote>
         <p>We can effectively use this function to generate a random number between two values</p>
-        <script src="https://gist.github.com/0x13a/ecccbdcc34253588f270be0a2e5891a6.js"></script>
+        <pre><code class="language-go">
+package main
+
+import (
+    "fmt"
+    "math/rand"
+)
+        
+func main() {
+    min := 10
+    max := 30
+    fmt.Println(rand.Intn(max - min) + min)
+}
+        </code></pre>
         <p>This thing works quite well, however if you try to run it several times you will see always the same number in output</p>
         <p>Indeed on the <a href="https://golang.org/pkg/math/rand/">official documentation</a> we can read</p>
         <blockquote>
         <p>Top-level functions, such as Float64 and Int, use a default shared Source that produces a deterministic sequence of values each time a program is run. Use the Seed function to initialize the default Source if different behavior is required for each run.</p>
         </blockquote>
         <p>The proper example should then become</p>
-        <script src="https://gist.github.com/0x13a/e3e2814bb8b345abe8134111b46c0d5c.js"></script>
+        <pre><code class="language-go">
+package main
+
+import (
+    "fmt"
+    "math/rand"
+    "time"
+)
+        
+func main() {
+    rand.Seed(time.Now().UnixNano())
+    min := 10
+    max := 30
+    fmt.Println(r.Intn(max - min + 1) + min)
+}
+        </code></pre>
         <p>Bear in mind, for random numbers suitable for security-sensitive work, use the <a href="https://golang.org/pkg/crypto/rand/">crypto/rand</a> package instead.</p>
         <br />
         <p>
