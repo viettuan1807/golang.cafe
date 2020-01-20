@@ -73,7 +73,7 @@ func main() {
     rand.Seed(time.Now().UnixNano())
     min := 10
     max := 30
-    fmt.Println(r.Intn(max - min + 1) + min)
+    fmt.Println(rand.Intn(max - min + 1) + min)
 }
         </code></pre>
         <p>Bear in mind, for random numbers suitable for security-sensitive work, use the <a href="https://golang.org/pkg/crypto/rand/">crypto/rand</a> package instead.</p>
