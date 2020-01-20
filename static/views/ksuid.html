@@ -62,8 +62,15 @@
                 <br />
                 <br />
                 <p>
-                    <input type="submit" style="width: 100%;" value="Find your next job on Golang Cafe" onclick="window.location.href='/'" />
-                  </p>
+                  Get
+                  <select style="border: 1px solid #d9d9d9; margin-bottom: 0;" id="job-email-frequency">
+                      <option>Daily</option>
+                      <option>Weekly</option>
+                  </select>
+                  Email with all new Golang Jobs
+                  <input type="email" name="job-email-subscription" id="job-email-subscription" class="email-subscribe-item" style="border: 1px solid #d9d9d9;margin-bottom:0;" placeholder="Your Email Address">
+                  <input type="submit" onclick="subscribe()" class="email-subscribe-item" value="Stay Updated" style="margin-bottom: 0;"/>
+              </p>
             </p>
       </article>
   </section>
@@ -156,6 +163,38 @@
         }
         function copyToClipboard() {
             copyTextToClipboard(document.getElementById("ksuid").value);
+        }
+        function isEmail(email) {
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
+        var get = function(uri, cb) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', uri, true);
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    cb(xhr.status === 200);
+                }
+            }
+        };
+        function subscribe() {
+            var email = document.getElementById('job-email-subscription').value;
+            var frequency = document.getElementById('job-email-frequency').value;
+            if (!isEmail(email)) {
+                alert('Please enter a valid email address!');
+                return;
+            }
+            get('/x/n/m/s?email='+encodeURIComponent(email)+'&frequency='+encodeURIComponent(frequency), function(success) {
+                amplitude.getInstance().logEvent('golang_jobs_newsletter_subscribed', {source: 'blog', blog_slug_id: 'ksuid'});
+                if (success) {
+                    alert('Thanks for subscribing. Please confirm your email before we can send any newsletter!');
+                    document.getElementById('job-email-subscription').value = '';
+                } else {
+                    alert('Oops, there was an error with your subscription!');
+                }
+            });
         }
     </script>
   </body>
