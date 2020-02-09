@@ -79,7 +79,7 @@
     <div>
         <input type="text" value="{{ .TagFilter }}" placeholder="Position, Skill, Startup" id="search-tag"/>
         <input type="text" value="{{ .LocationFilter }}" placeholder="City or Country" id="search-location"/>
-        <input type="submit" value="Search" id="search-btn"/>
+        <input type="submit" value="Find Jobs" id="search-btn"/>
     </div>
     <div class="overlay-effect" id="overlay-0" onclick="closeApplyPopup();"></div>
     <article class="apply-box" id="apply-box-0">
@@ -140,10 +140,10 @@
           {{ else }}
             <small>{{ len .Jobs }} of {{ .TotalJobCount }} {{ if .TagFilter }}<b>{{ .TagFilter }}</b> {{ else }}Golang {{ end }}Jobs {{ if .LocationFilter }}in <b>{{ .LocationFilter }}</b>{{ end }}</small><br />
           {{ end }}
-          <article class="line-item" id="email-subscribe-banner">
-            Get Weekly Email With All New Golang Jobs
+          <article class="line-item" id="email-subscribe-banner" style="font-size: 12pt;">
+            New Go Jobs Weekly In Your Inbox
             <input type="email" name="job-email-subscription" id="job-email-subscription" class="email-subscribe-item" style="border: 1px solid #d9d9d9;margin-bottom:0;" placeholder="Your Email Address">
-            <input type="submit" onclick="subscribe()" class="email-subscribe-item" value="Stay Updated" style="margin-bottom: 0;"/>
+            <input type="submit" onclick="subscribe()" class="email-subscribe-item" value="Get Jobs" style="margin-bottom: 0;"/>
         </article>
           {{ range $i, $j := .Jobs }}
               {{ if eq .AdType 1 }}
