@@ -146,7 +146,7 @@
             <textarea id="perks" placeholder="Perks (optional)" style="resize:none; width: 100%;"></textarea><br />
             <textarea id="interview-process" placeholder="Interview Process (optional)" style="resize:none; width: 100%;"></textarea><br />
             <input type="text" name="how-to-apply" id="how-to-apply" placeholder="How To Apply (Email or URL)" style="width: 100%;" value="{{ .Job.HowToApply }}"/><br />
-            <input type="email" name="company-email" id="company-email" placeholder="Your Email Address" style="width: 100%;" value="{{ .Job.CompanyEmail }}"/><br />
+            <input type="email" name="company-email" id="company-email" placeholder="Your Email" style="width: 100%;" value="{{ .Job.CompanyEmail }}"/><br />
             <input type="hidden" name="token" id="token" value="{{ .Token }}" />
             <input type="submit" id="submit" value="Update" onclick="update();" style="float: right;">
             {{ if .Job.ApprovedAt.Valid }}
