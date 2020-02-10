@@ -23,6 +23,12 @@ func ViewNewsletterPageHandler(svr server.Server) http.HandlerFunc {
 	}
 }
 
+func ViewShopPageHandler(svr server.Server) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		svr.RenderPageForLocationAndTag(w, "", "", "", "shop.html")
+	}
+}
+
 func ViewCommunityNewsletterPageHandler(svr server.Server) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		svr.RenderPageForLocationAndTag(w, "", "", "", "community.html")
