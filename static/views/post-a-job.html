@@ -93,14 +93,14 @@
             <p>
                 {{ if and .Location $isRemote }}
                     <h1>Hire Remote Go (Golang) Developers</h1>
-                    <small>Golang Cafe is the First Go job board with no recruiters and clear salary ranges. This makes Golang Cafe one of the most popular job boards to look for a Remote Golang job 🌎. Golang Cafe is visited by thousands of engineers passionate about the Go programming language. Post a job today and reach thousands of high-quality candidates that are looking for Remote Go (Golang) Jobs</small><br /><br />
+                    <small>Golang Cafe is the First Go job board with no recruiters and clear salary ranges. This makes Golang Cafe one of the most popular job boards to look for a Remote Golang job 🌎. Golang Cafe is visited by thousands of engineers passionate about the Go programming language. Hire Go Developers today and reach thousands of high-quality candidates that are looking for Remote Go (Golang) Jobs</small><br /><br />
                 {{ else }}
                     {{ if .Location }}
                         <h1>Hire Go (Golang) Developers In {{ .Location }}</h1>
-                        <small>Golang Cafe is the First Go job board with no recruiters and clear salary ranges. This makes Golang Cafe one of the most popular job boards to look for a Golang job in {{ .Location }}. Golang Cafe is visited by thousands of engineers passionate about the Go programming language. Post a job today and reach thousands of high-quality candidates that are looking for Go (Golang) Jobs in {{ .Location }}</small><br /><br />
+                        <small>Golang Cafe is the First Go job board with no recruiters and clear salary ranges. This makes Golang Cafe one of the most popular job boards to look for a Golang job in {{ .Location }}. Golang Cafe is visited by thousands of engineers passionate about the Go programming language. Hire Go Developers today and reach thousands of high-quality candidates that are looking for Go (Golang) Jobs in {{ .Location }}</small><br /><br />
                     {{ else }}
                         <h1>Hire Go (Golang) Developers</h1>
-                        <small>Golang Cafe is the First Go job board with no recruiters and clear salary ranges. This makes Golang Cafe one of the most popular job boards to look for a Golang job. Golang Cafe is visited by thousands of engineers passionate about the Go programming language. Post a job today and reach thousands of high-quality candidates that are looking for Go (Golang) Jobs</small><br /><br />
+                        <small>Golang Cafe is the First Go job board with no recruiters and clear salary ranges. This makes Golang Cafe one of the most popular job boards to look for a Golang job. Golang Cafe is visited by thousands of engineers passionate about the Go programming language. Hire Go Developers today and reach thousands of high-quality candidates that are looking for Go (Golang) Jobs</small><br /><br />
                     {{ end }}
                 {{ end }}
                 <h3>Trusted By</h3>
@@ -126,7 +126,7 @@
                     <li><b>24/7 email</b> customer support</li>
                     <li><b>500</b> average page views per pinned job post</li>
                 </ul>
-                <h3>Post a Job</h3>
+                <h3>Hire Go Developers</h3>
                 <input type="text" name="job-title" id="job-title" placeholder="Job Title" style="width: 100%;"/><br />
                 <input type="text" name="job-location" id="job-location" placeholder="Job Location" style="width: 100%;"/><br />
                 <input type="number" name="salary-min" id="salary-min" placeholder="Min Annual Salary" style="width: 35%;"/>
@@ -392,7 +392,7 @@
             var ref = document.getElementById("ref").value;
             var companyEmail = document.getElementById("company-email").value;
             if (empty(jobTitle, jobLocation, salaryMin, salaryMax, companyName, companyWebsite, jobDescription, howToApply, companyEmail)) {
-                alert('You must fill all the mandatory forms in order to post a job');
+                alert('You must fill all the mandatory forms in order to Hire Go Developers');
                 return;
             }
             if (!isInteger(salaryMax) || !isInteger(salaryMin)) {
