@@ -17,7 +17,7 @@ import (
 func AdTypeToAmount(adType int64) int64 {
 	switch adType {
 	case database.JobAdBasic:
-		return 900
+		return 1900
 	case database.JobAdSponsoredBackground:
 		return 3900
 	case database.JobAdSponsoredPinnedFor30Days:
@@ -25,7 +25,7 @@ func AdTypeToAmount(adType int64) int64 {
 	case database.JobAdSponsoredPinnedFor7Days:
 		return 5900
 	case database.JobAdWithCompanyLogo:
-		return 1900
+		return 2900
 	}
 
 	return 0
