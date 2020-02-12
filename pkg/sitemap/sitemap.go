@@ -55,6 +55,10 @@ var blogPosts = []Page{
 		CreatedAt: time.Now().UTC(),
 		Title:     "how-to-validate-url-in-go",
 	},
+	{
+		CreatedAt: time.Now().UTC(),
+		Title:     "upgrade-dependencies-golang",
+	},
 }
 var pages = []string{
 	"hire-golang-developers",
