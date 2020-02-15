@@ -100,7 +100,10 @@
                         <p style="font-size: 18px;">The most loved Go (Golang) job board, clear salary ranges and direct application to companies. This makes Golang Cafe one of the leading job boards for a Golang jobs in {{ .Location }}. Golang Cafe is visited by thousands of engineers passionate about the Go programming language. Hire Go Developers today and reach thousands of high-quality candidates</p><br /><br />
                     {{ else }}
                         <h1>Hire Go (Golang) Developers</h1>
-                        <p style="font-size: 18px;">The most loved Go (Golang) job board, clear salary ranges and direct application to companies. Golang Cafe is visited by thousands of engineers passionate about the Go programming language. Hire Go Developers today and reach thousands of high-quality candidates</p><br /><br />
+                        <p style="font-size: 18px;">
+                            The most loved Go (Golang) job board, clear salary ranges and direct application to companies. 
+                            <b>Thousands of exceptional Go (Golang) Engineers visit Golang Cafe every month</b>. <br/>
+                            Reach thousands of high-quality candidates, <b>hire your next Go engineer today</b></p><br /><br />
                     {{ end }}
                 {{ end }}
                 <h3>Trusted By</h3>
@@ -175,6 +178,7 @@
                 <input type="checkbox" name="ad-type-3" style="margin-right: 8px; margin-bottom: 5px;" id="ad-type-3" checked><label>Pinned to the Front Page for 7 days <b>{{ .Currency.Symbol }}59</b> (only 1 left)</label><br/>
                 <input type="checkbox" name="ad-type-2" style="margin-right: 8px; margin-bottom: 5px;" id="ad-type-2"><label>Pinned to the Front Page for 30 days <b>{{ .Currency.Symbol }}99</b>  (only 1 left)</label><br/>
                 <input type="hidden" name="ref" id="ref" value="{{ .Ref }}" />
+                <br />
                 <br />
                 <input type="submit" id="submit" value="Hire Go Developers {{ .Currency.Symbol }}59" onclick="post();" style="float: right;">
                 <br />
