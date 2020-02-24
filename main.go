@@ -30,6 +30,11 @@ func main() {
 	if err != nil {
 		log.Fatalf("unable to connect to sparkpost API: %v", err)
 	}
+	ipGeolocation, err := ipgeolocation.NewIPGeoLocation(cfg.IPGeoLocationGeoliteFile, cfg.IPGeoLocationCurrencyMapFile)
+	if err != nil {
+		log.Fatalf("unable to load ipgeolocation")
+	}
+	defer ipGeolocation.Close()
 	sessionStore := sessions.NewCookieStore(cfg.SessionKey)
 	auth := authoriser.NewAuthoriser(cfg)
 
@@ -39,7 +44,7 @@ func main() {
 		mux.NewRouter(),
 		template.NewTemplate(),
 		emailClient,
-		ipgeolocation.NewIPGeoLocation(cfg.IPGeoLocationApiKey, cfg.IPGeoLocationURI),
+		ipGeolocation,
 		sessionStore,
 	)
 

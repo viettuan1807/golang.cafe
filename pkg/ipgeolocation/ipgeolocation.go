@@ -1,16 +1,22 @@
 package ipgeolocation
 
 import (
-	"encoding/json"
-	"fmt"
-	"net/http"
+	"encoding/csv"
+	"net"
+	"os"
 
-	"github.com/pkg/errors"
+	maxminddb "github.com/oschwald/maxminddb-golang"
 )
 
+var supportedCurrencies = map[string]string{
+	"USD": "$",
+	"EUR": "€",
+	"GBP": "£",
+}
+
 type IPGeoLocation struct {
-	apiKey string
-	uri    string
+	c2c map[string]string
+	db  *maxminddb.Reader
 }
 
 type Currency struct {
@@ -24,36 +30,50 @@ const (
 	CurrencyGBP = "GBP"
 )
 
-func NewIPGeoLocation(apiKey, URI string) IPGeoLocation {
-	return IPGeoLocation{apiKey: apiKey, uri: URI}
+func NewIPGeoLocation(geoliteLocation, country2currencyLocation string) (IPGeoLocation, error) {
+	r, err := maxminddb.Open(geoliteLocation)
+	if err != nil {
+		return IPGeoLocation{}, err
+	}
+
+	c2c, err := os.Open(country2currencyLocation)
+	if err != nil {
+		return IPGeoLocation{}, err
+	}
+	defer c2c.Close()
+	c2cLines, err := csv.NewReader(c2c).ReadAll()
+	if err != nil {
+		return IPGeoLocation{}, err
+	}
+
+	c2cMap := make(map[string]string, len(c2cLines))
+	for _, l := range c2cLines {
+		c2cMap[l[0]] = l[1]
+	}
+	return IPGeoLocation{db: r, c2c: c2cMap}, nil
 }
 
 func (i IPGeoLocation) GetCurrencyForIP(ip string) (Currency, error) {
-	res, err := http.Get(fmt.Sprintf("%s?apiKey=%s&ip=%s", i.uri, i.apiKey, ip))
+	ipNet := net.ParseIP(ip)
+	var record struct {
+		Country struct {
+			ISOCode string `maxminddb:"iso_code"`
+		} `maxminddb:"country"`
+	}
+	err := i.db.Lookup(ipNet, &record)
 	if err != nil {
-		return Currency{CurrencyUSD, "$"}, errors.Wrapf(err, "unable to call api.ipgeolocation.io for IP lookup %#v", ip[0])
+		return Currency{CurrencyUSD, "$"}, err
 	}
-	defer res.Body.Close()
-	var meta map[string]interface{}
-	err = json.NewDecoder(res.Body).Decode(&meta)
-	if err != nil {
-		return Currency{CurrencyUSD, "$"}, errors.Wrapf(err, "unable to parse api.ipgeolocation.io response for IP lookup %#v", ip)
-	}
-	currencyMeta, ok := meta["currency"].(map[string]interface{})
-	if !ok {
-		return Currency{CurrencyUSD, "$"}, fmt.Errorf("unable to cast currency from APIs: %+v", currencyMeta["currency"])
-	}
-	currencyCode, ok := currencyMeta["code"].(string)
-	if !ok {
-		return Currency{CurrencyUSD, "$"}, fmt.Errorf("unable to cast code from APIs: %+v", currencyMeta["code"])
-	}
-	currencySymbol, ok := currencyMeta["symbol"].(string)
-	if !ok {
-		return Currency{CurrencyUSD, "$"}, fmt.Errorf("unable to cast symbol from APIs: %+v", currencyMeta["symbol"])
-	}
-	// default to USD in case currencyCode is neither EUR / GBP / USD
-	if currencyCode != CurrencyEUR && currencyCode != CurrencyGBP && currencyCode != CurrencyUSD {
+	currencyCode := i.c2c[record.Country.ISOCode]
+	if currencyCode == "" {
 		return Currency{CurrencyUSD, "$"}, nil
 	}
-	return Currency{currencyCode, currencySymbol}, nil
+	if supportedCurrencies[currencyCode] == "" {
+		return Currency{CurrencyUSD, "$"}, nil
+	}
+	return Currency{currencyCode, supportedCurrencies[currencyCode]}, nil
+}
+
+func (i IPGeoLocation) Close() {
+	i.db.Close()
 }

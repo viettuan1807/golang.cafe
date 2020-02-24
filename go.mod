@@ -35,6 +35,7 @@ require (
 	github.com/kylelemons/godebug v1.1.0 // indirect
 	github.com/lib/pq v1.0.0
 	github.com/mitchellh/mapstructure v1.1.2 // indirect
+	github.com/oschwald/maxminddb-golang v1.6.0
 	github.com/pkg/errors v0.8.0
 	github.com/rainycape/unidecode v0.0.0-20150907023854-cb7f23ec59be // indirect
 	github.com/saintfish/chardet v0.0.0-20120816061221-3af4cd4741ca // indirect

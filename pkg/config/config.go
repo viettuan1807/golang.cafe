@@ -10,22 +10,22 @@ import (
 )
 
 type Config struct {
-	Port                 string
-	DatabaseURL          string
-	StripeKey            string
-	StripeEndpointSecret string
-	StripePublishableKey string
-	EmailAPIKey          string
-	AdminEmail           string
-	AdminPassword        string
-	SessionKey           []byte
-	JwtSigningKey        []byte
-	Env                  string
-	IPGeoLocationApiKey  string
-	IPGeoLocationURI     string
-	MailerLiteAPIKey     string
-	SentryDSN            string
-	JobsPerPage          int
+	Port                         string
+	DatabaseURL                  string
+	StripeKey                    string
+	StripeEndpointSecret         string
+	StripePublishableKey         string
+	EmailAPIKey                  string
+	AdminEmail                   string
+	AdminPassword                string
+	SessionKey                   []byte
+	JwtSigningKey                []byte
+	Env                          string
+	IPGeoLocationGeoliteFile     string
+	IPGeoLocationCurrencyMapFile string
+	MailerLiteAPIKey             string
+	SentryDSN                    string
+	JobsPerPage                  int
 }
 
 func LoadConfig() (Config, error) {
@@ -73,9 +73,13 @@ func LoadConfig() (Config, error) {
 	if err != nil {
 		return Config{}, errors.Wrapf(err, "unable to decode session key to bytes")
 	}
-	ipGeolocationAPIKey := os.Getenv("IP_GEOLOCATION_API_KEY")
-	if ipGeolocationAPIKey == "" {
-		return Config{}, fmt.Errorf("IP_GEOLOCATION_API_KEY cannot be empty")
+	ipGeolocationCurrencyMapFile := os.Getenv("IP_GEOLOCATION_CURRENCY_MAPPING_FILE")
+	if ipGeolocationCurrencyMapFile == "" {
+		return Config{}, fmt.Errorf("IP_GEOLOCATION_CURRENCY_MAPPING_FILE cannot be empty")
+	}
+	ipGeolocationGeoliteFile := os.Getenv("IP_GEOLOCATION_GEOLITE_DB_FILE")
+	if ipGeolocationGeoliteFile == "" {
+		return Config{}, fmt.Errorf("IP_GEOLOCATION_GEOLITE_DB_FILE cannot be empty")
 	}
 	adminEmail := os.Getenv("ADMIN_EMAIL")
 	if adminEmail == "" {
@@ -95,21 +99,21 @@ func LoadConfig() (Config, error) {
 	}
 
 	return Config{
-		Port:                 port,
-		DatabaseURL:          databaseURL,
-		StripeKey:            stripeKey,
-		StripeEndpointSecret: stripeEndpointSecret,
-		StripePublishableKey: stripePublishableKey,
-		EmailAPIKey:          emailAPIKey,
-		AdminEmail:           adminEmail,
-		AdminPassword:        adminPassword,
-		SessionKey:           sessionKeyBytes,
-		JwtSigningKey:        jwtSigningKeyBytes,
-		Env:                  env,
-		IPGeoLocationApiKey:  ipGeolocationAPIKey,
-		IPGeoLocationURI:     "https://api.ipgeolocation.io/ipgeo",
-		MailerLiteAPIKey:     mailerliteAPIKey,
-		SentryDSN:            sentryDSN,
-		JobsPerPage:          20,
+		Port:                         port,
+		DatabaseURL:                  databaseURL,
+		StripeKey:                    stripeKey,
+		StripeEndpointSecret:         stripeEndpointSecret,
+		StripePublishableKey:         stripePublishableKey,
+		EmailAPIKey:                  emailAPIKey,
+		AdminEmail:                   adminEmail,
+		AdminPassword:                adminPassword,
+		SessionKey:                   sessionKeyBytes,
+		JwtSigningKey:                jwtSigningKeyBytes,
+		Env:                          env,
+		IPGeoLocationCurrencyMapFile: ipGeolocationCurrencyMapFile,
+		IPGeoLocationGeoliteFile:     ipGeolocationGeoliteFile,
+		MailerLiteAPIKey:             mailerliteAPIKey,
+		SentryDSN:                    sentryDSN,
+		JobsPerPage:                  20,
 	}, nil
 }
