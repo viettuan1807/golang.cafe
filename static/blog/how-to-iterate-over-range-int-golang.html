@@ -34,21 +34,21 @@
         <p class="has-line-data" data-line-start="2" data-line-end="3">In Go (Golang) the <a href="https://tour.golang.org/flowcontrol/1"><code>for</code> construct</a> is the only keyword used to declare loops, as opposed to other programming languages where we could use <code>while</code>. There are a couple of ways we can use the <code>for</code> construct in Go (Golang). Let’s see the various examples and example of the for’s syntax</p>
         <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CE7ITK3J&placement=golangcafe" id="_carbonads_js"></script><br />
         <pre><code class="language-go">for &lt;init statement&gt;; &lt;condition expression&gt;; &lt;post statement&gt; {
-            // do stuff here...
-        }
+      // do stuff here...
+}
         </code></pre>
         <p class="has-line-data" data-line-start="10" data-line-end="11">The <strong>init statement</strong> is executed before the first iteration, the <strong>condition expression</strong> is evaluated after each iteration and the <strong>post statement</strong> is executed after each iteration.</p>
         <h3 class="code-line" data-line-start=12 data-line-end=13 ><a id="How_to_iterate_over_a_range_of_integers_12"></a>How to iterate over a range of integers?</h3>
         <p class="has-line-data" data-line-start="14" data-line-end="15">We know the basics and how easy is to use the <code>for</code> loop in Go (Golang), let’s see how we can iterate over a range of integers in Go, for example from 1 to 9</p>
         <pre><code class="language-go">for i:=0; i &lt; 10; i++ {
-            fmt.Println(i)
-        }
+      fmt.Println(i)
+}
         </code></pre>
         <p class="has-line-data" data-line-start="22" data-line-end="23">Like you would do in any other languages, iterating over a range of integers is straightforward in Go.</p>
         <p class="has-line-data" data-line-start="24" data-line-end="25">Or you alternatively you could use the <a href="https://tour.golang.org/moretypes/16">range construct</a> and range over an initialised empty slice of integers</p>
         <pre><code class="language-go">for i := range [10]int{} {
-                fmt.Println(i)
-        }
+        fmt.Println(i)
+}
         </code></pre>
         <br />
         <p>
