@@ -59,6 +59,10 @@ var blogPosts = []Page{
 		CreatedAt: time.Now().UTC(),
 		Title:     "upgrade-dependencies-golang",
 	},
+	{
+		CreatedAt: time.Now().UTC(),
+		Title:     "how-to-iterate-over-range-int-golang",
+	},
 }
 var pages = []string{
 	"hire-golang-developers",

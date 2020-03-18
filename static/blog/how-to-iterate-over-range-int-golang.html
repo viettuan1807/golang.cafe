@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Golang base64 Encode Example</title>
+    <title>How To Iterate Over A Range Of Integers In Go (Goalng)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
-    <meta name="title" content="Golang base64 Encode Example" />
+    <meta name="title" content="How To Iterate Over A Range Of Integers In Go (Goalng)" />
     <meta name="keywords" content="golang, golang base64, golang example, base64 encoding, golang base64 encode string, golang base64 decode, golang base64 decode string, golang base64 decode example" />
-    <meta name="description" content="Golang base64 Encode Example" />
-    <meta itemprop="name" content="Golang base64 Encode Example">
-    <meta itemprop="description" content="Golang base64 Encode Example">
+    <meta name="description" content="How To Iterate Over A Range Of Integers In Go (Goalng)" />
+    <meta itemprop="name" content="How To Iterate Over A Range Of Integers In Go (Goalng)">
+    <meta itemprop="description" content="How To Iterate Over A Range Of Integers In Go (Goalng)">
     <meta itemprop="image" content="https://golang.cafe/s/img/cafe.jpg">
     <meta property="og:url" content="https://golang.cafe">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Golang base64 Encode Example">
-    <meta property="og:description" content="Golang base64 Encode Example">
+    <meta property="og:title" content="How To Iterate Over A Range Of Integers In Go (Goalng)">
+    <meta property="og:description" content="How To Iterate Over A Range Of Integers In Go (Goalng)">
     <meta property="og:image" content="https://golang.cafe/s/img/cafe.jpg">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Golang base64 Encode Example">
-    <meta name="twitter:description" content="Golang base64 Encode Example">
+    <meta name="twitter:title" content="How To Iterate Over A Range Of Integers In Go (Goalng)">
+    <meta name="twitter:description" content="How To Iterate Over A Range Of Integers In Go (Goalng)">
     <meta name="twitter:image" content="https://golang.cafe/s/img/cafe.jpg">
     <meta name="twitter:site" content="@golangcafe"/>
     <style type="text/css">
@@ -30,21 +30,26 @@
   <body>
   <section>
       <article>
-        <h1><a id="Golang_base64_encode_example_0"></a>Golang base64 encode example</h1>
-<p>Golang provides built in support for <a target="_blank" href="http://en.wikipedia.org/wiki/Base64">base64 encoding/decoding</a>. Directly in the standard library we have <code>&quot;encoding/base64&quot;</code> so there is no need to download or install third-party libraries. Let’s have a look at the Go base64 encoding documentation <a target="_blank" href="https://golang.org/pkg/encoding/base64/">https://golang.org/pkg/encoding/base64/</a>. In order to encode or decode a string to and from base64 we need to use the <code>type Encoder</code> which provides the following methods</p>
-<script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CE7ITK3J&placement=golangcafe" id="_carbonads_js"></script><br />
-<pre><code class="language-go"><span class="hljs-keyword">func</span> (enc *Encoding) DecodeString(s <span class="hljs-typename">string</span>) ([]<span class="hljs-typename">byte</span>, error)
-</code></pre>
-<p>and to encode a string (in this case a slice of bytes) to base64 format</p>
-<pre><code class="language-go"><span class="hljs-keyword">func</span> (enc *Encoding) EncodeToString(src []<span class="hljs-typename">byte</span>) <span class="hljs-typename">string</span>
-</code></pre>
-<p>the standard library also provides us methods that decode and encode from and to byte slices for more general purpose usages (<a target="_blank" href="https://golang.org/pkg/encoding/base64/#Encoding.Decode">Decode</a>, <a target="_blank" href="https://golang.org/pkg/encoding/base64/#Encoding.Encode">Encode</a>).</p>
-<p>Here is an example on how to encode and decode base64 strings</p>
-<script src="https://gist.github.com/0x13a/195287daee2c3376f2c1a4fd6a9de2cb.js"></script>
-<p>Here is the expected output</p>
-<pre><code class="language-go">SGVsbG8gV29ybGQu
-Hello World.
-</code></pre>
+        <h2 class="code-line" data-line-start=0 data-line-end=1 ><a id="How_To_Iterate_Over_A_Range_Of_Integers_In_Go_Goalng_0"></a>How To Iterate Over A Range Of Integers In Go (Goalng)</h2>
+        <p class="has-line-data" data-line-start="2" data-line-end="3">In Go (Golang) the <a href="https://tour.golang.org/flowcontrol/1"><code>for</code> construct</a> is the only keyword used to declare loops, as opposed to other programming languages where we could use <code>while</code>. There are a couple of ways we can use the <code>for</code> construct in Go (Golang). Let’s see the various examples and example of the for’s syntax</p>
+        <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CE7ITK3J&placement=golangcafe" id="_carbonads_js"></script><br />
+        <pre><code class="language-go">for &lt;init statement&gt;; &lt;condition expression&gt;; &lt;post statement&gt; {
+            // do stuff here...
+        }
+        </code></pre>
+        <p class="has-line-data" data-line-start="10" data-line-end="11">The <strong>init statement</strong> is executed before the first iteration, the <strong>condition expression</strong> is evaluated after each iteration and the <strong>post statement</strong> is executed after each iteration.</p>
+        <h3 class="code-line" data-line-start=12 data-line-end=13 ><a id="How_to_iterate_over_a_range_of_integers_12"></a>How to iterate over a range of integers?</h3>
+        <p class="has-line-data" data-line-start="14" data-line-end="15">We know the basics and how easy is to use the <code>for</code> loop in Go (Golang), let’s see how we can iterate over a range of integers in Go, for example from 1 to 9</p>
+        <pre><code class="language-go">for i:=0; i &lt; 10; i++ {
+            fmt.Println(i)
+        }
+        </code></pre>
+        <p class="has-line-data" data-line-start="22" data-line-end="23">Like you would do in any other languages, iterating over a range of integers is straightforward in Go.</p>
+        <p class="has-line-data" data-line-start="24" data-line-end="25">Or you alternatively you could use the <a href="https://tour.golang.org/moretypes/16">range construct</a> and range over an initialised empty slice of integers</p>
+        <pre><code class="language-go">for i := range [10]int{} {
+                fmt.Println(i)
+        }
+        </code></pre>
         <br />
         <p>
           Only New Go Jobs Weekly
@@ -122,7 +127,7 @@ Hello World.
           return;
       }
       get('/x/n/m/s?email='+encodeURIComponent(email)+'&frequency='+encodeURIComponent(frequency), function(success) {
-        amplitude.getInstance().logEvent('golang_jobs_newsletter_subscribed', {source: 'blog', blog_slug_id: 'golang-base64-encode-example'});
+        amplitude.getInstance().logEvent('golang_jobs_newsletter_subscribed', {source: 'blog', blog_slug_id: 'how-to-iterate-over-range-int-golang'});
           if (success) {
               alert('Thanks for subscribing. Please confirm your email before we can send any newsletter!');
               document.getElementById('job-email-subscription').value = '';
@@ -134,3 +139,4 @@ Hello World.
   </script>
   </body>
 </html>
+
