@@ -59,8 +59,8 @@
                 No frameworks have been used, apart from Go's <a href="https://github.com/gorilla/mux" target="_blank" rel="noreferrer nofollow">gorilla mux</a> for routing.
                 The frontend is written in vanilla JavaScript using a class-less CSS framework called <a href="https://yegor256.github.io/tacit/" target="_blank" rel="noreferrer nofollow">tacit</a>.
 
-                <h4>Open Startup</h4>
-                Golang Cafe openly reports traffic stats and revenue which is used to pay off maintenance, development and hosting costs. Please have a look at our indiehackers page <a href="https://www.indiehackers.com/product/golang-cafe" target="_blank" rel="noreferrer nofollow">https://www.indiehackers.com/product/golang-cafe</a>
+                <h4>No JS Tracking</h4>
+                We do not use any tracking tool (Google Analytics, etc) all traffic is monitored for stats purposes at DNS level
                 <br />
                 <br />
                 <p>
@@ -73,7 +73,6 @@
     <nav>
       <small>
         <a href="/">Home</a> &bull;
-        
         <a href="&#116;&#101;&#97;&#109;&#64;&#103;&#111;&#108;&#97;&#110;&#103;&#46;&#99;&#97;&#102;&#101;">Need Help?</a> &bull;
         <a href="https://twitter.com/golangcafe">Twitter</a> &bull;
         <a href="/shop">Go Merchandise</a> &bull;
@@ -83,39 +82,5 @@
       </small>
     </nav>
   </footer>
-  <script type="text/javascript">
-    (function(e,t){var n=e.amplitude||{_q:[],_iq:{}};var r=t.createElement("script")
-    ;r.type="text/javascript"
-    ;r.integrity="sha384-vYYnQ3LPdp/RkQjoKBTGSq0X5F73gXU3G2QopHaIfna0Ct1JRWzwrmEz115NzOta"
-    ;r.crossOrigin="anonymous";r.async=true
-    ;r.src="https://cdn.amplitude.com/libs/amplitude-5.8.0-min.gz.js"
-    ;r.onload=function(){if(!e.amplitude.runQueuedFunctions){
-    console.log("[Amplitude] Error: could not load SDK")}}
-    ;var i=t.getElementsByTagName("script")[0];i.parentNode.insertBefore(r,i)
-    ;function s(e,t){e.prototype[t]=function(){
-    this._q.push([t].concat(Array.prototype.slice.call(arguments,0)));return this}}
-    var o=function(){this._q=[];return this}
-    ;var a=["add","append","clearAll","prepend","set","setOnce","unset"]
-    ;for(var u=0;u<a.length;u++){s(o,a[u])}n.Identify=o;var c=function(){this._q=[]
-    ;return this}
-    ;var l=["setProductId","setQuantity","setPrice","setRevenueType","setEventProperties"]
-    ;for(var p=0;p<l.length;p++){s(c,l[p])}n.Revenue=c
-    ;var d=["init","logEvent","logRevenue","setUserId","setUserProperties","setOptOut","setVersionName","setDomain","setDeviceId", "enableTracking", "setGlobalUserProperties","identify","clearUserProperties","setGroup","logRevenueV2","regenerateDeviceId","groupIdentify","onInit","logEventWithTimestamp","logEventWithGroups","setSessionId","resetSessionId"]
-    ;function v(e){function t(t){e[t]=function(){
-    e._q.push([t].concat(Array.prototype.slice.call(arguments,0)))}}
-    for(var n=0;n<d.length;n++){t(d[n])}}v(n);n.getInstance=function(e){
-    e=(!e||e.length===0?"$default_instance":e).toLowerCase()
-    ;if(!n._iq.hasOwnProperty(e)){n._iq[e]={_q:[]};v(n._iq[e])}return n._iq[e]}
-    ;e.amplitude=n})(window,document);
-    amplitude.getInstance().init("d7c01abf60d7d36460c16377d3192f08");
-    amplitude.getInstance().logEvent('page_viewed', {page_slug_id: 'about'});
-  </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-72181251-11"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-72181251-11');
-    </script>
   </body>
 </html>
