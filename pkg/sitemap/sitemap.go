@@ -63,6 +63,10 @@ var blogPosts = []Page{
 		CreatedAt: time.Now().UTC(),
 		Title:     "how-to-iterate-over-range-int-golang",
 	},
+	{
+		CreatedAt: time.Now().UTC(),
+		Title:     "golang-string-to-int-conversion-example",
+	},
 }
 var pages = []string{
 	"hire-golang-developers",

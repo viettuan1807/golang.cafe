@@ -2,23 +2,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Golang Int to String Conversion Example</title>
+    <title>Golang String To Int Conversion Example</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
-    <meta name="title" content="Golang Int to String Conversion Example" />
-    <meta name="keywords" content="golang, learning golang, golang tutorial, golang int to string, go int to string, golang int to string conversion" />
-    <meta name="description" content="Golang Int to String Conversion Example" />
-    <meta itemprop="name" content="Golang Int to String Conversion Example">
-    <meta itemprop="description" content="Golang Int to String Conversion Example">
+    <meta name="title" content="Golang String To Int Conversion Example" />
+    <meta name="keywords" content="golang, learning golang, golang tutorial, golang string to int, go string to int, golang string to int conversion" />
+    <meta name="description" content="Golang String To Int Conversion Example" />
+    <meta itemprop="name" content="Golang String To Int Conversion Example">
+    <meta itemprop="description" content="Golang String To Int Conversion Example">
     <meta itemprop="image" content="https://golang.cafe/s/img/cafe.jpg">
     <meta property="og:url" content="https://golang.cafe">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Golang Int to String Conversion Example">
-    <meta property="og:description" content="Golang Int to String Conversion Example">
+    <meta property="og:title" content="Golang String To Int Conversion Example">
+    <meta property="og:description" content="Golang String To Int Conversion Example">
     <meta property="og:image" content="https://golang.cafe/s/img/cafe.jpg">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Golang Int to String Conversion Example">
-    <meta name="twitter:description" content="Golang Int to String Conversion Example">
+    <meta name="twitter:title" content="Golang String To Int Conversion Example">
+    <meta name="twitter:description" content="Golang String To Int Conversion Example">
     <meta name="twitter:image" content="https://golang.cafe/s/img/cafe.jpg">
     
     <meta name="twitter:site" content="@golangcafe"/>
@@ -32,40 +32,90 @@
   <body>
   <section>
       <article>
-        <h1><a id="Golang_int_to_string_conversion_example_0"></a>Golang int to string conversion example</h1>
-<p>Go (Golang) provides string and integer conversion directly from a package coming from the standard library - <a href="https://golang.org/pkg/strconv/" target="_blank" rel="noopener noreferrer"><code>strconv</code></a>.<br>
-In order to convert an integer value to string in Golang we can use the <a href="https://golang.org/pkg/strconv/#FormatInt" target="_blank" rel="noopener noreferrer"><code>FormatInt</code></a> function from the <code>strconv</code> package.</p>
-<script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CE7ITK3J&placement=golangcafe" id="_carbonads_js"></script><br />
-<blockquote>
-<p>func FormatInt(i int64, base int) string</p>
-</blockquote>
-<p>FormatInt returns the string representation of i in the given base, for 2 &lt;= base &lt;= 36. The result uses the lower-case letters ‘a’ to ‘z’ for digit values &gt;= 10.</p>
-<p>So what we need is just the integer value and what base of the given integer is. There is a shorter function which we can use if we want to convert an integer base 10 to an ASCII string.<br>
-The function is <a href="https://golang.org/pkg/strconv/#Itoa" target="_blank" rel="noopener noreferrer"><code>Itoa</code></a> from the <code>strconv</code> package.</p>
-<blockquote>
-<p>func Itoa(i int) string</p>
-</blockquote>
-<p>Itoa is equivalent to FormatInt(int64(i), 10).</p>
-<p>Let’s see an example on how we can use these functions to convert an integer to an ASCII string</p>
-<pre><code class="language-go">
-package main
+        <h1 class="code-line" data-line-start=0 data-line-end=1 ><a id="Golang_string_to_int_example_0"></a>Golang string to int example</h1>
+        <p class="has-line-data" data-line-start="2" data-line-end="3">Go (Golang) offers a vast standard library with a lot tools coming directly out of the box for most every day tasks. One of this is the conversion of strings to numeric values. For this kind of problem we have an handful of different options, here some of them:</p>
+        <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CE7ITK3J&placement=golangcafe" id="_carbonads_js"></script><br />
+        <h2 class="code-line" data-line-start=4 data-line-end=5 ><a id="Use_strconvParseInt_4"></a>Use strconv.ParseInt</h2>
+        <p class="has-line-data" data-line-start="6" data-line-end="7">One option is <a href="https://golang.org/pkg/strconv/#ParseInt">strconv.ParseInt</a>. Which gives you a lot of flexibility on what numeric base (base 2, 10, 16 etc) the expected integer is supposed to be and the bitsize (16, 32, 64 etc) of the integer you are trying to parse.</p>
+        <pre><code class="language-go">func ParseInt(s string, base int, bitSize int) (int64, error)
+        </code></pre>
+        <blockquote>
+        <p class="has-line-data" data-line-start="12" data-line-end="16">ParseInt interprets a string s in the given base (0, 2 to 36) and bit size (0 to 64) and returns the corresponding value i.<br>
+        If the base argument is 0, the true base is implied by the string’s prefix: 2 for “0b”, 8 for “0” or “0o”, 16 for “0x”, and 10 otherwise. Also, for argument base 0 only, underscore characters are permitted as defined by the Go syntax for integer literals.<br>
+        The bitSize argument specifies the integer type that the result must fit into. Bit sizes 0, 8, 16, 32, and 64 correspond to int, int8, int16, int32, and int64. If bitSize is below 0 or above 64, an error is returned.<br>
+        The errors that ParseInt returns have concrete type *NumError and include err.Num = s. If s is empty or contains invalid digits, err.Err = ErrSyntax and the returned value is 0; if the value corresponding to s cannot be represented by a signed integer of the given size, err.Err = ErrRange and the returned value is the maximum magnitude integer of the appropriate bitSize and sign.</p>
+        </blockquote>
+        <p class="has-line-data" data-line-start="17" data-line-end="18">Here’s an example below</p>
+        <pre><code class="language-go">package main
+        
+import (
+    &quot;strconv&quot;
+    &quot;log&quot;
+)
+        
+func main() {
+    i, err := strconv.ParseInt(&quot;12345&quot;, 10, 64)
+    if err != nil {
+        log.Fatal(err)
+    }
+    log.Println(i)
+}
+        </code></pre>
+        <p class="has-line-data" data-line-start="35" data-line-end="36">This is the expected output</p>
+        <pre><code class="language-go">2009/11/10 23:00:00 12345
+        </code></pre>
+        <h2 class="code-line" data-line-start=41 data-line-end=42 ><a id="Use_strconvAtoi_41"></a>Use strconv.Atoi</h2>
+        <p class="has-line-data" data-line-start="43" data-line-end="44">One options is to use <a href="https://golang.org/pkg/strconv/#Atoi">strconv.Atoi</a> function which is much quicker to use as it’s using by default a decimal base.</p>
+        <pre><code class="language-go">func Atoi(s string) (int, error)
+        </code></pre>
+        <blockquote>
+        <p class="has-line-data" data-line-start="48" data-line-end="49">Atoi is equivalent to ParseInt(s, 10, 0), converted to type int.</p>
+        </blockquote>
+        <p class="has-line-data" data-line-start="50" data-line-end="51">Here’s an example below</p>
+        <pre><code class="language-go">package main
 
 import (
-  "fmt"
-  "strconv"
+    &quot;strconv&quot;
+    &quot;log&quot;
+)
+        
+func main() {
+   i, err := strconv.Atoi(&quot;12345&quot;)
+   if err != nil {
+        log.Fatal(err)
+    }
+    log.Println(i)
+}
+        </code></pre>
+        <p class="has-line-data" data-line-start="69" data-line-end="70">This is the expected output for the much simpler strconv.Atoi function</p>
+        <pre><code class="has-line-data" data-line-start="72" data-line-end="74">2009/11/10 23:00:00 12345
+        </code></pre>
+        <h2 class="code-line" data-line-start=75 data-line-end=76 ><a id="Use_fmtSscanf_75"></a>Use fmt.Sscanf</h2>
+        <p class="has-line-data" data-line-start="76" data-line-end="77">One more sophisticated option is to use the <a href="https://golang.org/pkg/fmt/#Sscanf">fmt.Sscanf</a> function. Which allows you to parse integer values inside strings but using different format options</p>
+        <pre><code class="has-line-data" data-line-start="79" data-line-end="81">func Sscanf(str string, format string, a ...interface{}) (n int, err error)
+        </code></pre>
+        <blockquote>
+        <p class="has-line-data" data-line-start="82" data-line-end="83">Sscanf scans the argument string, storing successive space-separated values into successive arguments as determined by the format. It returns the number of items successfully parsed. Newlines in the input must match newlines in the format.</p>
+        </blockquote>
+        <p class="has-line-data" data-line-start="84" data-line-end="85">Let’s see an example to better understand its possible use cases</p>
+        <pre><code class="language-go">package main
+
+import (
+    &quot;fmt&quot;
 )
 
 func main() {
-  i := 10
-  s1 := strconv.FormatInt(int64(i), 10)
-  s2 := strconv.Itoa(i)
-  fmt.Printf("%v, %v\n", s1, s2)
+    var userID, sessionID int
+    _, err := fmt.Sscanf(&quot;UserID:12345 SessionID:54321&quot;, &quot;UserID:%d SessionID:%d&quot;, &amp;userID, &amp;sessionID)
+    if err != nil {
+        panic(err)
+    }
+    fmt.Printf(&quot;%d, %d\n&quot;, userID, sessionID)
 }
-</code></pre>
-<p>As you can see the result is exactly the same. The expected output from the above snippet is as follows</p>
-<blockquote>
-<p>10, 10</p>
-</blockquote>
+        </code></pre>
+        <p class="has-line-data" data-line-start="103" data-line-end="104">Here’s an example of the output for this code snippet</p>
+        <pre><code class="language-go">12345, 54321
+        </code></pre>
         <br />
         <p>
           Only New Go Jobs Weekly
