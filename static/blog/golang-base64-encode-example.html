@@ -40,7 +40,32 @@
 </code></pre>
 <p>the standard library also provides us methods that decode and encode from and to byte slices for more general purpose usages (<a target="_blank" href="https://golang.org/pkg/encoding/base64/#Encoding.Decode">Decode</a>, <a target="_blank" href="https://golang.org/pkg/encoding/base64/#Encoding.Encode">Encode</a>).</p>
 <p>Here is an example on how to encode and decode base64 strings</p>
-<script src="https://gist.github.com/0x13a/195287daee2c3376f2c1a4fd6a9de2cb.js"></script>
+<pre><code class="language-go">
+package main
+
+import (
+    "encoding/base64"
+    "fmt"
+)
+
+func main() {
+
+    // Here's the `string` we'll encode
+    plainStr := "Hello World."
+
+    // The encoder we will use is the base64.StdEncoding
+    // It requires a byte slice so we cast the string to []byte
+    encodedStr := base64.StdEncoding.EncodeToString([]byte(plainStr))
+    fmt.Println(encodedStr)
+
+    // Decoding may return an error, in case the input is not well formed
+    decodedStrAsByteSlice, err := base64.StdEncoding.DecodeString(encodedStr)
+    if err != nil {
+        panic("malformed input")
+    }
+    fmt.Println(string(decodedStrAsByteSlice))
+}
+</code></pre>
 <p>Here is the expected output</p>
 <pre><code class="language-go">SGVsbG8gV29ybGQu
 Hello World.

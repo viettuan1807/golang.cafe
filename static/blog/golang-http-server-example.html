@@ -43,7 +43,23 @@ One of the first function we want to have a look at is <a href="https://golang.o
 <pre><code class="language-go"><span class="hljs-keyword">func</span> ListenAndServe(addr <span class="hljs-typename">string</span>, handler Handler) error
 </code></pre>
 <p>It appears to be clear that we can easily create our first http handler by using <code>ListenAndServe</code> and <code>HandleFunc</code> as follows</p>
-<script src="https://gist.github.com/0x13a/42fea2a0eb24dd77060d345a45c25cef.js"></script>
+<pre><code class="language-go">
+package main
+
+import (
+        "fmt"
+        "log"
+        "net/http"
+)
+
+func main() {
+        goodMorningHandler := func(w http.ResponseWriter, req *http.Request) {
+                fmt.Fprintf(w, "Good morning! You are using verb: %s, URL: %s\n", req.Method, req.URL)
+        }
+        http.HandleFunc("/goodmorning", goodMorningHandler)
+        log.Fatal(http.ListenAndServe(":1234", nil))
+}
+</code></pre>
 <p>In the following example we just saw how to create a http server which handles http requests based on the requested URI path.<br>
 Let’s now try out our simple http server and see what we get as response</p>
 <pre><code class="language-sh">➜  ~ curl -v http://localhost:<span class="hljs-number">1234</span>/goodmorning

@@ -32,7 +32,7 @@
   <body>
   <section>
       <article>
-        <h1 class="code-line" data-line-start=0 data-line-end=1 ><a id="Golang_string_to_int_example_0"></a>Golang string to int example</h1>
+        <h1 class="code-line" data-line-start=0 data-line-end=1 ><a id="Golang_string_to_int_example_0"></a>Golang String To Int Conversion example</h1>
         <p class="has-line-data" data-line-start="2" data-line-end="3">Go (Golang) offers a vast standard library with a lot tools coming directly out of the box for most every day tasks. One of this is the conversion of strings to numeric values. For this kind of problem we have an handful of different options, here some of them:</p>
         <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CE7ITK3J&placement=golangcafe" id="_carbonads_js"></script><br />
         <h2 class="code-line" data-line-start=4 data-line-end=5 ><a id="Use_strconvParseInt_4"></a>Use strconv.ParseInt</h2>
@@ -88,11 +88,11 @@ func main() {
 }
         </code></pre>
         <p class="has-line-data" data-line-start="69" data-line-end="70">This is the expected output for the much simpler strconv.Atoi function</p>
-        <pre><code class="has-line-data" data-line-start="72" data-line-end="74">2009/11/10 23:00:00 12345
+        <pre><code class="language-go">2009/11/10 23:00:00 12345
         </code></pre>
         <h2 class="code-line" data-line-start=75 data-line-end=76 ><a id="Use_fmtSscanf_75"></a>Use fmt.Sscanf</h2>
         <p class="has-line-data" data-line-start="76" data-line-end="77">One more sophisticated option is to use the <a href="https://golang.org/pkg/fmt/#Sscanf">fmt.Sscanf</a> function. Which allows you to parse integer values inside strings but using different format options</p>
-        <pre><code class="has-line-data" data-line-start="79" data-line-end="81">func Sscanf(str string, format string, a ...interface{}) (n int, err error)
+        <pre><code class="language-go">func Sscanf(str string, format string, a ...interface{}) (n int, err error)
         </code></pre>
         <blockquote>
         <p class="has-line-data" data-line-start="82" data-line-end="83">Sscanf scans the argument string, storing successive space-separated values into successive arguments as determined by the format. It returns the number of items successfully parsed. Newlines in the input must match newlines in the format.</p>
@@ -114,8 +114,7 @@ func main() {
 }
         </code></pre>
         <p class="has-line-data" data-line-start="103" data-line-end="104">Here’s an example of the output for this code snippet</p>
-        <pre><code class="language-go">12345, 54321
-        </code></pre>
+        <pre><code class="language-go">12345, 54321</code></pre>
         <br />
         <p>
           Only New Go Jobs Weekly
