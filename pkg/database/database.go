@@ -31,7 +31,6 @@ type JobRq struct {
 	Description        string `json:"job_description"`
 	HowToApply         string `json:"how_to_apply"`
 	Perks              string `json:"perks"`
-	AffiliateReference string `json:"ref,omitempty"`
 	InterviewProcess   string `json:"interview_process,omitempty"`
 	Email              string `json:"company_email"`
 	StripeToken        string `json:"stripe_token,omitempty"`
@@ -193,12 +192,6 @@ type SEOSkill struct {
 
 // CREATE INDEX job_idx ON job_event (job_id);
 
-// CREATE TABLE IF NOT EXISTS affiliate_event_log (
-// 	affiliate_id VARCHAR(255) NOT NULL,
-// 	type VARCHAR(128) NOT NULL,
-//  meta JSON DEFAULT NULL,
-// 	created_at TIMESTAMP NOT NULL
-// );
 
 // CREATE TABLE IF NOT EXISTS seo_salary (
 //  id VARCHAR(255) NOT NULL,

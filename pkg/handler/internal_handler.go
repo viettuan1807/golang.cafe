@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/0x13a/golang.cafe/pkg/affiliate"
 	"github.com/0x13a/golang.cafe/pkg/database"
 	"github.com/0x13a/golang.cafe/pkg/email"
 	"github.com/0x13a/golang.cafe/pkg/middleware"
