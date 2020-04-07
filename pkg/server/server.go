@@ -211,35 +211,9 @@ func (s Server) RenderPageForLocationAndTag(w http.ResponseWriter, location, tag
 }
 
 func (s Server) RenderPostAJobForLocation(w http.ResponseWriter, r *http.Request, location string) {
-	affiliateRef := r.URL.Query().Get("ref")
-	affiliateRefCookie, err := r.Cookie(affiliate.PostAJobAffiliateRefCookie)
-	var affiliateRefCookieVal string
-	if err == nil {
-		affiliateRefCookieVal = affiliateRefCookie.String()
-	}
-	// not in cookie not in rq
-	if affiliateRef == "" && affiliateRefCookieVal == "" {
-		affiliateRef = affiliate.DefaultAffiliateID
-	}
-	// in cookie not in rq
-	if affiliateRef == "" && affiliateRefCookieVal != "" {
-		affiliateRef = affiliateRefCookieVal
-	}
-	if affiliate.ValidAffiliateRef(affiliateRef) {
-		err := database.SaveAffiliatePostAJobView(s.Conn, affiliateRef)
-		if err != nil {
-			s.Log(err, fmt.Sprintf("unable to save affiliate %s post a job view", affiliateRef))
-		}
-		// if cookie is already present we don't set Cookie
-		// if cookie is same as ref coming from the req we don't set cookie
-		if affiliateRefCookieVal != r.URL.Query().Get("ref") && affiliateRefCookieVal == "" {
-			thirtyDays := time.Now().Add(30 * 24 * time.Hour)
-			cookie := http.Cookie{Name: affiliate.PostAJobAffiliateRefCookie, Value: affiliateRef, Expires: thirtyDays}
-			http.SetCookie(w, &cookie)
-		}
-	}
 	ipAddrs := strings.Split(r.Header.Get("x-forwarded-for"), ", ")
 	currency := ipgeolocation.Currency{ipgeolocation.CurrencyUSD, "$"}
+	var err error
 	if len(ipAddrs) > 0 {
 		currency, err = s.ipGeoLocation.GetCurrencyForIP(ipAddrs[0])
 		if err != nil {
@@ -251,7 +225,6 @@ func (s Server) RenderPostAJobForLocation(w http.ResponseWriter, r *http.Request
 	s.Render(w, http.StatusOK, "post-a-job.html", map[string]interface{}{
 		"Location":             location,
 		"Currency":             currency,
-		"Ref":                  affiliateRef,
 		"StripePublishableKey": s.GetConfig().StripePublishableKey,
 	})
 }

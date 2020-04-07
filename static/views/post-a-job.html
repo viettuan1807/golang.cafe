@@ -177,7 +177,6 @@
                 <h4>Get More Leads</h4>
                 <input type="checkbox" name="ad-type-3" style="margin-right: 8px; margin-bottom: 5px;" id="ad-type-3" checked><label>Pinned to the Front Page for 7 days <b>{{ .Currency.Symbol }}59</b> (only 1 left)</label><br/>
                 <input type="checkbox" name="ad-type-2" style="margin-right: 8px; margin-bottom: 5px;" id="ad-type-2"><label>Pinned to the Front Page for 30 days <b>{{ .Currency.Symbol }}99</b>  (only 1 left)</label><br/>
-                <input type="hidden" name="ref" id="ref" value="{{ .Ref }}" />
                 <br />
                 <br />
                 <input type="submit" id="submit" value="Hire Go Developers {{ .Currency.Symbol }}59" onclick="post();" style="float: right;">
@@ -189,7 +188,7 @@
     <nav>
       <small>
         <a href="/">Home</a> &bull;
-        <a href="&#116;&#101;&#97;&#109;&#64;&#103;&#111;&#108;&#97;&#110;&#103;&#46;&#99;&#97;&#102;&#101;">Need Help?</a> &bull;
+        <a href="mailto:&#116;&#101;&#97;&#109;&#64;&#103;&#111;&#108;&#97;&#110;&#103;&#46;&#99;&#97;&#102;&#101;">Need Help?</a> &bull;
         <a href="/terms-of-service">T&Cs</a>
         <br>
       </small>
@@ -361,7 +360,6 @@
             var companyWebsite = document.getElementById("company-website").value;
             var jobDescription = jobDescriptionEditor.value();
             var howToApply = document.getElementById("how-to-apply").value;
-            var ref = document.getElementById("ref").value;
             var companyEmail = document.getElementById("company-email").value;
             if (empty(jobTitle, jobLocation, salaryMin, salaryMax, companyName, companyWebsite, jobDescription, howToApply, companyEmail)) {
                 alert('You must fill all the mandatory forms in order to Hire Go Developers');
@@ -432,7 +430,6 @@
                                 job_description: jobDescription,
                                 how_to_apply: howToApply,
                                 company_email: companyEmail,
-                                ref: ref,
                                 ad_type: adType,
                                 currency_code: '{{ .Currency.Code }}',
                                 company_icon_id: companyIconId
@@ -476,7 +473,6 @@
                         job_description: jobDescription,
                         how_to_apply: howToApply,
                         company_email: companyEmail,
-                        ref: ref,
                         ad_type: adType,
                         currency_code: '{{ .Currency.Code }}'
                     },

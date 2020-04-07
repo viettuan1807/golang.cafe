@@ -214,12 +214,6 @@ func SubmitJobPostPageHandler(svr server.Server) http.HandlerFunc {
 			svr.JSON(w, http.StatusBadRequest, nil)
 			return
 		}
-		if affiliate.ValidAffiliateRef(jobRq.AffiliateReference) {
-			err = database.SaveAffiliateLog(svr.Conn, jobID, jobRq.AdType, payment.AdTypeToAmount(jobRq.AdType), jobRq.CurrencyCode, jobRq.AffiliateReference)
-			if err != nil {
-				svr.Log(err, fmt.Sprintf("unable to save affiliate reference %s for job %d: %v", jobRq.AffiliateReference, jobID, err))
-			}
-		}
 		k, err := ksuid.NewRandom()
 		if err != nil {
 			svr.Log(err, "unable to generate unique token")

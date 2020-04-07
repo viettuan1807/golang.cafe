@@ -249,25 +249,6 @@ func GetDbConn(databaseURL string) (*sql.DB, error) {
 	}
 	return db, nil
 }
-func GetAllJobIDs(conn *sql.DB) ([]int, error) {
-	var IDs []int
-	res, err := conn.Query(`SELECT id from job`)
-	if err != nil {
-		return IDs, err
-	}
-	for res.Next() {
-		var id int
-		res.Scan(&id)
-		IDs = append(IDs, id)
-	}
-
-	return IDs, nil
-}
-
-func AddExternalID(conn *sql.DB, jobID int, externalID string) error {
-	_, err := conn.Exec(`UPDATE job SET external_id = $1 WHERE id = $2`, externalID, jobID)
-	return err
-}
 
 // CloseDbConn closes db conn
 func CloseDbConn(conn *sql.DB) {
@@ -472,76 +453,6 @@ func GetSEOskills(conn *sql.DB) ([]SEOSkill, error) {
 		return skills, err
 	}
 	return skills, nil
-}
-
-type AffiliateLogMeta struct {
-	JobID    int    `json:"job_id"`
-	AdType   int    `json:"ad_type"`
-	Amount   int    `json:"amount"`
-	Currency string `json:"currency"`
-}
-
-func SaveAffiliateLog(conn *sql.DB, jobID int, adType int64, amount int64, currencyCode string, affiliateRef string) error {
-	stmt := `INSERT INTO affiliate_event_log (affiliate_id, type, meta, created_at) VALUES ($1, $2, $3, NOW())`
-	metaStruct := AffiliateLogMeta{jobID, int(adType), int(amount), currencyCode}
-	meta, err := json.Marshal(metaStruct)
-	if err != nil {
-		return err
-	}
-	_, err = conn.Exec(stmt, affiliateRef, "conversion", meta)
-	return err
-}
-
-func SaveAffiliatePostAJobView(conn *sql.DB, affiliateRef string) error {
-	stmt := `INSERT INTO affiliate_event_log (affiliate_id, type, created_at) VALUES ($1, $2, NOW())`
-	_, err := conn.Exec(stmt, affiliateRef, "pageview")
-	return err
-}
-
-func GetAffiliatePageViews(conn *sql.DB, affiliateID string) (int, error) {
-	stmt := `select count(*) from affiliate_event_log where affiliate_id = $1 and type = 'pageview'`
-	row := conn.QueryRow(stmt, affiliateID)
-	var count int
-	err := row.Scan(&count)
-	if err != nil {
-		return 0, err
-	}
-	return count, nil
-}
-
-type AffiliateConversion struct {
-	JobID            int
-	GrossRevenue     float64
-	NetRevenue       float64
-	AffiliateRevenue float64
-	Currency         string
-	CreatedAt        time.Time
-}
-
-func GetAffiliateConversions(conn *sql.DB, affiliateID string) ([]AffiliateConversion, error) {
-	var affiliateConversions []AffiliateConversion
-	stmt := `select meta->'job_id' as job_id,meta->'amount' as amount,meta->'currency' as currency, created_at from affiliate_event_log where affiliate_id = $1 and type = 'conversion'`
-	res, err := conn.Query(stmt, affiliateID)
-	if err != nil {
-		return affiliateConversions, err
-	}
-	for res.Next() {
-		var affiliateConversion AffiliateConversion
-		res.Scan(&affiliateConversion.JobID, &affiliateConversion.GrossRevenue, &affiliateConversion.Currency, &affiliateConversion.CreatedAt)
-		affiliateConversion.GrossRevenue = affiliateConversion.GrossRevenue / 100
-		if affiliateConversion.Currency == "USD" {
-			affiliateConversion.NetRevenue = (affiliateConversion.GrossRevenue - 0.2) - (affiliateConversion.GrossRevenue * 0.0029)
-		} else {
-			affiliateConversion.NetRevenue = (affiliateConversion.GrossRevenue - 0.2) - (affiliateConversion.GrossRevenue * 0.0014)
-		}
-		if affiliateConversion.GrossRevenue == 0 {
-			affiliateConversion.NetRevenue = 0
-		}
-		affiliateConversion.AffiliateRevenue = affiliateConversion.NetRevenue * 0.3
-
-		affiliateConversions = append(affiliateConversions, affiliateConversion)
-	}
-	return affiliateConversions, nil
 }
 
 func SaveDraft(db *sql.DB, job *JobRq) (int, error) {
