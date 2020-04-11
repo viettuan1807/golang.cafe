@@ -11,6 +11,7 @@ require (
 	github.com/ChimeraCoder/tokenbucket v0.0.0-20131201223612-c5a927568de7 // indirect
 	github.com/PuerkitoBio/goquery v1.5.0 // indirect
 	github.com/SparkPost/gosparkpost v0.0.0-20170825125937-4c6d2a3be658
+	github.com/aclements/go-moremath v0.0.0-20161014184102-0ff62e0875ff
 	github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc
 	github.com/antchfx/htmlquery v1.2.0 // indirect
 	github.com/antchfx/xmlquery v1.2.1 // indirect
@@ -49,5 +50,6 @@ require (
 	github.com/turnage/redditproto v0.0.0-20151223012412-afedf1b6eddb // indirect
 	golang.org/x/net v0.0.0-20190628185345-da137c7871d7 // indirect
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45 // indirect
+	golang.org/x/perf v0.0.0-20200318175901-9c9101da8316
 	gopkg.in/russross/blackfriday.v2 v2.0.0
 )

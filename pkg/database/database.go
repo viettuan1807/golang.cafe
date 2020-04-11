@@ -407,7 +407,7 @@ func GetLocation(conn *sql.DB, location string) (string, string, string, error) 
 	var loc string
 	var currency string
 	var country sql.NullString
-	res := conn.QueryRow(`SELECT name, currency, country FROM seo_location WHERE name = $1`, location)
+	res := conn.QueryRow(`SELECT name, currency, country FROM seo_location WHERE LOWER(name) = LOWER($1)`, location)
 	err := res.Scan(&loc, &currency, &country)
 	if err != nil {
 		return "", "", "", err

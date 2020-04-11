@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"math"
 	"net/http"
 	"regexp"
 	"strconv"
@@ -20,6 +21,8 @@ import (
 	"github.com/0x13a/golang.cafe/pkg/ipgeolocation"
 	"github.com/0x13a/golang.cafe/pkg/middleware"
 	"github.com/0x13a/golang.cafe/pkg/template"
+	"github.com/aclements/go-moremath/stats"
+	humanize "github.com/dustin/go-humanize"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
 
@@ -47,7 +50,7 @@ func NewServer(
 ) Server {
 	// todo: move somewhere else
 	raven.SetDSN(cfg.SentryDSN)
-	
+
 	return Server{
 		cfg:           cfg,
 		Conn:          conn,
@@ -85,10 +88,11 @@ func (s Server) GetConfig() config.Config {
 
 func (s Server) RenderSalaryForLocation(w http.ResponseWriter, r *http.Request, location string) {
 	loc, currency, country, err := database.GetLocation(s.Conn, location)
+	complimentaryRemote := false
 	if err != nil {
-		s.Log(err, fmt.Sprintf("unable to retrieve location %s from db, err: %#v", location, err))
-		s.JSON(w, http.StatusBadRequest, map[string]string{"status": "error"})
-		return
+		complimentaryRemote = true
+		loc = "Remote"
+		currency = "$"
 	}
 	set, err := database.GetSalaryDataForLocationAndCurrency(s.Conn, loc, currency)
 	if err != nil {
@@ -96,7 +100,6 @@ func (s Server) RenderSalaryForLocation(w http.ResponseWriter, r *http.Request, 
 		s.JSON(w, http.StatusInternalServerError, map[string]string{"status": "error"})
 		return
 	}
-	complimentaryRemote := false
 	if len(set) < 1 {
 		complimentaryRemote = true
 		set, err = database.GetSalaryDataForLocationAndCurrency(s.Conn, "Remote", "$")
@@ -112,11 +115,36 @@ func (s Server) RenderSalaryForLocation(w http.ResponseWriter, r *http.Request, 
 		s.JSON(w, http.StatusInternalServerError, map[string]string{"status": "error"})
 		return
 	}
+	var sampleMin, sampleMax stats.Sample
+	for _, x := range set {
+		sampleMin.Xs = append(sampleMin.Xs, float64(x.Min))
+		sampleMax.Xs = append(sampleMax.Xs, float64(x.Max))
+	}
+	min, _ := sampleMin.Bounds()
+	_, max := sampleMax.Bounds()
+	min = min - 30000
+	max = max + 30000
+	if min < 0 {
+		min = 0
+	}
 	s.Render(w, http.StatusOK, "salary-explorer.html", map[string]interface{}{
 		"Location":            strings.ReplaceAll(location, "-", " "),
 		"Currency":            currency,
 		"DataSet":             string(jsonRes),
+		"P10Max":              humanize.Comma(int64(math.Round(sampleMax.Quantile(0.1)))),
+		"P10Min":              humanize.Comma(int64(math.Round(sampleMin.Quantile(0.1)))),
+		"P50Max":              humanize.Comma(int64(math.Round(sampleMax.Quantile(0.5)))),
+		"P50Min":              humanize.Comma(int64(math.Round(sampleMin.Quantile(0.5)))),
+		"P90Max":              humanize.Comma(int64(math.Round(sampleMax.Quantile(0.9)))),
+		"P90Min":              humanize.Comma(int64(math.Round(sampleMin.Quantile(0.9)))),
+		"MeanMin":             humanize.Comma(int64(math.Round(sampleMin.Mean()))),
+		"MeanMax":             humanize.Comma(int64(math.Round(sampleMax.Mean()))),
+		"StdDevMin":           humanize.Comma(int64(math.Round(sampleMin.StdDev()))),
+		"StdDevMax":           humanize.Comma(int64(math.Round(sampleMax.StdDev()))),
+		"Count":               len(set),
 		"Country":             country,
+		"Min":                 int64(math.Round(min)),
+		"Max":                 int64(math.Round(max)),
 		"ComplimentaryRemote": complimentaryRemote,
 	})
 }
@@ -166,9 +194,9 @@ func (s Server) RenderPageForLocationAndTag(w http.ResponseWriter, location, tag
 	}
 	pages := []int{}
 	pageLinksPerPage := 8
-	pageLinkShift := ((pageLinksPerPage/2)+1)
+	pageLinkShift := ((pageLinksPerPage / 2) + 1)
 	firstPage := 1
-	if pageID - pageLinkShift > 0 {
+	if pageID-pageLinkShift > 0 {
 		firstPage = pageID - pageLinkShift
 	}
 	for i, j := firstPage, 1; i <= totalJobCount/s.cfg.JobsPerPage+1 && j <= pageLinksPerPage; i, j = i+1, j+1 {

@@ -55,7 +55,7 @@
     .line-item {padding:20px;margin:10px auto;}input{-webkit-appearance: none;-moz-appearance: none;appearance: none;}
     .job-desc {float:left;padding:0px 0px 0px 0px;font-size:12pt;display:none;}.job-desc>h3{margin-top:10px;}.job-icon{float: left; width: 60px; border-radius: 60px; margin-right: 10px;border: 1px solid #ccc;}
     a:hover{cursor:pointer;}.main-title{font-weight: bold;margin: 0 0 auto;width:80%;color:#000090;}
-    .line-item-sponsored-1 {border-radius: 8px;background-color: #fff9c9;}@media only screen and (max-width: 768px) {.email-subscribe-item{margin-top:15px;margin-bottom: 0;}}
+    .line-item-sponsored-1 {border-radius: 8px;}@media only screen and (max-width: 768px) {.email-subscribe-item{margin-top:15px;margin-bottom: 0;}}
     .apply-box {display: none;z-index: 2;width: 50%; height: auto;position: fixed;margin: 5% auto; top: 40px; left: 0; right: 0;background: #fff;}@media only screen and (max-width: 768px) {.apply-box{width: 90%;}}
     .overlay-effect {display: none;width: 100%; height: 100%; position: fixed; top: 0; left: 0;background: rgba(0, 0, 0,0.5);z-index: 1}.upload-file-label:hover{cursor: pointer;}
     .clearfix::after {content: "";clear: both;display: table;}
@@ -327,26 +327,6 @@
                 }
             }
         }
-        function setCookie(cname, cvalue, exdays) {
-            var d = new Date();
-            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-            var expires = "expires="+d.toUTCString();
-            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-        }
-        function getCookie(cname) {
-            var name = cname + "=";
-            var ca = document.cookie.split(';');
-            for(var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-                }
-                if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
-                }
-            }
-            return "";
-        }
         function apply(howToApply, jobID) {
           get('/x/j/c/'+jobID, function() {
             document.getElementById('apply-job-id').value = jobID;
@@ -450,12 +430,6 @@
                 window.location.href = '/Golang-'+encodeURIComponent(document.getElementById('search-tag').value)+'-Jobs-In-'+encodeURIComponent(document.getElementById('search-location').value);
             }
         });
-    function hideEmailBanner() {
-        var res = getCookie('__gcs');
-        if (res && res.trim() != "") {
-            document.getElementById('email-subscribe-banner').style.display = 'none';
-        }
-    }
     function subscribe() {
         var email = document.getElementById('job-email-subscription').value;
         var frequency = "Weekly";
@@ -465,7 +439,6 @@
         }
         get('/x/n/m/s?email='+encodeURIComponent(email)+'&frequency='+encodeURIComponent(frequency), function(success) {
             if (success) {
-                setCookie('__gcs', true, 365);
                 alert('Thanks for subscribing. Please confirm your email before we can send any newsletter!');
                 window.location.href='/';
             } else {
