@@ -146,6 +146,7 @@ func (s Server) RenderSalaryForLocation(w http.ResponseWriter, r *http.Request, 
 		"Min":                 int64(math.Round(min)),
 		"Max":                 int64(math.Round(max)),
 		"ComplimentaryRemote": complimentaryRemote,
+		"MonthAndYear":        time.Now().UTC().Format("January 2006"),
 	})
 }
 

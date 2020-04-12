@@ -71,6 +71,9 @@ func main() {
 	// view community
 	svr.RegisterRoute("/community", handler.ViewCommunityNewsletterPageHandler(svr), []string{"GET"})
 
+	// view community
+	svr.RegisterRoute("/support", handler.ViewSupportPageHandler(svr), []string{"GET"})
+
 	// generate ksuid
 	svr.RegisterRoute("/ksuid", handler.GenerateKsuIDPageHandler(svr), []string{"GET"})
 

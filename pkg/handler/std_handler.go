@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/url"
 	"regexp"
 	"strconv"
 	"strings"
@@ -116,6 +117,7 @@ func JobBySlugPageHandler(svr server.Server) http.HandlerFunc {
 		}
 		svr.Render(w, http.StatusOK, "job.html", map[string]interface{}{
 			"Job":                     job,
+			"JobURIEncoded":           url.QueryEscape(job.Slug),
 			"IsQuickApply":            isQuickApply,
 			"HTMLJobDescription":      svr.MarkdownToHTML(job.JobDescription),
 			"HTMLJobPerks":            svr.MarkdownToHTML(job.Perks),

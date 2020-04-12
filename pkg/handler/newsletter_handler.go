@@ -35,10 +35,15 @@ func ViewCommunityNewsletterPageHandler(svr server.Server) http.HandlerFunc {
 	}
 }
 
+func ViewSupportPageHandler(svr server.Server) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		svr.RenderPageForLocationAndTag(w, "", "", "", "support.html")
+	}
+}
+
 func SaveMemberToCommunityNewsletterPageHandler(svr server.Server) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		email := strings.ToLower(r.URL.Query().Get("email"))
-		communityType := strings.ToLower(r.URL.Query().Get("type"))
 		emailRe := regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
 		if !emailRe.MatchString(email) {
 			svr.Log(errors.New("invalid email provided"), fmt.Sprintf("invalid email provided: %v", email))
@@ -49,11 +54,7 @@ func SaveMemberToCommunityNewsletterPageHandler(svr server.Server) http.HandlerF
 		mailerliteRq := &SubscribeRqMailerlite{}
 		mailerliteRq.Fields = make(map[string]interface{})
 		mailerliteRq.Email = email
-		if communityType == "slack" || communityType == "forum" {
-			mailerliteRq.Fields["community_type"] = communityType
-		} else {
-			mailerliteRq.Fields["community_type"] = "slack"
-		}
+		mailerliteRq.Fields["community_type"] = "slack"
 		jsonMailerliteRq, err := json.Marshal(mailerliteRq)
 		if err != nil {
 			svr.Log(err, fmt.Sprintf("unable to marshal mailerliteRq %v: %v", mailerliteRq, err))
