@@ -101,9 +101,21 @@ func (s Server) RenderSalaryForLocation(w http.ResponseWriter, r *http.Request, 
 		s.JSON(w, http.StatusInternalServerError, map[string]string{"status": "error"})
 		return
 	}
+	trendSet, err := database.GetSalaryTrendsForLocationAndCurrency(s.Conn, loc, currency)
+	if err != nil {
+		s.Log(err, fmt.Sprintf("unable to retrieve salary trends for location %s and currency %s, err: %#v", location, currency, err))
+		s.JSON(w, http.StatusInternalServerError, map[string]string{"status": "error"})
+		return
+	}
 	if len(set) < 1 {
 		complimentaryRemote = true
 		set, err = database.GetSalaryDataForLocationAndCurrency(s.Conn, "Remote", "$")
+		if err != nil {
+			s.Log(err, fmt.Sprintf("unable to retrieve salary stats for location %s and currency %s, err: %#v", location, currency, err))
+			s.JSON(w, http.StatusInternalServerError, map[string]string{"status": "error"})
+			return
+		}
+		trendSet, err = database.GetSalaryTrendsForLocationAndCurrency(s.Conn, "Remote", "$")
 		if err != nil {
 			s.Log(err, fmt.Sprintf("unable to retrieve salary stats for location %s and currency %s, err: %#v", location, currency, err))
 			s.JSON(w, http.StatusInternalServerError, map[string]string{"status": "error"})
@@ -113,6 +125,12 @@ func (s Server) RenderSalaryForLocation(w http.ResponseWriter, r *http.Request, 
 	jsonRes, err := json.Marshal(set)
 	if err != nil {
 		s.Log(err, fmt.Sprintf("unable to marshal data set %v, err: %#v", set, err))
+		s.JSON(w, http.StatusInternalServerError, map[string]string{"status": "error"})
+		return
+	}
+	jsonTrendRes, err := json.Marshal(trendSet)
+	if err != nil {
+		s.Log(err, fmt.Sprintf("unable to marshal data set trneds %v, err: %#v", trendSet, err))
 		s.JSON(w, http.StatusInternalServerError, map[string]string{"status": "error"})
 		return
 	}
@@ -133,6 +151,7 @@ func (s Server) RenderSalaryForLocation(w http.ResponseWriter, r *http.Request, 
 		"LocationURIEncoded":  url.QueryEscape(strings.ReplaceAll(location, "-", " ")),
 		"Currency":            currency,
 		"DataSet":             string(jsonRes),
+		"DataSetTrends":       string(jsonTrendRes),
 		"P10Max":              humanize.Comma(int64(math.Round(sampleMax.Quantile(0.1)))),
 		"P10Min":              humanize.Comma(int64(math.Round(sampleMin.Quantile(0.1)))),
 		"P50Max":              humanize.Comma(int64(math.Round(sampleMax.Quantile(0.5)))),

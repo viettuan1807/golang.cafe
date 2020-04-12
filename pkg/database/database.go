@@ -365,6 +365,40 @@ func GetSalaryDataForLocationAndCurrency(conn *sql.DB, location, currency string
 	return res, nil
 }
 
+type SalaryTrendDataPoint struct {
+	Date string `json:"date"`
+	P10 int64 `json:"p10"`
+	P25 int64 `json:"p25"`
+	P50 int64 `json:"p50"`
+	P75 int64 `json:"p75"`
+	P90 int64 `json:"p90"`
+}
+
+func GetSalaryTrendsForLocationAndCurrency(conn *sql.DB, location, currency string) ([]SalaryTrendDataPoint, error) {
+	var res []SalaryTrendDataPoint
+	var rows *sql.Rows
+	rows, err := conn.Query(`
+	SELECT to_char(date_trunc('month', created_at), 'YYYY-MM-DD') as date, percentile_disc(0.10) within group (order by salary_max) as p10, percentile_disc(0.25) within group (order by salary_max) as p25, percentile_disc(0.50) within group (order by salary_max) as p50, percentile_disc(0.75) within group (order by salary_max) as p75, percentile_disc(0.90) within group (order by salary_max) as p90 FROM job WHERE approved_at IS NOT NULL AND salary_currency = $1 AND location ILIKE '%' || $2 || '%' group by date_trunc('month', created_at) order by date_trunc('month', created_at) asc`,
+	currency, location)
+	if err != nil {
+		return res, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		dp := SalaryTrendDataPoint{}
+		err = rows.Scan(&dp.Date, &dp.P10, &dp.P25, &dp.P50, &dp.P75, &dp.P90)
+		if err != nil {
+			return res, err
+		}
+		res = append(res, dp)
+	}
+	err = rows.Err()
+	if err != nil {
+		return res, err
+	}
+	return res, nil
+}
+
 func SaveSEOLandingPage(conn *sql.DB, seoLandingPage SEOLandingPage) error {
 	sqlStmt := `INSERT INTO seo_landing_page (uri, location, skill) VALUES ($1, $2, $3)`
 	_, err := conn.Exec(sqlStmt, seoLandingPage.URI, seoLandingPage.Location, seoLandingPage.Skill)

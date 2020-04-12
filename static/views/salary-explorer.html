@@ -40,10 +40,13 @@
 	top: 0;
 	left: 0;
 }
-#salary-distribution {
+#salary-distribution, #salary-trends {
   width: 100%;
   height: 400px;
   margin-bottom: 20px;
+}
+#salary-trends svg {
+  font-size: 14px;
 }
 .resp-sharing-button__link,
 .resp-sharing-button__icon {
@@ -265,6 +268,49 @@ background-color: #FF6600
 .resp-sharing-button--telegram:hover {
   background-color: #4B97D1;}
 
+
+  .axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+  fill: #000;
+}
+
+.axis .tick line {
+  stroke: rgba(0, 0, 0, 0.1);
+}
+
+.area {
+  stroke-width: 1;
+}
+
+.area.outer,
+.legend .outer {
+  fill: rgba(230, 230, 255, 0.8);
+  stroke: rgba(216, 216, 255, 0.8);
+}
+
+.area.inner,
+.legend .inner {
+  fill: rgba(127, 127, 255, 0.8);
+  stroke: rgba(96, 96, 255, 0.8);
+}
+
+.median-line,
+.legend .median-line {
+  fill: none;
+  stroke: #000;
+  stroke-width: 3;
+}
+
+.legend .legend-bg {
+  fill: rgba(0, 0, 0, 0.5);
+  stroke: rgba(0, 0, 0, 0.5);
+}
     </style>
     <script src="https://d3js.org/d3.v4.js"></script>
   </head>
@@ -345,6 +391,17 @@ background-color: #FF6600
           In the chart above we can see the distribution of <span style="color: #69b3a2;">minimum (green)</span> and <span style="color: #6900a2;">maximum (purple)</span> salary for Go (Golang) Software Engineer jobs based in {{ .Location }}{{ if .Country }}, {{ .Country }}{{ end }} as of {{ .MonthAndYear }}
         </p>
         {{ end }}
+        <h2>Go (Golang) Salary Trends</h2>
+        <div id="salary-trends"></div>
+        {{ if .ComplimentaryRemote }}
+        <p>
+          <p>The Chart below represents the maximum salary trend over time. When data points are available the chart shows outer <span style="background: rgba(127, 127, 255);">p10 p90 percentiles</span>, inner <span style="background: rgba(230, 230, 255);">p25 and p75 percentiles</span> and the <b>median</b> trending over time for Remote based jobs. Data as of {{ .MonthAndYear }}</p>
+        </p>
+        {{ else }}
+        <p>
+          <p>The Chart below represents the maximum salary trend over time. When data points are available the chart shows outer <span style="background: rgba(127, 127, 255);">p10 p90 percentiles</span>, inner <span style="background: rgba(230, 230, 255);">p25 and p75 percentiles</span> and the <b>median</b> trending over time for jobs based in {{ .Location }}{{ if .Country }}, {{ .Country }}{{ end }}. Data as of {{ .MonthAndYear }}</p>
+        </p>
+        {{ end }}
         <br />
         <h2>Share This Salary Insight</h2>
         <a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgolang.cafe%2FGolang-Developer-Salary-{{ .LocationURIEncoded }}" target="_blank" rel="noopener" aria-label="Facebook">
@@ -398,7 +455,7 @@ background-color: #FF6600
     <script>
 
 // set the dimensions and margins of the graph
-var margin = {top: 30, right: 30, bottom: 30, left: 50},
+var margin = {top: 30, right: 30, bottom: 60, left: 50},
     width = 620 - margin.left - margin.right,
     height = 300 - margin.top - margin.bottom;
 
@@ -425,7 +482,12 @@ var data = {{ .DataSet }};
             .range([0, width]);
   svg.append("g")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
+      .call(d3.axisBottom(x))
+      .selectAll("text")	
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", ".15em")
+        .attr("transform", "rotate(-65)");
 
   // add the y Axis
   var y = d3.scaleLinear()
@@ -484,6 +546,149 @@ function kernelEpanechnikov(k) {
   };
 }
 
+function drawPaths (svg, data, x, y) {
+  var upperOuterArea = d3.area()
+    .curve(d3.curveBasis)
+    .x(function (d) { return x(d.date) || 1; })
+    .y0(function (d) { return y(d.p90); })
+    .y1(function (d) { return y(d.p75); });
+
+  var upperInnerArea = d3.area()
+    .curve(d3.curveBasis)
+    .x (function (d) { return x(d.date) || 1; })
+    .y0(function (d) { return y(d.p75); })
+    .y1(function (d) { return y(d.p50); });
+
+  var medianLine = d3.line()
+    .curve(d3.curveBasis)
+    .x(function (d) { return x(d.date); })
+    .y(function (d) { return y(d.p50); });
+
+  var lowerInnerArea = d3.area()
+    .curve(d3.curveBasis)
+    .x (function (d) { return x(d.date) || 1; })
+    .y0(function (d) { return y(d.p50); })
+    .y1(function (d) { return y(d.p25); });
+
+  var lowerOuterArea = d3.area()
+    .curve(d3.curveBasis)
+    .x (function (d) { return x(d.date) || 1; })
+    .y0(function (d) { return y(d.p25); })
+    .y1(function (d) { return y(d.p10); });
+
+  svg.datum(data);
+
+  svg.append('path')
+    .attr('class', 'area upper outer')
+    .attr('d', upperOuterArea)
+    .attr('clip-path', 'url(#rect-clip)');
+
+  svg.append('path')
+    .attr('class', 'area lower outer')
+    .attr('d', lowerOuterArea)
+    .attr('clip-path', 'url(#rect-clip)');
+
+  svg.append('path')
+    .attr('class', 'area upper inner')
+    .attr('d', upperInnerArea)
+    .attr('clip-path', 'url(#rect-clip)');
+
+  svg.append('path')
+    .attr('class', 'area lower inner')
+    .attr('d', lowerInnerArea)
+    .attr('clip-path', 'url(#rect-clip)');
+
+  svg.append('path')
+    .attr('class', 'median-line')
+    .attr('d', medianLine)
+    .attr('clip-path', 'url(#rect-clip)');
+}
+
+function addAxes(svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
+  var axes = svg.append('g')
+    .attr('clip-path', 'url(#axes-clip)');
+
+  axes.append('g')
+    .attr('class', 'x axis')
+    .attr('transform', 'translate(0,' + chartHeight + ')')
+    .call(xAxis)
+    .selectAll("text")	
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", ".15em")
+        .attr("transform", "rotate(-65)");
+
+  axes.append('g')
+    .attr('class', 'y axis')
+    .call(yAxis)
+    .append('text')
+      .attr('transform', 'rotate(-90)')
+      .attr('y', 6)
+      .attr('dy', '.71em')
+      .style('text-anchor', 'end')
+      .text('Yearly Max Salary ({{ .Currency }})');
+}
+
+function makeChart (data) {
+  var svgWidth  = 620,
+      svgHeight = 300,
+      margin = { top: 20, right: 40, bottom: 60, left: 40 },
+      chartWidth  = svgWidth  - margin.left - margin.right,
+      chartHeight = svgHeight - margin.top  - margin.bottom;
+
+  var x = d3.scaleTime().range([0, chartWidth])
+            .domain(d3.extent(data, function (d) { return d.date; })),
+      y = d3.scaleLinear().range([chartHeight, 0])
+            .domain([0, d3.max(data, function (d) { return d.p90; })]);
+
+  var xAxis = d3.axisBottom(x)
+                .tickFormat(d3.timeFormat("%Y-%m-%d"))
+                .tickSizeInner(-chartHeight).tickSizeOuter(0).tickPadding(10),
+      yAxis = d3.axisLeft(y)
+                .tickSizeInner(-chartWidth).tickSizeOuter(0).tickPadding(10);
+
+    var svg = d3.select("#salary-trends")
+      .append("div")
+      // Container class to make it responsive.
+      .classed("svg-container", true) 
+      .append("svg")
+      // Responsive SVG needs these 2 attributes and no width and height attr.
+      .attr("preserveAspectRatio", "xMinYMin meet")
+      .attr("viewBox", "0 0 600 400")
+      // Class to make it responsive.
+      .classed("svg-content", true)
+      .append('g')
+      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+  // clipping to start chart hidden and slide it in later
+  var rectClip = svg.append('clipPath')
+    .attr('id', 'rect-clip')
+    .append('rect')
+      .attr('width', chartWidth)
+      .attr('height', chartHeight);
+
+  addAxes(svg, xAxis, yAxis, margin, chartWidth, chartHeight);
+  drawPaths(svg, data, x, y);
+}
+
+// salary trends chart
+var dataTrendsRaw = {{ .DataSetTrends }};
+
+var parseDate = d3.timeParse("%Y-%m-%d")
+
+var dataTrends = dataTrendsRaw.map(function (d) {
+  console.log(d);
+    return {
+      date:  parseDate(d.date),
+      p10: d.p10,
+      p25: d.p25,
+      p50: d.p50,
+      p75: d.p75,
+      p90: d.p90
+    };
+  });
+
+  makeChart(dataTrends);
 document
   .getElementById('search-salary-btn')
   .addEventListener('click', function() {
