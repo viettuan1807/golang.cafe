@@ -1,4 +1,5 @@
 User-agent: *
+Allow: /x/r
 Disallow: /x/*
 
 Sitemap: https://golang.cafe/sitemap.xml

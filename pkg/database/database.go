@@ -239,6 +239,9 @@ func GetDbConn(databaseURL string) (*sql.DB, error) {
 	if err != nil {
 		return nil, err
 	}
+	db.SetMaxOpenConns(20)
+	db.SetMaxIdleConns(20)
+	db.SetConnMaxLifetime(5*time.Minute)
 	return db, nil
 }
 
