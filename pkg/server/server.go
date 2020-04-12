@@ -8,6 +8,7 @@ import (
 	"log"
 	"math"
 	"net/http"
+	"net/url"
 	"regexp"
 	"strconv"
 	"strings"
@@ -129,6 +130,7 @@ func (s Server) RenderSalaryForLocation(w http.ResponseWriter, r *http.Request, 
 	}
 	s.Render(w, http.StatusOK, "salary-explorer.html", map[string]interface{}{
 		"Location":            strings.ReplaceAll(location, "-", " "),
+		"LocationURIEncoded":  url.QueryEscape(strings.ReplaceAll(location, "-", " ")),
 		"Currency":            currency,
 		"DataSet":             string(jsonRes),
 		"P10Max":              humanize.Comma(int64(math.Round(sampleMax.Quantile(0.1)))),
