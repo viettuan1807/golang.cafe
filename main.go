@@ -55,6 +55,7 @@ func main() {
 
 	svr.RegisterPathPrefix("/s/", http.StripPrefix("/s/", http.FileServer(http.Dir("./static/assets"))), []string{"GET"})
 	svr.RegisterPathPrefix("/blog/", http.StripPrefix("/blog/", http.FileServer(http.Dir("./static/blog"))), []string{"GET"})
+	svr.RegisterPathPrefix("/changelog/", http.StripPrefix("/changelog/", http.FileServer(http.Dir("./static/changelog"))), []string{"GET"})
 
 	svr.RegisterRoute("/about", handler.AboutPageHandler, []string{"GET"})
 	svr.RegisterRoute("/privacy-policy", handler.PrivacyPolicyPageHandler, []string{"GET"})
@@ -68,10 +69,10 @@ func main() {
 	// view shop
 	svr.RegisterRoute("/shop", handler.ViewShopPageHandler(svr), []string{"GET"})
 
-	// view community
-	svr.RegisterRoute("/community", handler.ViewCommunityNewsletterPageHandler(svr), []string{"GET"})
+	// view news
+	svr.RegisterRoute("/news", handler.ViewCommunityNewsletterPageHandler(svr), []string{"GET"})
 
-	// view community
+	// view support
 	svr.RegisterRoute("/support", handler.ViewSupportPageHandler(svr), []string{"GET"})
 
 	// generate ksuid

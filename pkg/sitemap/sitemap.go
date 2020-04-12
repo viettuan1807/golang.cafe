@@ -74,7 +74,8 @@ var pages = []string{
 	"terms-of-service",
 	"about",
 	"newsletter",
-	"community",
+	"news",
+	"support",
 	"ksuid",
 }
 

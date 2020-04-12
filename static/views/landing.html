@@ -69,7 +69,7 @@
           <small>
                   <a style="text-decoration: underline;" href="/">Jobs</a> &bull;
                   <a href="/Golang-Developer-Salary-Remote">Salary Insights</a> &bull;
-                  <a href="/community">Community</a> &bull;
+                  <a href="/news">News</a> &bull;
                   <a href="/support">Support</a> &bull;
                   <a href="/about">About</a>
             <br>
@@ -142,7 +142,8 @@
                     {{ else }}
                         <a href="/x/r?j={{ .ExternalID }}" style="float:right;" target="_blank" rel="noopener nofollow" class="apply-link">Apply</a>
                     {{ end }}
-                    <a href="/job/{{ .Slug }}" rel="noreferrer" target="_blank" style="padding: 6.525px 23.4px; float: right;">🔗 Link</a>
+                    <a class="copy-to-clipboard" data-link="https://golang.cafe/job/{{ .Slug }}" style="font-size: 10pt;padding: 6.525px 23.4px; float: right;">&#x2398 Copy Link</a>
+                    <a href="/job/{{ .Slug }}" rel="noreferrer" target="_blank" style="font-size: 10pt;padding: 6.525px 23.4px; float: right;">&#x2197; Visit Link</a>
                 </div>
                 <div class="clearfix"></div>
             </article>
@@ -182,7 +183,8 @@
                       {{ else }}
                         <a href="/x/r?j={{ .ExternalID }}" style="float:right;" target="_blank" rel="noopener nofollow" class="apply-link">Apply</a>
                       {{ end }}
-                      <a href="/job/{{ .Slug }}" rel="noreferrer" target="_blank" style="padding: 6.525px 23.4px; float: right;">🔗 Link</a>  
+                      <a class="copy-to-clipboard" data-link="https://golang.cafe/job/{{ .Slug }}" style="font-size: 10pt;padding: 6.525px 23.4px; float: right;">&#x2398 Copy Link</a>
+                      <a href="/job/{{ .Slug }}" rel="noreferrer" target="_blank" style="font-size: 10pt;padding: 6.525px 23.4px; float: right;">&#x2197; Visit Link</a>  
                 </div>
                 <div class="clearfix"></div>
               </article>
@@ -214,13 +216,14 @@
                       {{ else }}
                         <a href="/x/r?j={{ .ExternalID }}" style="float:right;" target="_blank" rel="noopener nofollow" class="apply-link">Apply</a>
                       {{ end }}
-                      <a href="/job/{{ .Slug }}" rel="noreferrer" target="_blank" style="padding: 6.525px 23.4px; float: right;">🔗 Link</a>
+                      <a class="copy-to-clipboard" data-link="https://golang.cafe/job/{{ .Slug }}" style="font-size: 10pt;padding: 6.525px 23.4px; float: right;">&#x2398 Copy Link</a>
+                      <a href="/job/{{ .Slug }}" rel="noreferrer" target="_blank" style="font-size: 10pt;padding: 6.525px 23.4px; float: right;">&#x2197; Visit Link</a>
                   </div>
                   <div class="clearfix"></div>
               </article>
           {{ end }}
           {{ end }}
-          <article class="line-item" id="email-subscribe-banner" style="font-size: 12pt;">
+          <article class="line-item" id="email-subscribe-banner" style="font-size: 10pt;">
             Golang Jobs Weekly
             <input type="email" name="job-email-subscription" id="job-email-subscription" class="email-subscribe-item" style="border: 1px solid #d9d9d9;margin-bottom:0;" placeholder="Your Email">
             <input type="submit" onclick="subscribe()" class="email-subscribe-item" value="Create Alert" style="margin-bottom: 0;"/>
@@ -318,6 +321,57 @@
     </nav>
   </footer>
     <script>
+        function copyTextToClipboard(text) {
+            var textArea = document.createElement("textarea");
+
+            // Place in top-left corner of screen regardless of scroll position.
+            textArea.style.position = 'fixed';
+            textArea.style.top = 0;
+            textArea.style.left = 0;
+
+            // Ensure it has a small width and height. Setting to 1px / 1em
+            // doesn't work as this gives a negative w/h on some browsers.
+            textArea.style.width = '2em';
+            textArea.style.height = '2em';
+
+            // We don't need padding, reducing the size if it does flash render.
+            textArea.style.padding = 0;
+
+            // Clean up any borders.
+            textArea.style.border = 'none';
+            textArea.style.outline = 'none';
+            textArea.style.boxShadow = 'none';
+
+            // Avoid flash of white box if rendered for any reason.
+            textArea.style.background = 'transparent';
+
+
+            textArea.value = text;
+
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                var successful = document.execCommand('copy');
+                var msg = successful ? 'successful' : 'unsuccessful';
+            } catch (err) {
+                alert('Oops, unable to copy');
+            }
+
+            document.body.removeChild(textArea);
+        }
+        var els = document.getElementsByClassName('copy-to-clipboard');
+        for (var i = 0; i < els.length; i++) {
+            els[i].addEventListener('click', function (e) {
+                e.preventDefault();
+                copyTextToClipboard(this.getAttribute('data-link'));
+                var oldHTML = this.innerHTML;
+                this.innerHTML = "Copied";
+                var self = this;
+                setTimeout(function(){ self.innerHTML = oldHTML;}, 5000);
+            },false);
+        }
         function isEmail(email) {
             var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return re.test(email);
