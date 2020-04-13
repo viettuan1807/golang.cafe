@@ -67,6 +67,10 @@ var blogPosts = []Page{
 		CreatedAt: time.Now().UTC(),
 		Title:     "golang-string-to-int-conversion-example",
 	},
+	{
+		CreatedAt: time.Now().UTC(),
+		Title:     "golang-round-float-to-int-example",
+	},
 }
 var pages = []string{
 	"hire-golang-developers",
