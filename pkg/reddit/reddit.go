@@ -47,7 +47,10 @@ func main() {
 	}
 	jobs, err := database.GetLastNJobsFromID(conn, JobsToPost, lastRedditJobID)
 	fmt.Printf("found %d/%d jobs to post on reddit /r/%s\n", len(jobs), JobsToPost, SubReddit)
-	var lastJobID int
+	if len(jobs) == 0 {
+		return
+	}
+	lastJobID := lastRedditJobID
 	for _, j := range jobs {
 		err = bot.PostLink(SubReddit, fmt.Sprintf("%s with %s - %s | %s | Golang Cafe", j.JobTitle, j.Company, j.Location, j.SalaryRange), fmt.Sprintf("https://golang.cafe/job/%s", j.Slug))
 		if err != nil {

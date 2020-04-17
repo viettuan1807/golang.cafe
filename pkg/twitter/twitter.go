@@ -32,7 +32,10 @@ func main() {
 	}
 	jobs, err := database.GetLastNJobsFromID(conn, cfg.JobsToPost, lastTwittedJobID)
 	fmt.Printf("found %d/%d jobs to post on twitter\n", len(jobs), cfg.JobsToPost)
-	var lastJobID int
+	if len(jobs) == 0 {
+		return
+	}
+	lastJobID := lastTwittedJobID
 	api := anaconda.NewTwitterApiWithCredentials(cfg.AccessToken, cfg.AccessTokenSecret, cfg.ClientKey, cfg.ClientSecret)
 	fmt.Printf("initialised twitter client\n")
 	for _, j := range jobs {
