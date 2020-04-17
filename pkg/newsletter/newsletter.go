@@ -25,7 +25,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("unable to convert NEWSLETTER_JOBS_TO_SEND to int %v", err)
 	}
-	fmt.Printf("running newsletter script send %s jobs updates with %d jobs\n", frequency, jobsToSend)
+	fmt.Printf("running newsletter script send jobs updates with %d jobs\n", jobsToSend)
 	cfg, err := config.LoadConfig()
 	if err != nil {
 		log.Fatalf("unable to load config %v", err)
