@@ -2,23 +2,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Golang Cafe News in {{ .MonthAndYear }}</title>
+    <title>Golang Cafe News | {{ .Title }}</title>
     <link href="/s/img/favicon.ico" rel="shortcut icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="title" content="Golang Cafe News in {{ .MonthAndYear }}" />
+    <meta name="title" content="Golang Cafe News | {{ .Title }}" />
     <meta name="keywords" content="golang, golang jobs, go programming language, golang backend engineer, golang software engineer, remote golang" />
-    <meta name="description" content="Golang Cafe News in {{ .MonthAndYear }}" />
-    <meta itemprop="name" content="Golang Cafe News in {{ .MonthAndYear }}">
-    <meta itemprop="description" content="Golang Cafe News in {{ .MonthAndYear }}">
+    <meta name="description" content="Golang Cafe News | {{ .Title }}" />
+    <meta itemprop="name" content="Golang Cafe News | {{ .Title }}">
+    <meta itemprop="description" content="Golang Cafe News | {{ .Title }}">
     <meta itemprop="image" content="https://golang.cafe/s/img/cafe.jpg">
     <meta property="og:url" content="https://golang.cafe">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Golang Cafe News in {{ .MonthAndYear }}">
-    <meta property="og:description" content="Golang Cafe News in {{ .MonthAndYear }}">
+    <meta property="og:title" content="Golang Cafe News | {{ .Title }}">
+    <meta property="og:description" content="Golang Cafe News | {{ .Title }}">
     <meta property="og:image" content="https://golang.cafe/s/img/cafe.jpg">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Golang Cafe News in {{ .MonthAndYear }}">
-    <meta name="twitter:description" content="Golang Cafe News in {{ .MonthAndYear }}">
+    <meta name="twitter:title" content="Golang Cafe News | {{ .Title }}">
+    <meta name="twitter:description" content="Golang Cafe News | {{ .Title }}">
     <link rel="canonical" href="https://golang.cafe/newsletter" />
     <meta name="twitter:image" content="https://golang.cafe/s/img/cafe.jpg">
     <meta name="twitter:site" content="@golangcafe"/>
@@ -29,13 +29,13 @@
     .job-desc {padding:0px 0px 50px 0px;font-size:12pt;display:none;}.job-desc>h3{margin-top:10px;}
     a:hover{cursor:pointer;}.main-title{font-weight: bold;margin: 0 0 auto;width:80%;color:#000090;}
     .line-item-sponsored-1 {border-radius: 8px;background-color: #fff9c9;}@media only screen and (max-width: 768px) {.email-subscribe-item{margin-top:15px;margin-bottom: 0;}}
+    .apply-box {z-index: 100000;display: none;width: 50%; height: auto;position: fixed;margin: 5% auto; top: 40px; left: 0; right: 0;background: #fff;}@media only screen and (max-width: 768px) {.apply-box{width: 90%;}}
     .menu-header{width: 100%;background: #000090; color: white;margin:0 auto;padding:0;}.menu-header a {color: white;}
     .overlay-effect {display: none;width: 100%; height: 100%; position: fixed; top: 0; left: 0;background: rgba(0, 0, 0,0.5);z-index: 99999}
     .spinner-box {z-index: 999999;width: 124px; padding: 30px; height: auto;position: fixed;margin: 5% auto; top: 40px; left: 0; right: 0;background: #fff;}
     .lds-ring {display: inline-block; position: relative; width: 64px; height: 64px;}.lds-ring div {box-sizing: border-box; display: block; position: absolute; width: 51px; height: 51px; margin: 6px; border: 6px solid #000; border-radius: 50%; animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite; border-color: #000 transparent transparent transparent;}
     .lds-ring div:nth-child(1) {animation-delay: -0.45s;}.lds-ring div:nth-child(2) {animation-delay: -0.3s;}.lds-ring div:nth-child(3) {animation-delay: -0.15s;}
     @keyframes lds-ring {0% {transform: rotate(0deg);} 100% {transform: rotate(360deg);}}#spinner-0{display: none;}
-    .apply-box {z-index: 100000;display: none;width: 50%; height: auto;position: fixed;margin: 5% auto; top: 40px; left: 0; right: 0;background: #fff;}@media only screen and (max-width: 768px) {.apply-box{width: 90%;}}
     </style>
   </head>
   <body>
@@ -68,22 +68,22 @@
     </div>
     <section style="margin: 30px auto;">
             <article>
-              <h1>News</h1>
-              <ul>
-              {{ range $i, $j := .News }}
-                  <li><a href="/news/{{ .ID }}">{{ .Title }}</a> &bull; {{ .CreatedAtHumanised }}</li>
-              {{ end }}
-              </ul>
+              <h1>{{ .Title }}</h1>
+              <p><b>{{ .CreatedBy.Username }}</b> &bull; {{ .CreatedAtHumanised }}</p>
+              <p>{{ .Text }}</p>
               <br />
             </article>
+            {{ range $i, $j := .Comments }}
+                <article style="margin-top:10px;">
+                    <p><b>{{ .CreatedBy.Username }}</b> &bull; {{ .CreatedAtHumanised }}</p>
+                    <p>{{ .Text }}</p>
+                </article>
+            {{ end }}
             <article style="margin-top: 10px;">
-              <h3>Submit Question, News or Link to the Community</h3>
-              <p>Prefix your title with "Ask" for question, "Show" to showcase your project or just share a link or comment</p>
-              <input type="text" style="width:100%;border: 1px solid #d9d9d9;" id="title-0" placeholder="Title">
-              <textarea id="textarea-0" placeholder="Text (Supports Markdown)" style="width: 100%;border: 1px solid #d9d9d9; resize: none;overflow: hidden;min-height: 100px;" oninput="autogrow(this);"></textarea>
-              <input style="float: right;" type="submit" value="{{ if .IsSignedOn }}Submit{{ else }}Sign On To Submit{{ end }}" onclick="{{ if .IsSignedOn }}submit(){{ else }}signOnToSubmit(){{ end }}"/>
-              <div style="clear: both"></div>
-          </article>
+                <textarea id="textarea-0" placeholder="Text (Supports Markdown)" style="width: 100%;border: 1px solid #d9d9d9; resize: none;overflow: hidden;min-height: 100px;" oninput="autogrow(this);"></textarea>
+            <input style="float: right;" type="submit" value="{{ if .IsSignedOn }}Reply{{ else }}Sign On To Reply{{ end }}" onclick="{{ if .IsSignedOn }}reply(){{ else }}signOnToReply(){{ end }}"/>
+                <div style="clear: both"></div>
+            </article>
   </section>
   <footer>
     <nav>
@@ -131,30 +131,24 @@
                 }
             }
         };
+                    
         function autogrow(element) {
             element.style.height = "5px";
             element.style.height = (element.scrollHeight)+"px";
         }
-        function submit() {
+        function reply() {
             document.getElementById("spinner-0").style.display = "block";
-            var title = document.getElementById("title-0").value;
-            var text = document.getElementById("textarea-0").value;
-            if (empty(title) || empty(text)) {
-              alert('Title and Text cannot be blank');
-              document.getElementById("spinner-0").style.display = "none";
-              return;
-            }
-            post('/x/news/new', {title: title, text: text, parent: '{{ .ID }}'}, function(success) {
+            text = document.getElementById("textarea-0").value;
+            post('/x/news/comment/new', {text: text, parent: '{{ .ID }}'}, function(success) {
                 document.getElementById("spinner-0").style.display = "none";
                 if (success) {
                     window.location.reload();
                 } else {
-                    document.getElementById("spinner-0").style.display = "none";
                     alert('Oops, there was an error while posting your comment. Please try later');
                 }
             });
         }
-        function signOnToSubmit() {
+        function signOnToReply() {
             document.getElementById('sign-on-box-0').style.display = 'block';
             document.getElementById('overlay-0').style.display = 'block';
         }

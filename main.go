@@ -4,7 +4,6 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/0x13a/golang.cafe/pkg/authoriser"
 	"github.com/0x13a/golang.cafe/pkg/config"
 	"github.com/0x13a/golang.cafe/pkg/database"
 	"github.com/0x13a/golang.cafe/pkg/email"
@@ -36,7 +35,6 @@ func main() {
 	}
 	defer ipGeolocation.Close()
 	sessionStore := sessions.NewCookieStore(cfg.SessionKey)
-	auth := authoriser.NewAuthoriser(cfg)
 
 	svr := server.NewServer(
 		cfg,
@@ -68,9 +66,6 @@ func main() {
 
 	// view shop
 	svr.RegisterRoute("/shop", handler.ViewShopPageHandler(svr), []string{"GET"})
-
-	// view news
-	svr.RegisterRoute("/news", handler.ViewCommunityNewsletterPageHandler(svr), []string{"GET"})
 
 	// view support
 	svr.RegisterRoute("/support", handler.ViewSupportPageHandler(svr), []string{"GET"})
@@ -124,9 +119,20 @@ func main() {
 	// auth routes
 	//
 
+	// sign on page
 	svr.RegisterRoute("/auth", handler.GetAuthPageHandler(svr), []string{"GET"})
 
-	svr.RegisterRoute("/x/auth", handler.PostAuthPageHandler(svr, auth), []string{"POST"})
+	// sign on email link
+	svr.RegisterRoute("/x/auth/link", handler.RequestTokenSignOn(svr), []string{"POST"})
+	svr.RegisterRoute("/x/auth/{token}", handler.VerifyTokenSignOn(svr, cfg.AdminEmail), []string{"GET"})
+
+
+	// forum
+	svr.RegisterRoute("/news", handler.ListNewsItems(svr), []string{"GET"})
+	svr.RegisterRoute("/news/{id}", handler.ListNewsComments(svr), []string{"GET"})
+
+	svr.RegisterRoute("/x/news/new", handler.PostNewsItem(svr), []string{"POST"})
+	svr.RegisterRoute("/x/news/comment/new", handler.PostNewsComment(svr), []string{"POST"})
 
 	//
 	// private routes

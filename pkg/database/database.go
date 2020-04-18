@@ -1,8 +1,12 @@
 package database
 
 import (
+	"crypto/sha256"
 	"database/sql"
+	"encoding/hex"
+	"errors"
 	"fmt"
+	"math/rand"
 	"strconv"
 	"strings"
 	"time"
@@ -20,22 +24,22 @@ type Job struct {
 }
 
 type JobRq struct {
-	JobTitle           string `json:"job_title"`
-	Location           string `json:"job_location"`
-	Company            string `json:"company_name"`
-	CompanyURL         string `json:"company_url"`
-	SalaryMin          string `json:"salary_min"`
-	SalaryMax          string `json:"salary_max"`
-	SalaryCurrency     string `json:"salary_currency"`
-	Description        string `json:"job_description"`
-	HowToApply         string `json:"how_to_apply"`
-	Perks              string `json:"perks"`
-	InterviewProcess   string `json:"interview_process,omitempty"`
-	Email              string `json:"company_email"`
-	StripeToken        string `json:"stripe_token,omitempty"`
-	AdType             int64  `json:"ad_type"`
-	CurrencyCode       string `json:"currency_code"`
-	CompanyIconID      string `json:"company_icon_id,omitempty"`
+	JobTitle         string `json:"job_title"`
+	Location         string `json:"job_location"`
+	Company          string `json:"company_name"`
+	CompanyURL       string `json:"company_url"`
+	SalaryMin        string `json:"salary_min"`
+	SalaryMax        string `json:"salary_max"`
+	SalaryCurrency   string `json:"salary_currency"`
+	Description      string `json:"job_description"`
+	HowToApply       string `json:"how_to_apply"`
+	Perks            string `json:"perks"`
+	InterviewProcess string `json:"interview_process,omitempty"`
+	Email            string `json:"company_email"`
+	StripeToken      string `json:"stripe_token,omitempty"`
+	AdType           int64  `json:"ad_type"`
+	CurrencyCode     string `json:"currency_code"`
+	CompanyIconID    string `json:"company_icon_id,omitempty"`
 }
 
 type JobRqUpdate struct {
@@ -155,6 +159,41 @@ type SEOSkill struct {
 // )
 // ALTER TABLE image ADD COLUMN media_type VARCHAR(100) NOT NULL;
 
+// CREATE TABLE IF NOT EXISTS news (
+// 	id CHAR(27) NOT NULL UNIQUE,
+// 	title VARCHAR(80) NOT NULL,
+// 	text TEXT NOT NULL,
+// 	created_at TIMESTAMP NOT NULL,
+// 	created_by CHAR(27) NOT NULL,
+// 	PRIMARY KEY(id)
+// );
+
+// CREATE TABLE IF NOT EXISTS news_comment (
+// 	id CHAR(27) NOT NULL UNIQUE,
+// 	text TEXT NOT NULL,
+// 	created_by CHAR(27) NOT NULL,
+// 	created_at TIMESTAMP NOT NULL,
+// 	parent_id CHAR(27) NOT NULL,
+// 	PRIMARY KEY(id)
+// );
+
+// CREATE INDEX news_comment_parent_id_idx on news_comment (parent_id);
+
+// CREATE TABLE IF NOT EXISTS users (
+// 	id CHAR(27) NOT NULL UNIQUE,
+// 	email VARCHAR(255) NOT NULL,
+// 	username VARCHAR(255) NOT NULL,
+// 	created_at TIMESTAMP,
+// 	PRIMARY KEY (id)
+// );
+
+// CREATE TABLE IF NOT EXISTS user_sign_on_token (
+// 	token CHAR(27) NOT NULL UNIQUE,
+// 	email VARCHAR(255) NOT NULL
+// );
+
+// CREATE INDEX user_sign_on_token_token_idx on user_sign_on_token (token);
+
 // CREATE TABLE IF NOT EXISTS edit_token (
 //   token      CHAR(27) NOT NULL,
 //   job_id     INTEGER NOT NULL REFERENCES job (id),
@@ -190,7 +229,6 @@ type SEOSkill struct {
 // );
 
 // CREATE INDEX job_idx ON job_event (job_id);
-
 
 // CREATE TABLE IF NOT EXISTS seo_salary (
 //  id VARCHAR(255) NOT NULL,
@@ -241,7 +279,7 @@ func GetDbConn(databaseURL string) (*sql.DB, error) {
 	}
 	db.SetMaxOpenConns(20)
 	db.SetMaxIdleConns(20)
-	db.SetConnMaxLifetime(5*time.Minute)
+	db.SetConnMaxLifetime(5 * time.Minute)
 	return db, nil
 }
 
@@ -367,11 +405,11 @@ func GetSalaryDataForLocationAndCurrency(conn *sql.DB, location, currency string
 
 type SalaryTrendDataPoint struct {
 	Date string `json:"date"`
-	P10 int64 `json:"p10"`
-	P25 int64 `json:"p25"`
-	P50 int64 `json:"p50"`
-	P75 int64 `json:"p75"`
-	P90 int64 `json:"p90"`
+	P10  int64  `json:"p10"`
+	P25  int64  `json:"p25"`
+	P50  int64  `json:"p50"`
+	P75  int64  `json:"p75"`
+	P90  int64  `json:"p90"`
 }
 
 func GetSalaryTrendsForLocationAndCurrency(conn *sql.DB, location, currency string) ([]SalaryTrendDataPoint, error) {
@@ -379,7 +417,7 @@ func GetSalaryTrendsForLocationAndCurrency(conn *sql.DB, location, currency stri
 	var rows *sql.Rows
 	rows, err := conn.Query(`
 	SELECT to_char(date_trunc('month', created_at), 'YYYY-MM-DD') as date, percentile_disc(0.10) within group (order by salary_max) as p10, percentile_disc(0.25) within group (order by salary_max) as p25, percentile_disc(0.50) within group (order by salary_max) as p50, percentile_disc(0.75) within group (order by salary_max) as p75, percentile_disc(0.90) within group (order by salary_max) as p90 FROM job WHERE approved_at IS NOT NULL AND salary_currency = $1 AND location ILIKE '%' || $2 || '%' group by date_trunc('month', created_at) order by date_trunc('month', created_at) asc`,
-	currency, location)
+		currency, location)
 	if err != nil {
 		return res, err
 	}
@@ -471,8 +509,7 @@ func GetSEOskills(conn *sql.DB) ([]SEOSkill, error) {
 	defer rows.Close()
 	for rows.Next() {
 		loc := SEOSkill{}
-		err = rows.Scan(&loc.Name)
-		if err != nil {
+		if err := rows.Scan(&loc.Name); err != nil {
 			return skills, err
 		}
 		skills = append(skills, loc)
@@ -482,6 +519,227 @@ func GetSEOskills(conn *sql.DB) ([]SEOSkill, error) {
 		return skills, err
 	}
 	return skills, nil
+}
+
+type User struct {
+	ID                 string
+	Username           string
+	Email              string
+	CreatedAtHumanised string
+	CreatedAt          time.Time
+	IsAdmin            bool
+}
+type NewsItem struct {
+	ID                 string    `json:"_"`
+	Title              string    `json:"title"`
+	Text               string    `json:"text"`
+	CreatedAt          time.Time `json:"_"`
+	CreatedAtHumanised string
+	CreatedBy          User `json:"_"`
+}
+
+type NewsComment struct {
+	ID                 string    `json:"-"`
+	Text               string    `json:"text"`
+	Parent             string    `json:"parent"`
+	CreatedAt          time.Time `json:"-"`
+	CreatedAtHumanised string
+	CreatedBy          User `json:"-"`
+}
+
+func GetLatestNews(db *sql.DB, last int) ([]NewsItem, error) {
+	var news []NewsItem
+	var rows *sql.Rows
+	rows, err := db.Query(`SELECT n.id, n.title, n.text, n.created_at, u.id, u.email, u.username, u.created_at FROM news n JOIN users u ON u.id = n.created_by ORDER BY n.created_at DESC LIMIT $1`, last)
+	if err != nil {
+		return news, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		n := NewsItem{}
+		n.CreatedBy = User{}
+		if err := rows.Scan(
+			&n.ID,
+			&n.Title,
+			&n.Text,
+			&n.CreatedAt,
+			&n.CreatedBy.ID,
+			&n.CreatedBy.Email,
+			&n.CreatedBy.Username,
+			&n.CreatedBy.CreatedAt,
+		); err != nil {
+			return news, err
+		}
+		n.CreatedAtHumanised = humanize.Time(n.CreatedAt.UTC())
+		news = append(news, n)
+	}
+
+	return news, nil
+}
+
+func CreateNewsItem(db *sql.DB, n NewsItem) error {
+	newsID, err := ksuid.NewRandom()
+	if err != nil {
+		return err
+	}
+	n.ID = newsID.String()
+	n.CreatedAt = time.Now()
+	if _, err := db.Exec(`INSERT INTO news (id, title, text, created_at, created_by) VALUES ($1, $2, $3, $4, $5)`, n.ID, n.Title, n.Text, n.CreatedAt, n.CreatedBy.ID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func CreateNewsComment(db *sql.DB, c NewsComment) error {
+	newsID, err := ksuid.NewRandom()
+	if err != nil {
+		return err
+	}
+	c.ID = newsID.String()
+	c.CreatedAt = time.Now()
+	// TODO: check that parent id exists
+	if _, err := db.Exec(`INSERT INTO news_comment (id, text, created_at, created_by, parent_id) VALUES ($1, $2, $3, $4, $5)`, c.ID, c.Text, c.CreatedAt, c.CreatedBy.ID, c.Parent); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func GetNewsByID(db *sql.DB, newsID string) (NewsItem, error) {
+	row := db.QueryRow(`SELECT n.id, n.title, n.text, n.created_at, u.id, u.email, u.username, u.created_at FROM news n JOIN users u ON u.id = n.created_by WHERE n.id = $1`, newsID)
+	n := NewsItem{}
+	n.CreatedBy = User{}
+	if err := row.Scan(
+		&n.ID,
+		&n.Title,
+		&n.Text,
+		&n.CreatedAt,
+		&n.CreatedBy.ID,
+		&n.CreatedBy.Email,
+		&n.CreatedBy.Username,
+		&n.CreatedBy.CreatedAt,
+	); err != nil {
+		return n, err
+	}
+	n.CreatedAtHumanised = humanize.Time(n.CreatedAt.UTC())
+	return n, nil
+}
+
+func GetNewsComments(db *sql.DB, newsID string) ([]NewsComment, error) {
+	var comments []NewsComment
+	var rows *sql.Rows
+	rows, err := db.Query(`SELECT n.id, n.text, n.created_at, u.id, u.email, u.username, u.created_at FROM news_comment n JOIN users u ON u.id = n.created_by WHERE n.parent_id = $1 ORDER BY n.created_at DESC`, newsID)
+	if err != nil {
+		return comments, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		n := NewsComment{}
+		n.CreatedBy = User{}
+		if err := rows.Scan(
+			&n.ID,
+			&n.Text,
+			&n.CreatedAt,
+			&n.CreatedBy.ID,
+			&n.CreatedBy.Email,
+			&n.CreatedBy.Username,
+			&n.CreatedBy.CreatedAt,
+		); err != nil {
+			return comments, err
+		}
+		n.CreatedAtHumanised = humanize.Time(n.CreatedAt.UTC())
+		comments = append(comments, n)
+	}
+
+	return comments, nil
+}
+
+func SaveTokenSignOn(db *sql.DB, email, token string) error {
+	sha256Email := sha256.Sum256([]byte(email))
+	if _, err := db.Exec(`INSERT INTO user_sign_on_token (token, email) VALUES ($1, $2)`, token, hex.EncodeToString(sha256Email[:])); err != nil {
+		return err
+	}
+	return nil
+}
+
+func ValidateSignOnToken(db *sql.DB, token string) (User, error) {
+	u := User{}
+	row := db.QueryRow(`SELECT t.token, t.email, u.id, u.username, u.email, u.created_at FROM user_sign_on_token t LEFT JOIN users u ON t.email = u.email WHERE t.token = $1`, token)
+	var tokenRes, id, username, email, tokenEmail sql.NullString
+	var createdAt sql.NullTime
+	if err := row.Scan(&tokenRes, &tokenEmail, &id, &username, &email, &createdAt); err != nil {
+		return u, err
+	}
+	if !tokenRes.Valid {
+		return u, errors.New("token not found")
+	}
+	if !email.Valid {
+		// user not found create new one
+		userID, err := ksuid.NewRandom()
+		if err != nil {
+			return u, err
+		}
+		u.ID = userID.String()
+		u.Email = tokenEmail.String
+		u.Username = GetUsername()
+		u.CreatedAt = time.Now()
+		u.CreatedAtHumanised = humanize.Time(u.CreatedAt.UTC())
+		if _, err := db.Exec(`INSERT INTO users (id, email, username, created_at) VALUES ($1, $2, $3, $4)`, u.ID, u.Email, u.Username, u.CreatedAt); err != nil {
+			return User{}, err
+		}
+
+		return u, nil
+	}
+	u.ID = id.String
+	u.Email = email.String
+	u.Username = username.String
+	u.CreatedAt = createdAt.Time
+	u.CreatedAtHumanised = humanize.Time(u.CreatedAt.UTC())
+
+	return u, nil
+}
+
+func GetUsername() string {
+	words := []string{"Time", "Past", "Future", "Dev",
+		"Fly", "Flying", "Soar", "Soaring", "Power", "Falling",
+		"Fall", "Jump", "Cliff", "Mountain", "Rend", "Red", "Blue",
+		"Green", "Yellow", "Gold", "Demon", "Demonic", "Panda", "Cat",
+		"Kitty", "Kitten", "Zero", "Memory", "Trooper", "XX", "Bandit",
+		"Fear", "Light", "Glow", "Tread", "Deep", "Deeper", "Deepest",
+		"Mine", "Your", "Worst", "Enemy", "Hostile", "Force", "Video",
+		"Game", "Donkey", "Mule", "Colt", "Cult", "Cultist", "Magnum",
+		"Gun", "Assault", "Recon", "Trap", "Trapper", "Redeem", "Code",
+		"Script", "Writer", "Near", "Close", "Open", "Cube", "Circle",
+		"Geo", "Genome", "Germ", "Spaz", "Shot", "Echo", "Beta", "Alpha",
+		"Gamma", "Omega", "Seal", "Squid", "Money", "Cash", "Lord", "King",
+		"Duke", "Rest", "Fire", "Flame", "Morrow", "Break", "Breaker", "Numb",
+		"Ice", "Cold", "Rotten", "Sick", "Sickly", "Janitor", "Camel", "Rooster",
+		"Sand", "Desert", "Dessert", "Hurdle", "Racer", "Eraser", "Erase", "Big",
+		"Small", "Short", "Tall", "Sith", "Bounty", "Hunter", "Cracked", "Broken",
+		"Sad", "Happy", "Joy", "Joyful", "Crimson", "Destiny", "Deceit", "Lies",
+		"Lie", "Honest", "Destined", "Bloxxer", "Hawk", "Eagle", "Hawker", "Walker",
+		"Zombie", "Sarge", "Capt", "Captain", "Punch", "One", "Two", "Uno", "Slice",
+		"Slash", "Melt", "Melted", "Melting", "Fell", "Wolf", "Hound",
+		"Legacy", "Sharp", "Dead", "Mew", "Chuckle", "Bubba", "Bubble", "Sandwich", "Smasher",
+		"Extreme", "Multi", "Universe", "Ultimate", "Death", "Ready", "Monkey", "Elevator", "Wrench",
+		"Grease", "Head", "Theme", "Grand", "Cool", "Kid", "Boy", "Girl", "Vortex", "Paradox",
+		"Dog", "Cat", "Chimp", "Face", "Beer","Busy", "Cuttery",
+		"Cuzzing","Calculating","Calm","Candid","Canine","Capital","Carefree","Careful","Careless","Caring",
+		"Cautious","Cavernous","Celebrated","Charming","Cheap","Cheerful","Cheery","Chief","Chilly","Chubby",
+		"Circular","Classic","Boxer", "Boxspring", "Boy", "Boycott", "Boyfriend", "Boyhood", "Boysenberry", "Bra",
+		"Brace", "Bracelet", "Bracket", "Brain", "Brake", "Bran", "Branch", "Brand", "Brandy",
+		"Brass", "Brassiere", "Bratwurst", "Bread", "Breadcrumb", "Breadfruit", "Break",
+		"Breakdown", "Breakfast", "Breakpoint", "Breakthrough", "Breast",
+	}
+
+	rand.Seed(time.Now().UnixNano())
+	finalName := words[rand.Intn(len(words))]
+	finalName += words[rand.Intn(len(words))]
+	finalName += words[rand.Intn(len(words))]
+	finalName += fmt.Sprintf("%d", rand.Intn(99)+1)
+
+	return finalName
 }
 
 func SaveDraft(db *sql.DB, job *JobRq) (int, error) {

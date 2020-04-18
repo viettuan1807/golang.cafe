@@ -3,6 +3,7 @@ package middleware
 import (
 	"net/http"
 	"strings"
+	"time"
 
 	"github.com/0x13a/golang.cafe/pkg/gzip"
 
@@ -45,14 +46,17 @@ func GzipMiddleware(next http.Handler) http.Handler {
 }
 
 type MyCustomClaims struct {
-	IsAdmin bool   `json:"is_admin"`
-	Email   string `json:"email"`
+	IsAdmin   bool      `json:"is_admin"`
+	Username  string    `json:"username"`
+	UserID    string    `json:"user_id"`
+	Email     string    `json:"email"`
+	CreatedAt time.Time `json:"created_at"`
 	jwt.StandardClaims
 }
 
 func AdminAuthenticatedMiddleware(sessionStore *sessions.CookieStore, jwtKey []byte, next http.HandlerFunc) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		sess, err := sessionStore.Get(r, "_gc_session_token")
+		sess, err := sessionStore.Get(r, "____gc")
 		if err != nil {
 			w.WriteHeader(http.StatusUnauthorized)
 			w.Header().Set("Content-Type", "text/plain")
@@ -90,4 +94,60 @@ func AdminAuthenticatedMiddleware(sessionStore *sessions.CookieStore, jwtKey []b
 		}
 		next(w, r)
 	})
+}
+
+func UserAuthenticatedMiddleware(sessionStore *sessions.CookieStore, jwtKey []byte, next http.HandlerFunc) http.HandlerFunc {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		sess, err := sessionStore.Get(r, "____gc")
+		if err != nil {
+			w.WriteHeader(http.StatusUnauthorized)
+			w.Header().Set("Content-Type", "text/plain")
+			w.Write([]byte("unauthorized"))
+			return
+		}
+		tk, ok := sess.Values["jwt"].(string)
+		if !ok {
+			w.WriteHeader(http.StatusUnauthorized)
+			w.Header().Set("Content-Type", "text/plain")
+			w.Write([]byte("unauthorized"))
+			return
+		}
+		token, err := jwt.ParseWithClaims(tk, &MyCustomClaims{}, func(token *jwt.Token) (interface{}, error) {
+			return jwtKey, nil
+		})
+		if !token.Valid {
+			w.WriteHeader(http.StatusUnauthorized)
+			w.Header().Set("Content-Type", "text/plain")
+			w.Write([]byte("unauthorized"))
+			return
+		}
+		if !ok {
+			w.WriteHeader(http.StatusUnauthorized)
+			w.Header().Set("Content-Type", "text/plain")
+			w.Write([]byte("unauthorized"))
+			return
+		}
+		next(w, r)
+	})
+}
+
+func IsSignedOn(r *http.Request, sessionStore *sessions.CookieStore, jwtKey []byte) bool {
+	sess, err := sessionStore.Get(r, "____gc")
+		if err != nil {
+			return false
+		}
+		tk, ok := sess.Values["jwt"].(string)
+		if !ok {
+			return false
+		}
+		token, err := jwt.ParseWithClaims(tk, &MyCustomClaims{}, func(token *jwt.Token) (interface{}, error) {
+			return jwtKey, nil
+		})
+		if !token.Valid {
+			return false
+		}
+		if !ok {
+			return false
+		}
+		return true
 }

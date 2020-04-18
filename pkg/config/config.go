@@ -17,7 +17,6 @@ type Config struct {
 	StripePublishableKey         string
 	EmailAPIKey                  string
 	AdminEmail                   string
-	AdminPassword                string
 	SessionKey                   []byte
 	JwtSigningKey                []byte
 	Env                          string
@@ -85,10 +84,6 @@ func LoadConfig() (Config, error) {
 	if adminEmail == "" {
 		return Config{}, fmt.Errorf("ADMIN_EMAIL cannot be empty")
 	}
-	adminPassword := os.Getenv("ADMIN_PASSWORD")
-	if adminPassword == "" {
-		return Config{}, fmt.Errorf("ADMIN_PASSWORD cannot be empty")
-	}
 	mailerliteAPIKey := os.Getenv("MAILERLITE_API_KEY")
 	if mailerliteAPIKey == "" {
 		return Config{}, fmt.Errorf("MAILERLITE_API_KEY cannot be empty")
@@ -106,7 +101,6 @@ func LoadConfig() (Config, error) {
 		StripePublishableKey:         stripePublishableKey,
 		EmailAPIKey:                  emailAPIKey,
 		AdminEmail:                   adminEmail,
-		AdminPassword:                adminPassword,
 		SessionKey:                   sessionKeyBytes,
 		JwtSigningKey:                jwtSigningKeyBytes,
 		Env:                          env,
