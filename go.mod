@@ -1,8 +1,8 @@
 module github.com/0x13a/golang.cafe
 
-go 1.12
+go 1.13
 
-// +heroku goVersion go1.12.5
+// +heroku goVersion go1.13.9
 // +heroku go mod download
 // +heroku install ./...
 
