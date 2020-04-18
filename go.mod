@@ -27,6 +27,7 @@ require (
 	github.com/gosimple/slug v1.3.0
 	github.com/kylelemons/godebug v1.1.0 // indirect
 	github.com/lib/pq v1.0.0
+	github.com/microcosm-cc/bluemonday v1.0.2
 	github.com/mitchellh/mapstructure v1.1.2 // indirect
 	github.com/oschwald/maxminddb-golang v1.6.0
 	github.com/pkg/errors v0.8.0
