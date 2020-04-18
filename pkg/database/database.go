@@ -588,6 +588,9 @@ func CreateNewsItem(db *sql.DB, n NewsItem) error {
 	p := bluemonday.UGCPolicy()
 	n.Title = p.Sanitize(n.Title)
 	n.Text = p.Sanitize(n.Text)
+	if strings.TrimSpace(n.Text) == "" || strings.TrimSpace(n.Title) == "" {
+		return errors.New("Text and Title cannot be blank")
+	}
 	if _, err := db.Exec(`INSERT INTO news (id, title, text, created_at, created_by) VALUES ($1, $2, $3, $4, $5)`, n.ID, n.Title, n.Text, n.CreatedAt, n.CreatedBy.ID); err != nil {
 		return err
 	}
@@ -604,6 +607,9 @@ func CreateNewsComment(db *sql.DB, c NewsComment) error {
 	c.CreatedAt = time.Now()
 	p := bluemonday.UGCPolicy()
 	c.Text = p.Sanitize(c.Text)
+	if strings.TrimSpace(c.Text) == "" {
+		return errors.New("Text cannot be blank")
+	}
 	// TODO: check that parent id exists
 	if _, err := db.Exec(`INSERT INTO news_comment (id, text, created_at, created_by, parent_id) VALUES ($1, $2, $3, $4, $5)`, c.ID, c.Text, c.CreatedAt, c.CreatedBy.ID, c.Parent); err != nil {
 		return err
