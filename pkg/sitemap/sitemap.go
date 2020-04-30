@@ -71,6 +71,10 @@ var blogPosts = []Page{
 		CreatedAt: time.Now().UTC(),
 		Title:     "golang-round-float-to-int-example",
 	},
+	{
+		CreatedAt: time.Now().UTC(),
+		Title:     "how-to-url-encode-string-in-golang-example",
+	},
 }
 var pages = []string{
 	"hire-golang-developers",
