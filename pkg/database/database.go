@@ -250,6 +250,18 @@ type SEOSkill struct {
 // ALTER TABLE seo_location ADD COLUMN currency VARCHAR(4) NOT NULL DEFAULT '$';
 // ALTER TABLE seo_location ADD COLUMN country VARCHAR(255) DEFAULT NULL;
 
+// CREATE TABLE IF NOT EXISTS queue_jobs (
+// 	id VARCHAR(28) NOT NULL,
+// 	name VARCHAR(255) NOT NULL,
+// 	payload JSONB NOT NULL,
+// 	created_at TIMESTAMP NOT NULL,
+// 	started_at TIMESTAMP DEFAULT NULL,
+// 	finished_at TIMESTAMP DEFAULT NULL,
+// 	PRIMARY KEY(id)
+// );
+
+// CREATE INDEX queue_jobs_handler_idx ON queue_jobs (handler);
+
 // CREATE TABLE IF NOT EXISTS seo_landing_page (
 //  uri VARCHAR(255) NOT NULL UNIQUE,
 //  location VARCHAR(255) NOT NULL,
