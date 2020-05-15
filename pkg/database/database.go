@@ -257,6 +257,7 @@ type SEOSkill struct {
 // 	created_at TIMESTAMP NOT NULL,
 // 	started_at TIMESTAMP DEFAULT NULL,
 // 	finished_at TIMESTAMP DEFAULT NULL,
+//  priority INTEGER NOT NULL,
 // 	PRIMARY KEY(id)
 // );
 
