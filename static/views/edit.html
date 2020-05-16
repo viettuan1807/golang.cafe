@@ -83,11 +83,15 @@
                 <b>Job Post Link:</b> <a href="/job/{{ .Job.Slug }}" rel="noopener noreferrer" target="_blank">https://golang.cafe/job/{{ .Job.Slug }}</a>
             </small><br /><br />
             
-            <h3>Pageviews</h3>
-            <div id="job-stats-pageviews"></div>
+            {{ if .ViewCount }}
+                <h3>Pageviews</h3>
+                <div id="job-stats-pageviews"></div>
+            {{ end }}
 
-            <h3>Clickouts</h3>
-            <div id="job-stats-clickouts"></div>
+            {{ if .ClickoutCount }}
+                <h3>Clickouts</h3>
+                <div id="job-stats-clickouts"></div>
+            {{ end }}
         </p>
     </article>
     <article style="margin-top: 30px;">
@@ -424,7 +428,9 @@
             return !isThere;
         };
 
-        // set the dimensions and margins of the graph
+{{ if .ClickoutCount }}
+{{ if .ViewCount }}
+// set the dimensions and margins of the graph
 var margin = {top: 20, right: 20, bottom: 30, left: 50},
     width = 600 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
@@ -502,6 +508,8 @@ x.domain(d3.extent(data, function(d) { return d.date; }));
   // Add the Y Axis
   clickoutsSvg.append("g")
       .call(d3.axisLeft(y));
+      {{ end }}
+      {{ end }}
     </script>
   </body>
 </html>
