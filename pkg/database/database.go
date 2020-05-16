@@ -916,7 +916,7 @@ type PurchaseEvent struct {
 
 func GetPurchaseEvents(conn *sql.DB, jobID int) ([]PurchaseEvent, error) {
 	var purchases []PurchaseEvent
-	rows, err := conn.Query(`SELECT stripe_session_id, created_at, completed_at, amount, currency, description, job_id WHERE job_id = $1 AND completed_at IS NOT NULL`, jobID)
+	rows, err := conn.Query(`SELECT stripe_session_id, created_at, completed_at, amount, currency, description, job_id FROM purchase_event WHERE job_id = $1 AND completed_at IS NOT NULL`, jobID)
 	if err == sql.ErrNoRows {
 		return purchases, nil
 	}
