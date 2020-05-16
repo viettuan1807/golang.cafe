@@ -46,7 +46,6 @@ func SaveMemberToCommunityNewsletterPageHandler(svr server.Server) http.HandlerF
 		email := strings.ToLower(r.URL.Query().Get("email"))
 		emailRe := regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
 		if !emailRe.MatchString(email) {
-			svr.Log(errors.New("invalid email provided"), fmt.Sprintf("invalid email provided: %v", email))
 			svr.JSON(w, http.StatusBadRequest, nil)
 			return
 		}
@@ -93,7 +92,6 @@ func SaveMemberToNewsletterPageHandler(svr server.Server) http.HandlerFunc {
 		frequency := strings.ToLower(r.URL.Query().Get("frequency"))
 		emailRe := regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
 		if !emailRe.MatchString(email) {
-			svr.Log(errors.New("invalid email provided"), fmt.Sprintf("invalid email provided: %v", email))
 			svr.JSON(w, http.StatusBadRequest, nil)
 			return
 		}

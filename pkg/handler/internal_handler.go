@@ -249,7 +249,7 @@ func SubmitJobPostPageHandler(svr server.Server) http.HandlerFunc {
 			svr.Log(err, "unable to send email to admin while posting job ad")
 		}
 		if sess != nil {
-			err = database.InitiatePaymentEvent(svr.Conn, sess.ID, payment.AdTypeToAmount(jobRq.AdType), jobRq.CurrencyCode, jobID)
+			err = database.InitiatePaymentEvent(svr.Conn, sess.ID, payment.AdTypeToAmount(jobRq.AdType), jobRq.CurrencyCode, payment.AdTypeToDescription(jobRq.AdType), jobID)
 			if err != nil {
 				svr.Log(err, "unable to save payment initiated event")
 			}
@@ -561,6 +561,10 @@ func EditJobViewPageHandler(svr server.Server) http.HandlerFunc {
 		conversionRate := ""
 		if clickoutCount > 0 && viewCount > 0 {
 			conversionRate = fmt.Sprintf("%.2f", float64(float64(clickoutCount)/float64(viewCount)*100))
+		}
+		paymentEvents, err := database.GetPaymentEvents(svr.Conn, jobID)
+		if err != nil {
+			svr.Log(err, fmt.Sprintf("unable to retrieve job payment events for job id %d", jobID))
 		}
 		svr.Render(w, http.StatusOK, "edit.html", map[string]interface{}{
 			"Job":                        job,

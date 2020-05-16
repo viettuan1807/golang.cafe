@@ -208,6 +208,7 @@ type SEOSkill struct {
 //  currency CHAR(3) NOT NULL,
 // 	created_at TIMESTAMP NOT NULL,
 // 	completed_at TIMESTAMP DEFAULT NULL,
+//  description VARCHAR(255) NOT NULL,
 // 	job_id INTEGER NOT NULL REFERENCES job (id)
 // );
 // CREATE UNIQUE INDEX purchase_event_stripe_session_id_idx ON purchase_event (stripe_session_id);
@@ -314,9 +315,9 @@ func ApplyToJob(conn *sql.DB, jobID int, cv []byte, email, token string) error {
 	return err
 }
 
-func InitiatePaymentEvent(conn *sql.DB, sessionID string, amount int64, currency string, jobID int) error {
-	stmt := `INSERT INTO purchase_event (stripe_session_id, amount, currency, job_id, created_at) VALUES ($1, $2, $3, $4, NOW())`
-	_, err := conn.Exec(stmt, sessionID, amount, currency, jobID)
+func InitiatePaymentEvent(conn *sql.DB, sessionID string, amount int64, currency string, description string, jobID int) error {
+	stmt := `INSERT INTO purchase_event (stripe_session_id, amount, currency, description, job_id, created_at) VALUES ($1, $2, $3, $4, $5, NOW())`
+	_, err := conn.Exec(stmt, sessionID, amount, currency, description, jobID)
 	return err
 }
 
@@ -917,6 +918,33 @@ func GetViewCountForJob(conn *sql.DB, jobID int) (int, error) {
 		return 0, err
 	}
 	return count, err
+}
+
+type PurchaseEvent struct {
+	StripeSessionID string
+	CreatedAt time.Time
+	CompletedAt time.Time
+	Amount int
+	Currency string
+	Type string
+	JobID int
+}
+
+func GetPaymentEvents(conn *sql.DB, jobID int) ([]PurchaseEvent, error) {
+	var purchases []PurchaseEvent
+	rows, err := conn.Query(`SELECT stripe_session_id, created_at, completed_at, amount, currency, type, job_id WHERE job_id = $1 AND completed_at IS NOT NULL`, jobID)
+	if err == sql.ErrNoRows {
+		return purchases, nil
+	}
+	for rows.Next() {
+		var p PurchaseEvent
+		if err := rows.Scan(p.StripeSessionID, p.CreatedAt, p.CompletedAt, p.Amount, p.Currency, p.Type, p.JobID); err != nil {
+			return purchases, err
+		}
+		purchases = append(purchases, p)
+	}
+
+	return purchases, nil
 }
 
 func GetClickoutCountForJob(conn *sql.DB, jobID int) (int, error) {
