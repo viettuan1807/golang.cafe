@@ -906,12 +906,12 @@ func GetViewCountForJob(conn *sql.DB, jobID int) (int, error) {
 
 type PurchaseEvent struct {
 	StripeSessionID string
-	CreatedAt time.Time
-	CompletedAt time.Time
-	Amount int
-	Currency string
-	Description string
-	JobID int
+	CreatedAt       time.Time
+	CompletedAt     time.Time
+	Amount          int
+	Currency        string
+	Description     string
+	JobID           int
 }
 
 func GetPurchaseEvents(conn *sql.DB, jobID int) ([]PurchaseEvent, error) {
@@ -948,6 +948,32 @@ func SaveSuccessfulPayment(conn *sql.DB, sessionID string) (int, error) {
 		return 0, err
 	}
 	return affected, nil
+}
+
+type JobStat struct {
+	Date      string `json:"date"`
+	Clickouts int    `json:"clickouts"`
+	PageViews int    `json:"pageviews"`
+}
+
+func GetStatsForJob(conn *sql.DB, jobID int) ([]JobStat, error) {
+	var stats []JobStat
+	rows, err := conn.Query(`SELECT COUNT(*) FILTER (WHERE event_type = 'clickout') AS clickout, COUNT(*) FILTER (WHERE event_type = 'page_view') AS pageview, TO_CHAR(DATE_TRUNC('day', created_at), 'YYYY-MM-DD') FROM job_event WHERE job_id = $1 GROUP BY DATE_TRUNC('day', created_at) ORDER BY DATE_TRUNC('day', created_at) ASC`, jobID)
+	if err == sql.ErrNoRows {
+		return stats, nil
+	}
+	if err != nil {
+		return nil, err
+	}
+	for rows.Next() {
+		var s JobStat
+		if err := rows.Scan(&s.Clickouts, &s.PageViews, &s.Date); err != nil {
+			return stats, err
+		}
+		stats = append(stats, s)
+	}
+
+	return stats, nil
 }
 
 func GetClickoutCountForJob(conn *sql.DB, jobID int) (int, error) {

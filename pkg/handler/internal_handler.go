@@ -566,9 +566,18 @@ func EditJobViewPageHandler(svr server.Server) http.HandlerFunc {
 		if err != nil {
 			svr.Log(err, fmt.Sprintf("unable to retrieve job payment events for job id %d", jobID))
 		}
+		stats, err := database.GetStatsForJob(svr.Conn, jobID)
+		if err != nil {
+			svr.Log(err, fmt.Sprintf("unable to retrieve stats for job id %d", jobID))
+		}
+		statsSet, err := json.Marshal(stats)
+		if err != nil {
+			svr.Log(err, fmt.Sprintf("unable to marshal stats for job id %d", jobID))
+		}
 		svr.Render(w, http.StatusOK, "edit.html", map[string]interface{}{
 			"Job":                        job,
-			"PurchaseEvents":             purchaseEvents,
+			"Stats":                      string(statsSet),
+			"Purchases":                  purchaseEvents,
 			"JobPerksEscaped":            svr.JSEscapeString(job.Perks),
 			"JobInterviewProcessEscaped": svr.JSEscapeString(job.InterviewProcess),
 			"JobDescriptionEscaped":      svr.JSEscapeString(job.JobDescription),

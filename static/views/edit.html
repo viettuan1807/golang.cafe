@@ -14,6 +14,11 @@
         .lds-ring {display: inline-block; position: relative; width: 64px; height: 64px;}.lds-ring div {box-sizing: border-box; display: block; position: absolute; width: 51px; height: 51px; margin: 6px; border: 6px solid #000; border-radius: 50%; animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite; border-color: #000 transparent transparent transparent;}
         .lds-ring div:nth-child(1) {animation-delay: -0.45s;}.lds-ring div:nth-child(2) {animation-delay: -0.3s;}.lds-ring div:nth-child(3) {animation-delay: -0.15s;}
         @keyframes lds-ring {0% {transform: rotate(0deg);} 100% {transform: rotate(360deg);}}#spinner-0{display: none;}
+        .line {
+          fill: none;
+          stroke: steelblue;
+          stroke-width: 2px;
+        }
     </style>
     <meta charset="utf-8">
     <meta name="title" content="{{ .Job.JobTitle }} at {{ .Job.Company }} | {{ .Job.Location }}" />
@@ -43,20 +48,26 @@
   <section>
     <p>
         <small>
-          <a href="/">Search Jobs</a> | 
-          <a href="/Hire-Golang-Developers">Hire Go Developers</a> 
+          <a href="/">Golang Cafe</a> |
+          <a href="/support">Contact Support</a> |
+          <a href="/Hire-Golang-Developers">Post a Job</a> 
         </small>
     </p>
+    {{ if .IsCallback }}
+        <article style="margin-bottom: 30px;">
+        <p>
+            <h3>Thank you</h3>
+            {{ if .PaymentSuccess }}
+                Thanks for submitting your job on Golang Cafe. The Job is currently being reviewed and will be approved within the next few hours. Any questions please don't hesitate to contact us <code>team@golang.cafe</code>
+            {{ else }}
+                Oops, there was a problem with your payment. Don't worry your job ad has been saved
+            {{ end }}
+        </p>
+        </article>
+    {{ end }}
     <article>
         <p>
-            <h3>Edit your Job Ad</h3>
-            {{ if .IsCallback }}
-                {{ if .PaymentSuccess }}
-                    Thanks for submitting your job on Golang Cafe. The Job is currently being reviewed and will be approved within the next few hours. Any questions please don't hesitate to contact us <code>team@golang.cafe</code>
-                {{ else }}
-                    Oops, there was a problem with your payment. Don't worry your job ad has been saved
-                {{ end }}
-            {{ end }}
+            <h3>Job Dashboard</h3>
             <small>
                 <b>Created:</b> {{ .Job.CreatedAt.Format "Jan 02, 2006 15:04:05 UTC" }}<br />
                 {{ if .ViewCount }}
@@ -71,6 +82,17 @@
                 <b>Status:</b> {{ if .Job.ApprovedAt.Valid }} Published {{ .Job.ApprovedAt.Value.Format "Jan 02, 2006 15:04:05 UTC" }} {{ else }} Pending Approval {{ end }}<br />
                 <b>Job Post Link:</b> <a href="/job/{{ .Job.Slug }}" rel="noopener noreferrer" target="_blank">https://golang.cafe/job/{{ .Job.Slug }}</a>
             </small><br /><br />
+            
+            <h3>Pageviews</h3>
+            <div id="job-stats-pageviews"></div>
+
+            <h3>Clickouts</h3>
+            <div id="job-stats-clickouts"></div>
+        </p>
+    </article>
+    <article style="margin-top: 30px;">
+        <p>
+            <h3>Edit your Job Ad</h3>
             <input type="text" name="job-title" id="job-title" placeholder="Job Title" style="width: 100%;" value="{{ .Job.JobTitle }}"/><br />
             <input type="text" name="job-location" id="job-location" placeholder="Job Location" style="width: 100%;" value="{{ .Job.Location }}"/><br />
             <input type="number" name="salary-min" id="salary-min" placeholder="Min Annual Salary" style="width: 35%;" value="{{ .Job.SalaryMin }}"/>
@@ -155,9 +177,27 @@
         </p>
   </article>
   {{ if .Purchases }}
-    {{ range $i, $j := .Purchases }}
-    
-    {{ end }}
+    <article style="margin-top: 30px;">
+        <p>
+        <h3>Payments</h3>
+        <table>
+            <tr>
+                <td><b>Description</b></td>
+                <td><b>Amount</b></td>
+                <td><b>Currency</b></td>
+                <td><b>Paid At</b></td>
+            </tr>
+        {{ range $i, $j := .Purchases }}
+            <tr>
+                <td>{{ .Description }}</td>
+                <td>{{ .Amount }}</td>
+                <td>{{ .Currency }}</td>
+                <td>{{ .CompletedAt.Format "Jan 02, 2006 15:04:05 UTC" }}</td>
+            </tr>
+        {{ end }}
+        </table>
+        </p>
+    </article>
   {{ end }}
   </section>
   <footer>
@@ -174,6 +214,7 @@
       </small>
     </nav>
   </footer>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
     <script>
         function isEmail(email) {
             var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -382,6 +423,85 @@
             }
             return !isThere;
         };
+
+        // set the dimensions and margins of the graph
+var margin = {top: 20, right: 20, bottom: 30, left: 50},
+    width = 600 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+// parse the date / time
+var parseTime = d3.timeParse("%Y-%m-%d");
+
+// set the ranges
+var x = d3.scaleTime().range([0, width]);
+var y = d3.scaleLinear().range([height, 0]);
+
+// define the 1st line
+var clickouts = d3.line()
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.clickouts); });
+
+// define the 2nd line
+var pageviews = d3.line()
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.pageviews); });
+
+
+var pageviewsSvg = d3.select("#job-stats-pageviews").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+var data = {{ .Stats }};
+data.forEach(function (d) { d.date = parseTime(d.date);})
+
+// Scale the range of the data
+x.domain(d3.extent(data, function(d) { return d.date; }));
+  y.domain([0, d3.max(data, function(d) { return d.pageviews })]);
+
+  // Add the valueline path.
+  pageviewsSvg.append("path")
+      .data([data])
+      .attr("class", "line")
+      .attr("d", pageviews);
+
+  // Add the X Axis
+  pageviewsSvg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+
+  // Add the Y Axis
+  pageviewsSvg.append("g")
+      .call(d3.axisLeft(y));
+
+var clickoutsSvg = d3.select("#job-stats-clickouts").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+
+// Scale the range of the data
+x.domain(d3.extent(data, function(d) { return d.date; }));
+  y.domain([0, d3.max(data, function(d) { return d.clickouts })]);
+
+  // Add the valueline path.
+  clickoutsSvg.append("path")
+      .data([data])
+      .attr("class", "line")
+      .attr("d", clickouts);
+
+  // Add the X Axis
+  clickoutsSvg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+
+  // Add the Y Axis
+  clickoutsSvg.append("g")
+      .call(d3.axisLeft(y));
     </script>
   </body>
 </html>
