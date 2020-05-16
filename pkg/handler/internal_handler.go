@@ -6,9 +6,11 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strings"
 
 	"github.com/0x13a/golang.cafe/pkg/database"
 	"github.com/0x13a/golang.cafe/pkg/email"
+	"github.com/0x13a/golang.cafe/pkg/ipgeolocation"
 	"github.com/0x13a/golang.cafe/pkg/middleware"
 	"github.com/0x13a/golang.cafe/pkg/payment"
 	"github.com/0x13a/golang.cafe/pkg/server"
@@ -194,6 +196,45 @@ func SubmitJobPostWithoutPaymentHandler(svr server.Server) http.HandlerFunc {
 	)
 }
 
+func SubmitJobPostPaymentUpsellPageHandler(svr server.Server) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		decoder := json.NewDecoder(r.Body)
+		jobRq := &database.JobRqUpsell{}
+		if err := decoder.Decode(&jobRq); err != nil {
+			svr.JSON(w, http.StatusBadRequest, nil)
+			return
+		}
+		// validate currency
+		if jobRq.CurrencyCode != "USD" && jobRq.CurrencyCode != "EUR" && jobRq.CurrencyCode != "GBP" {
+			jobRq.CurrencyCode = "USD"
+		}
+		jobID, err := database.JobPostIDByToken(svr.Conn, jobRq.Token)
+		if err != nil {
+			svr.JSON(w, http.StatusBadRequest, nil)
+			return
+		}
+		sess, err := payment.CreateSession(svr.GetConfig().StripeKey, &database.JobRq{AdType: jobRq.AdType, CurrencyCode: jobRq.CurrencyCode, Email: jobRq.Email}, jobRq.Token)
+		if err != nil {
+			svr.Log(err, "unable to create payment session")
+		}
+
+		err = svr.GetEmail().SendEmail("Diego from Golang Cafe <team@golang.cafe>", email.GolangCafeEmailAddress, jobRq.Email, "New Upgrade on Golang Cafe", fmt.Sprintf("Hey! There is a new ad upgrade on Golang Cafe. Please check https://golang.cafe/manage/%s", jobRq.Token))
+		if err != nil {
+			svr.Log(err, "unable to send email to admin while upgrading job ad")
+		}
+		if sess != nil {
+			err = database.InitiatePaymentEvent(svr.Conn, sess.ID, payment.AdTypeToAmount(jobRq.AdType), jobRq.CurrencyCode, payment.AdTypeToDescription(jobRq.AdType), jobRq.AdType, jobRq.Email, jobID)
+			if err != nil {
+				svr.Log(err, "unable to save payment initiated event")
+			}
+			svr.JSON(w, http.StatusOK, map[string]string{"s_id": sess.ID})
+			return
+		}
+		svr.JSON(w, http.StatusOK, nil)
+		return
+	}
+}
+
 func SubmitJobPostPageHandler(svr server.Server) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		decoder := json.NewDecoder(r.Body)
@@ -240,16 +281,12 @@ func SubmitJobPostPageHandler(svr server.Server) http.HandlerFunc {
 		if err != nil {
 			svr.Log(err, "unable to create payment session")
 		}
-		err = svr.GetEmail().SendEmail("Diego from Golang Cafe <team@golang.cafe>", jobRq.Email, email.GolangCafeEmailAddress, "Your Job Ad on Golang Cafe", fmt.Sprintf("Your Job Ad has been submitted successfully to Golang Cafe and it's currently being reviewed. You will receive a notification when the job ad will be live. You can edit the Job Ad at any time and check page views and clickouts by following this link https://golang.cafe/edit/%s", randomTokenStr))
-		if err != nil {
-			svr.Log(err, "unable to send email while posting job ad")
-		}
 		err = svr.GetEmail().SendEmail("Diego from Golang Cafe <team@golang.cafe>", email.GolangCafeEmailAddress, jobRq.Email, "New Job Ad on Golang Cafe", fmt.Sprintf("Hey! There is a new Ad on Golang Cafe. Please approve https://golang.cafe/manage/%s", randomTokenStr))
 		if err != nil {
 			svr.Log(err, "unable to send email to admin while posting job ad")
 		}
 		if sess != nil {
-			err = database.InitiatePaymentEvent(svr.Conn, sess.ID, payment.AdTypeToAmount(jobRq.AdType), jobRq.CurrencyCode, payment.AdTypeToDescription(jobRq.AdType), jobID)
+			err = database.InitiatePaymentEvent(svr.Conn, sess.ID, payment.AdTypeToAmount(jobRq.AdType), jobRq.CurrencyCode, payment.AdTypeToDescription(jobRq.AdType), jobRq.AdType, jobRq.Email, jobID)
 			if err != nil {
 				svr.Log(err, "unable to save payment initiated event")
 			}
@@ -538,6 +575,7 @@ func EditJobViewPageHandler(svr server.Server) http.HandlerFunc {
 		token := vars["token"]
 		isCallback := r.URL.Query().Get("callback")
 		paymentSuccess := r.URL.Query().Get("payment")
+		expiredUpsell := r.URL.Query().Get("expired")
 		jobID, err := database.JobPostIDByToken(svr.Conn, token)
 		if err != nil {
 			svr.Log(err, fmt.Sprintf("unable to find job post ID by token: %s", token))
@@ -574,6 +612,16 @@ func EditJobViewPageHandler(svr server.Server) http.HandlerFunc {
 		if err != nil {
 			svr.Log(err, fmt.Sprintf("unable to marshal stats for job id %d", jobID))
 		}
+		ipAddrs := strings.Split(r.Header.Get("x-forwarded-for"), ", ")
+		currency := ipgeolocation.Currency{ipgeolocation.CurrencyUSD, "$"}
+		if len(ipAddrs) > 0 {
+			currency, err = svr.GetCurrencyForIP(ipAddrs[0])
+			if err != nil {
+				svr.Log(err, fmt.Sprintf("unable to retrieve currency for ip addr %+v", ipAddrs[0]))
+			}
+		} else {
+			svr.Log(errors.New("coud not find ip address in x-forwarded-for"), "could not find ip address in x-forwarded-for, defaulting currency to USD")
+		}
 		svr.Render(w, http.StatusOK, "edit.html", map[string]interface{}{
 			"Job":                        job,
 			"Stats":                      string(statsSet),
@@ -587,6 +635,10 @@ func EditJobViewPageHandler(svr server.Server) http.HandlerFunc {
 			"ConversionRate":             conversionRate,
 			"IsCallback":                 isCallback,
 			"PaymentSuccess":             paymentSuccess,
+			"IsUpsell":                   expiredUpsell,
+			"Currency":                   currency,
+			"StripePublishableKey":       svr.GetConfig().StripePublishableKey,
+			"IsUnpinned":                 job.AdType != database.JobAdSponsoredPinnedFor30Days && job.AdType != database.JobAdSponsoredPinnedFor30Days,
 		})
 	}
 }

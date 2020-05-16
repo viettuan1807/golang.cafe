@@ -372,6 +372,10 @@ func (s Server) RenderPostAJobForLocation(w http.ResponseWriter, r *http.Request
 	})
 }
 
+func (s Server) GetCurrencyForIP(ip string) (ipgeolocation.Currency, error) {
+	return s.ipGeoLocation.GetCurrencyForIP(ip)
+}
+
 func (s Server) Render(w http.ResponseWriter, status int, htmlView string, data interface{}) error {
 	return s.tmpl.Render(w, status, htmlView, data)
 }

@@ -94,6 +94,9 @@ func main() {
 	// submit job post
 	svr.RegisterRoute("/x/s", handler.SubmitJobPostPageHandler(svr), []string{"POST"})
 
+	// re-submit job post payment for upsell
+	svr.RegisterRoute("/x/s/upsell", handler.SubmitJobPostPaymentUpsellPageHandler(svr), []string{"POST"})
+
 	// save media file
 	svr.RegisterRoute("/x/s/m", handler.SaveMediaPageHandler(svr), []string{"POST"})
 

@@ -13,7 +13,7 @@
         .spinner-box {z-index: 999999;width: 124px; padding: 30px; height: auto;position: fixed;margin: 5% auto; top: 40px; left: 0; right: 0;background: #fff;}
         .lds-ring {display: inline-block; position: relative; width: 64px; height: 64px;}.lds-ring div {box-sizing: border-box; display: block; position: absolute; width: 51px; height: 51px; margin: 6px; border: 6px solid #000; border-radius: 50%; animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite; border-color: #000 transparent transparent transparent;}
         .lds-ring div:nth-child(1) {animation-delay: -0.45s;}.lds-ring div:nth-child(2) {animation-delay: -0.3s;}.lds-ring div:nth-child(3) {animation-delay: -0.15s;}
-        @keyframes lds-ring {0% {transform: rotate(0deg);} 100% {transform: rotate(360deg);}}#spinner-0{display: none;}
+        @keyframes lds-ring {0% {transform: rotate(0deg);} 100% {transform: rotate(360deg);}}#spinner-0{display: none;}input[type="checkbox"]{-webkit-appearance: checkbox;-moz-appearance: checkbox;appearance: checkbox;}
         .line {
           fill: none;
           stroke: steelblue;
@@ -39,6 +39,7 @@
     
     <meta name="twitter:site" content="@golangcafe"/>
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
   </head>
   <body>
         <div id="spinner-0">
@@ -53,6 +54,20 @@
           <a href="/Hire-Golang-Developers">Post a Job</a> 
         </small>
     </p>
+    {{ if and .IsUnpinned .IsUpsell }}
+    <article style="margin-bottom: 30px;">
+        <p>
+            <h3>Your Job Ad Is No Longer Featured</h3>
+            Receive more applicants by sponsoring and pinning your job ad to the homepage<br/><br />
+            <input type="checkbox" id="ad-type-3" style="margin-right: 8px; margin-bottom: 5px;" checked><label>Pinned to the Front Page for 7 days <b>{{ .Currency.Symbol }}59</b></label><br/>
+            <input type="checkbox" id="ad-type-2" style="margin-right: 8px; margin-bottom: 5px;"><label>Pinned to the Front Page for 30 days <b>{{ .Currency.Symbol }}99</b></label><br/>
+            <br />
+            <br />
+            <input type="submit" id="submit" value="Pin To The Homepage For {{ .Currency.Symbol }}59" onclick="pin();" style="float: right;">
+            <br />
+        </p>
+    </article>
+    {{ end }}
     {{ if .IsCallback }}
         <article style="margin-bottom: 30px;">
         <p>
@@ -94,6 +109,21 @@
             {{ end }}
         </p>
     </article>
+    {{ $notUpsell := not .IsUpsell }}
+    {{ if and .IsUnpinned $notUpsell }}
+    <article style="margin-top: 30px;">
+        <p>
+            <h3>Sponsor Your Job Ad</h3>
+            Receive more applicants by sponsoring and pinning your job ad to the homepage<br/><br />
+            <input type="checkbox" id="ad-type-3" style="margin-right: 8px; margin-bottom: 5px;" checked><label>Pinned to the Front Page for 7 days <b>{{ .Currency.Symbol }}59</b></label><br/>
+            <input type="checkbox" id="ad-type-2" style="margin-right: 8px; margin-bottom: 5px;"><label>Pinned to the Front Page for 30 days <b>{{ .Currency.Symbol }}99</b></label><br/>
+            <br />
+            <br />
+            <input type="submit" id="submit" value="Pin To The Homepage For {{ .Currency.Symbol }}59" onclick="pin();" style="float: right;">
+            <br />
+        </p>
+    </article>
+    {{ end }}
     <article style="margin-top: 30px;">
         <p>
             <h3>Edit your Job Ad</h3>
@@ -220,6 +250,7 @@
   </footer>
   <script src="https://d3js.org/d3.v4.min.js"></script>
     <script>
+        var stripe = Stripe('{{ .StripePublishableKey }}');
         function isEmail(email) {
             var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return re.test(email);
@@ -416,7 +447,7 @@
             xhr.send(JSON.stringify(body));
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4) {
-                    cb(xhr.status === 200);
+                    cb(xhr.status === 200, xhr.response);
                 }
             }
         };
@@ -428,8 +459,7 @@
             return !isThere;
         };
 
-{{ if .ClickoutCount }}
-{{ if .ViewCount }}
+{{ if and .ClickoutCount .ViewCount }}
 // set the dimensions and margins of the graph
 var margin = {top: 20, right: 20, bottom: 30, left: 50},
     width = 600 - margin.left - margin.right,
@@ -509,6 +539,71 @@ x.domain(d3.extent(data, function(d) { return d.date; }));
   clickoutsSvg.append("g")
       .call(d3.axisLeft(y));
       {{ end }}
+      {{ if .IsUnpinned }}
+      function pin() {
+        document.getElementById("spinner-0").style.display = "block";
+            var adType = 0;
+            if (document.getElementById("ad-type-3").checked) {
+                adType = 3;
+            }
+            if (document.getElementById("ad-type-2").checked) {
+                adType = 2;
+            }
+            var email = document.getElementById("company-email").value;
+            if (!isEmail(email)) {
+                alert('You must provide a valid email address.');
+                return;
+            }
+        httpReq('/x/s/upsell',
+                            {
+                                ad_type: adType,
+                                email: email,
+                                currency_code: '{{ .Currency.Code }}',
+                                token: '{{ .Token }}'
+                            },
+                            function(success, body) {
+                                if (success) {
+                                    try {
+                                        var res = JSON.parse(body);
+                                        stripe.redirectToCheckout({
+                                            sessionId: res.s_id
+                                        }).then(function (result) {
+                                            document.getElementById("spinner-0").style.display = "none";
+                                            if (result.error) {
+                                                console.log(result.error);
+                                                alert('Oops, there was a problem with your payment. Please try again later');
+                                            }
+                                        });
+                                    } catch (err) {
+                                        document.getElementById("spinner-0").style.display = "none";
+                                        console.log(err);
+                                        alert('Oops, there was a problem with your payment. Please try again later');
+                                    }
+                                } else {
+                                    document.getElementById("spinner-0").style.display = "none";
+                                    window.location.href = "/x/j/p/0";
+                                }
+                            }
+                        );
+      }
+      document.getElementById("ad-type-2").addEventListener('change', function() {
+            if (this.checked) {
+                document.getElementById("ad-type-3").checked = false;
+                document.getElementById("submit").value = 'Pin To The Homepage For {{ .Currency.Symbol }}99';
+            } else {
+                document.getElementById("ad-type-3").checked = true;
+                document.getElementById("submit").value = 'Pin To The Homepage For {{ .Currency.Symbol }}59';
+            }
+        });
+        document.getElementById("ad-type-3").addEventListener('change', function() {
+            if (this.checked) {
+                document.getElementById("ad-type-2").checked = false;
+                document.getElementById("submit").value = 'Pin To The Homepage For {{ .Currency.Symbol }}59';
+            } else {
+                document.getElementById("ad-type-2").checked = true;
+                document.getElementById("submit").value = 'Pin To The Homepage For {{ .Currency.Symbol }}99';
+            }
+        });
       {{ end }}
     </script>
   </body>

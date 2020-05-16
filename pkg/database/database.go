@@ -43,6 +43,14 @@ type JobRq struct {
 	CompanyIconID    string `json:"company_icon_id,omitempty"`
 }
 
+type JobRqUpsell struct {
+	Token        string `json:"token"`
+	Email        string `json:"email"`
+	StripeToken  string `json:"stripe_token,omitempty"`
+	AdType       int64  `json:"ad_type"`
+	CurrencyCode string `json:"currency_code"`
+}
+
 type JobRqUpdate struct {
 	JobTitle         string `json:"job_title"`
 	Location         string `json:"job_location"`
@@ -81,6 +89,8 @@ type JobPost struct {
 	CompanyIconID    string
 	ExternalID       string
 	IsQuickApply     bool
+	ApprovedAt       *time.Time
+	CompanyEmail     string
 }
 
 type JobPostForEdit struct {
@@ -209,6 +219,8 @@ type SEOSkill struct {
 // 	created_at TIMESTAMP NOT NULL,
 // 	completed_at TIMESTAMP DEFAULT NULL,
 //  description VARCHAR(255) NOT NULL,
+//  ad_type INTEGER NOT NULL DEFAULT 0,
+//  email VARCHAR(255) NOT NULL,
 // 	job_id INTEGER NOT NULL REFERENCES job (id)
 // );
 // CREATE UNIQUE INDEX purchase_event_stripe_session_id_idx ON purchase_event (stripe_session_id);
@@ -380,6 +392,11 @@ func DemoteJobAdsOlderThan(conn *sql.DB, since time.Time, jobAdType JobAdType) (
 		return 0, err
 	}
 	return affected, nil
+}
+
+func UpdateJobAdType(conn *sql.DB, adType int, jobID int) error {
+	_, err := conn.Exec(`UPDATE job SET ad_type = $1 WHERE id = $1`, adType, jobID)
+	return err
 }
 
 type SalaryDataPoint struct {
@@ -911,12 +928,14 @@ type PurchaseEvent struct {
 	Amount          int
 	Currency        string
 	Description     string
+	AdType          int
+	Email           string
 	JobID           int
 }
 
 func GetPurchaseEvents(conn *sql.DB, jobID int) ([]PurchaseEvent, error) {
 	var purchases []PurchaseEvent
-	rows, err := conn.Query(`SELECT stripe_session_id, created_at, completed_at, amount, currency, description, job_id FROM purchase_event WHERE job_id = $1 AND completed_at IS NOT NULL`, jobID)
+	rows, err := conn.Query(`SELECT stripe_session_id, created_at, completed_at, amount/100 as amount, currency, description, job_id FROM purchase_event WHERE job_id = $1 AND completed_at IS NOT NULL`, jobID)
 	if err == sql.ErrNoRows {
 		return purchases, nil
 	}
@@ -934,9 +953,9 @@ func GetPurchaseEvents(conn *sql.DB, jobID int) ([]PurchaseEvent, error) {
 	return purchases, nil
 }
 
-func InitiatePaymentEvent(conn *sql.DB, sessionID string, amount int64, currency string, description string, jobID int) error {
-	stmt := `INSERT INTO purchase_event (stripe_session_id, amount, currency, description, job_id, created_at) VALUES ($1, $2, $3, $4, $5, NOW())`
-	_, err := conn.Exec(stmt, sessionID, amount, currency, description, jobID)
+func InitiatePaymentEvent(conn *sql.DB, sessionID string, amount int64, currency string, description string, adType int64, email string, jobID int) error {
+	stmt := `INSERT INTO purchase_event (stripe_session_id, amount, currency, description, ad_type, email, job_id, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, NOW())`
+	_, err := conn.Exec(stmt, sessionID, amount, currency, description, adType, email, jobID)
 	return err
 }
 
@@ -948,6 +967,32 @@ func SaveSuccessfulPayment(conn *sql.DB, sessionID string) (int, error) {
 		return 0, err
 	}
 	return affected, nil
+}
+
+func GetPurchaseEventBySessionID(conn *sql.DB, sessionID string) (PurchaseEvent, error) {
+	res := conn.QueryRow(`SELECT stripe_session_id, created_at, completed_at, email, amount, currency, description, ad_type FROM purchase_event WHERE stripe_session_id = $1`, sessionID)
+	var p PurchaseEvent
+	err := res.Scan(&p.StripeSessionID, &p.CreatedAt, &p.CompletedAt, &p.Email, &p.Amount, &p.Currency, &p.Description, &p.AdType)
+	if err != nil {
+		return p, err
+	}
+
+	return p, nil
+}
+
+func GetJobByStripeSessionID(conn *sql.DB, sessionID string) (JobPost, error) {
+	res := conn.QueryRow(`SELECT id, job_title, company, company_url, salary_range, location, how_to_apply, slug, external_id, approved_at FROM job j INNER JOIN purhcase_event p ON p.job_id = j.id WHERE p.stripe_session_id = $1`, sessionID)
+	var job JobPost
+	var approvedAt sql.NullTime
+	err := res.Scan(&job.ID, &job.JobTitle, &job.Company, &job.CompanyURL, &job.SalaryRange, &job.Location, &job.HowToApply, &job.Slug, &job.ExternalID, &approvedAt)
+	if err != nil {
+		return job, err
+	}
+	if approvedAt.Valid {
+		job.ApprovedAt = &approvedAt.Time
+	}
+
+	return job, nil
 }
 
 type JobStat struct {
