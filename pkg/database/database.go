@@ -575,6 +575,9 @@ func GetLatestNews(db *sql.DB, last int) ([]NewsItem, error) {
 	var news []NewsItem
 	var rows *sql.Rows
 	rows, err := db.Query(`SELECT n.id, n.title, n.text, n.created_at, u.id, u.email, u.username, u.created_at FROM news n JOIN users u ON u.id = n.created_by ORDER BY n.created_at DESC LIMIT $1`, last)
+	if err == sql.ErrNoRows {
+		return news, nil
+	}
 	if err != nil {
 		return news, err
 	}
@@ -665,6 +668,9 @@ func GetNewsComments(db *sql.DB, newsID string) ([]NewsComment, error) {
 	var comments []NewsComment
 	var rows *sql.Rows
 	rows, err := db.Query(`SELECT n.id, n.text, n.created_at, u.id, u.email, u.username, u.created_at FROM news_comment n JOIN users u ON u.id = n.created_by WHERE n.parent_id = $1 ORDER BY n.created_at DESC`, newsID)
+	if err == sql.ErrNoRows {
+		return comments, nil
+	}
 	if err != nil {
 		return comments, err
 	}

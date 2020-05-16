@@ -116,7 +116,6 @@ func ApplyToJobConfirmation(svr server.Server) http.HandlerFunc {
 		token := vars["token"]
 		job, applicant, err := database.GetJobByApplyToken(svr.Conn, token)
 		if err != nil {
-			svr.Log(err, fmt.Sprintf("unable to retrieve job by apply token %s", token))
 			svr.Render(w, http.StatusBadRequest, "apply-message.html", map[string]interface{}{
 				"Title":       "Invalid Job Application",
 				"Description": "Oops, seems like the application you are trying to complete is no longer valid. Your application request may be expired or simply the company may not be longer accepting applications.",
