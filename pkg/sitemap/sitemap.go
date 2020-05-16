@@ -273,7 +273,7 @@ func SaveSitemap(sm *sitemap.Sitemap, loc string) error {
 		return err
 	}
 	defer f.Close()
-	gzipWriter, err := gzip.NewWriterLevel(f, 9)
+	gzipWriter, err := gzip.NewWriterLevel(f, gzip.DefaultCompression)
 	if err != nil {
 		return err
 	}

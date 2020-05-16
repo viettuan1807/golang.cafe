@@ -2,34 +2,34 @@
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
     <loc>https://golang.cafe/sitemap-1.xml.gz</loc>
-    <lastmod>2020-05-15T23:15:32.877786Z</lastmod>
+    <lastmod>2020-05-16T18:11:59.962889Z</lastmod>
   </sitemap>
   <sitemap>
     <loc>https://golang.cafe/sitemap-2.xml.gz</loc>
-    <lastmod>2020-05-15T23:15:32.877786Z</lastmod>
+    <lastmod>2020-05-16T18:11:59.962889Z</lastmod>
   </sitemap>
   <sitemap>
     <loc>https://golang.cafe/sitemap-3.xml.gz</loc>
-    <lastmod>2020-05-15T23:15:32.877786Z</lastmod>
+    <lastmod>2020-05-16T18:11:59.962889Z</lastmod>
   </sitemap>
   <sitemap>
     <loc>https://golang.cafe/sitemap-4.xml.gz</loc>
-    <lastmod>2020-05-15T23:15:32.877786Z</lastmod>
+    <lastmod>2020-05-16T18:11:59.962889Z</lastmod>
   </sitemap>
   <sitemap>
     <loc>https://golang.cafe/sitemap-5.xml.gz</loc>
-    <lastmod>2020-05-15T23:15:32.877786Z</lastmod>
+    <lastmod>2020-05-16T18:11:59.962889Z</lastmod>
   </sitemap>
   <sitemap>
     <loc>https://golang.cafe/sitemap-6.xml.gz</loc>
-    <lastmod>2020-05-15T23:15:32.877786Z</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://golang.cafe/sitemap-7.xml.gz</loc>
-    <lastmod>2020-05-15T23:15:32.877786Z</lastmod>
+    <lastmod>2020-05-16T18:11:59.962889Z</lastmod>
   </sitemap>
   <sitemap>
     <loc>https://golang.cafe/sitemap-8.xml.gz</loc>
+    <lastmod>2020-05-16T18:11:59.962889Z</lastmod>
+  </sitemap>
+</sitemapindex>
+<loc>https://golang.cafe/sitemap-8.xml.gz</loc>
     <lastmod>2020-05-15T23:15:32.877786Z</lastmod>
   </sitemap>
   <sitemap>

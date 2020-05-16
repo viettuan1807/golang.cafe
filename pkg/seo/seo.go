@@ -63,9 +63,9 @@ func GenerateSearchSEOLandingPages(conn *sql.DB) ([]database.SEOLandingPage, err
 
 	for _, loc := range locs {
 		seoLandingPages = appendSearchSEOLandingPageForLocationAndSkill(seoLandingPages, loc, database.SEOSkill{})
-		for _, skill := range skills {
-			seoLandingPages = appendSearchSEOLandingPageForLocationAndSkill(seoLandingPages, loc, skill)
-		}
+		// for _, skill := range skills {
+		// 	seoLandingPages = appendSearchSEOLandingPageForLocationAndSkill(seoLandingPages, loc, skill)
+		// }
 	}
 	for _, skill := range skills {
 		seoLandingPages = appendSearchSEOLandingPageForLocationAndSkill(seoLandingPages, database.SEOLocation{}, skill)

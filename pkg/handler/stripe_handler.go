@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 
 	"github.com/0x13a/golang.cafe/pkg/database"
@@ -30,8 +29,6 @@ func StripePaymentConfirmationWebookHandler(svr server.Server) http.HandlerFunc 
 			return
 		}
 		if sess != nil {
-			log.Printf("session: %+v\n", sess)
-			// send email "thanks for your payment"
 			affectedRows, err := database.SaveSuccessfulPayment(svr.Conn, sess.ID)
 			if err != nil {
 				svr.Log(err, "error while saving successful payment")
