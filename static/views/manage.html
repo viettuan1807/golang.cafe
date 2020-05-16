@@ -180,9 +180,9 @@
             sendReq('/x/u');
         }
         function permanentlyDelete() {
-            sendReq('/x/j/d');
+            sendReq('/x/j/d', '/manage/list');
         }
-        function sendReq(url) {
+        function sendReq(url, returnTo) {
             var jobTitle = document.getElementById("job-title").value;
             var jobLocation = document.getElementById("job-location").value;
             var salaryMin = document.getElementById("salary-min").value;
@@ -259,7 +259,11 @@
                                 document.getElementById("spinner-0").style.display = "none";
                                 if (bool) {
                                     alert('Job Updated Successfully');
-                                    window.location.reload();
+                                    if (returnTo) {
+                                        window.location.href = returnTo;
+                                    } else {
+                                        window.location.reload();
+                                    }
                                 } else alert('Woops there was a problem updating the Job Ad');
                             }
                         );
@@ -305,7 +309,11 @@
                                 document.getElementById("spinner-0").style.display = "none";
                                 if (bool) {
                                     alert('Job Updated Successfully');
-                                    window.location.reload();
+                                    if (returnTo) {
+                                        window.location.href = returnTo;
+                                    } else {
+                                        window.location.reload();
+                                    }
                                 } else alert('Woops there was a problem updating the Job Ad');
                             }
                         );
@@ -339,7 +347,11 @@
                         document.getElementById("spinner-0").style.display = "none";
                         if (bool) {
                             alert('Job Updated Successfully');
-                            window.location.reload();
+                            if (returnTo) {
+                                window.location.href = returnTo;
+                            } else {
+                                window.location.reload();
+                            }
                         } else alert('Woops there was a problem updating the Job Ad');
                     }
                 );

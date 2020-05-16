@@ -259,6 +259,100 @@ func (s Server) RenderPageForLocationAndTag(w http.ResponseWriter, location, tag
 	})
 }
 
+func (s Server) RenderPageForLocationAndTagAdmin(w http.ResponseWriter, location, tag, page, htmlView string) {
+	showPage := true
+	if page == "" {
+		page = "1"
+		showPage = false
+	}
+	tag = strings.TrimSpace(tag)
+	location = strings.TrimSpace(location)
+	reg, err := regexp.Compile("[^a-zA-Z0-9\\s]+")
+	if err != nil {
+		s.Log(err, "unable to compile regex (this should never happen)")
+	}
+	tag = reg.ReplaceAllString(tag, "")
+	location = reg.ReplaceAllString(location, "")
+	pageID, err := strconv.Atoi(page)
+	if err != nil {
+		pageID = 1
+		showPage = false
+	}
+	var pinnedJobs []*database.JobPost
+	pinnedJobs, err = database.GetPinnedJobs(s.Conn)
+	if err != nil {
+		s.Log(err, "unable to get pinned jobs")
+	}
+	var pendingJobs []*database.JobPost
+	pendingJobs, err = database.GetPendingJobs(s.Conn)
+	if err != nil {
+		s.Log(err, "unable to get pending jobs")
+	}
+	jobsForPage, totalJobCount, err := database.JobsByQuery(s.Conn, location, tag, pageID, s.cfg.JobsPerPage)
+	if err != nil {
+		s.Log(err, "unable to get jobs by query")
+		s.JSON(w, http.StatusInternalServerError, "Oops! An internal error has occurred")
+		return
+	}
+	var complementaryRemote bool
+	if len(jobsForPage) == 0 {
+		complementaryRemote = true
+		jobsForPage, totalJobCount, err = database.JobsByQuery(s.Conn, "Remote", tag, pageID, s.cfg.JobsPerPage)
+		if len(jobsForPage) == 0 {
+			jobsForPage, totalJobCount, err = database.JobsByQuery(s.Conn, "Remote", "", pageID, s.cfg.JobsPerPage)
+		}
+	}
+	if err != nil {
+		s.Log(err, "unable to retrieve jobs by query")
+		s.JSON(w, http.StatusInternalServerError, "Oops! An internal error has occurred")
+		return
+	}
+	pages := []int{}
+	pageLinksPerPage := 8
+	pageLinkShift := ((pageLinksPerPage / 2) + 1)
+	firstPage := 1
+	if pageID-pageLinkShift > 0 {
+		firstPage = pageID - pageLinkShift
+	}
+	for i, j := firstPage, 1; i <= totalJobCount/s.cfg.JobsPerPage+1 && j <= pageLinksPerPage; i, j = i+1, j+1 {
+		pages = append(pages, i)
+	}
+	for i, j := range jobsForPage {
+		jobsForPage[i].JobDescription = string(s.tmpl.MarkdownToHTML(j.JobDescription))
+		jobsForPage[i].Perks = string(s.tmpl.MarkdownToHTML(j.Perks))
+		jobsForPage[i].InterviewProcess = string(s.tmpl.MarkdownToHTML(j.InterviewProcess))
+		emailRe := regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+		if emailRe.MatchString(j.HowToApply) {
+			jobsForPage[i].IsQuickApply = true
+		}
+	}
+	for i, j := range pinnedJobs {
+		pinnedJobs[i].JobDescription = string(s.tmpl.MarkdownToHTML(j.JobDescription))
+		pinnedJobs[i].Perks = string(s.tmpl.MarkdownToHTML(j.Perks))
+		pinnedJobs[i].InterviewProcess = string(s.tmpl.MarkdownToHTML(j.InterviewProcess))
+		emailRe := regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+		if emailRe.MatchString(j.HowToApply) {
+			pinnedJobs[i].IsQuickApply = true
+		}
+	}
+
+	s.Render(w, http.StatusOK, htmlView, map[string]interface{}{
+		"Jobs":                jobsForPage,
+		"PinnedJobs":          pinnedJobs,
+		"PendingJobs":         pendingJobs,
+		"JobsMinusOne":        len(jobsForPage) - 1,
+		"LocationFilter":      location,
+		"TagFilter":           tag,
+		"CurrentPage":         pageID,
+		"ShowPage":            showPage,
+		"PageSize":            s.cfg.JobsPerPage,
+		"PageIndexes":         pages,
+		"TotalJobCount":       totalJobCount,
+		"ComplementaryRemote": complementaryRemote,
+		"MonthAndYear":        time.Now().UTC().Format("January 2006"),
+	})
+}
+
 func (s Server) RenderPostAJobForLocation(w http.ResponseWriter, r *http.Request, location string) {
 	ipAddrs := strings.Split(r.Header.Get("x-forwarded-for"), ", ")
 	currency := ipgeolocation.Currency{ipgeolocation.CurrencyUSD, "$"}

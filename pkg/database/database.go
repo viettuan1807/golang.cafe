@@ -987,6 +987,31 @@ func JobPostBySlug(conn *sql.DB, slug string) (*JobPost, error) {
 	return job, nil
 }
 
+func JobPostBySlugAdmin(conn *sql.DB, slug string) (*JobPost, error) {
+	job := &JobPost{}
+	row := conn.QueryRow(
+		`SELECT id, job_title, company, company_url, salary_range, location, description, perks, interview_process, how_to_apply, created_at, url_id, slug, ad_type, salary_min, salary_max, salary_currency, company_icon_image_id, external_id
+		FROM job
+		WHERE slug = $1`, slug)
+	var createdAt time.Time
+	var perks, interview, companyIcon sql.NullString
+	err := row.Scan(&job.ID, &job.JobTitle, &job.Company, &job.CompanyURL, &job.SalaryRange, &job.Location, &job.JobDescription, &perks, &interview, &job.HowToApply, &createdAt, &job.CreatedAt, &job.Slug, &job.AdType, &job.SalaryMin, &job.SalaryMax, &job.SalaryCurrency, &companyIcon, &job.ExternalID)
+	if companyIcon.Valid {
+		job.CompanyIconID = companyIcon.String
+	}
+	if err != nil {
+		return job, err
+	}
+	if perks.Valid {
+		job.Perks = perks.String
+	}
+	if interview.Valid {
+		job.InterviewProcess = interview.String
+	}
+	job.TimeAgo = humanize.Time(createdAt.UTC())
+	return job, nil
+}
+
 func JobPostByIDForEdit(conn *sql.DB, jobID int) (*JobPostForEdit, error) {
 	job := &JobPostForEdit{}
 	row := conn.QueryRow(
@@ -1095,12 +1120,58 @@ func DeleteJobCascade(conn *sql.DB, jobID int) error {
 		return err
 	}
 	if _, err := conn.Exec(
+		`DELETE FROM purchase_event WHERE job_id = $1`,
+		jobID,
+	); err != nil {
+		return err
+	}
+	if _, err := conn.Exec(
 		`DELETE FROM job WHERE id = $1`,
 		jobID,
 	); err != nil {
 		return err
 	}
 	return nil
+}
+
+func GetPendingJobs(conn *sql.DB) ([]*JobPost, error) {
+	jobs := []*JobPost{}
+	var rows *sql.Rows
+	rows, err := conn.Query(`
+	SELECT id, job_title, company, company_url, salary_range, location, description, perks, interview_process, how_to_apply, created_at, url_id, slug, ad_type, salary_min, salary_max, salary_currency, company_icon_image_id, external_id
+		FROM job WHERE approved_at IS NULL`)
+	if err == sql.ErrNoRows {
+		return jobs, nil
+	}
+	if err != nil {
+		return jobs, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		job := &JobPost{}
+		var createdAt time.Time
+		var perks, interview, companyIcon sql.NullString
+		err = rows.Scan(&job.ID, &job.JobTitle, &job.Company, &job.CompanyURL, &job.SalaryRange, &job.Location, &job.JobDescription, &perks, &interview, &job.HowToApply, &createdAt, &job.CreatedAt, &job.Slug, &job.AdType, &job.SalaryMin, &job.SalaryMax, &job.SalaryCurrency, &companyIcon, &job.ExternalID)
+		if companyIcon.Valid {
+			job.CompanyIconID = companyIcon.String
+		}
+		if perks.Valid {
+			job.Perks = perks.String
+		}
+		if interview.Valid {
+			job.InterviewProcess = interview.String
+		}
+		job.TimeAgo = humanize.Time(createdAt.UTC())
+		if err != nil {
+			return jobs, err
+		}
+		jobs = append(jobs, job)
+	}
+	err = rows.Err()
+	if err != nil {
+		return jobs, err
+	}
+	return jobs, nil
 }
 
 func GetPinnedJobs(conn *sql.DB) ([]*JobPost, error) {

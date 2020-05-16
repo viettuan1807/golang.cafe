@@ -34,7 +34,35 @@
     {{ $locationFilter := .LocationFilter }}
     {{ $tagFilter := .TagFilter }}
     <small>Jobs Pending Approval</small>
-    <article>No Pending jobs</article>
+    {{ range $i, $j := .PendingJobs }}
+        {{ if eq .AdType 1 }}
+        <article class="line-item line-item-sponsored-1">
+            {{ if .CompanyIconID }}
+            <img src="/x/s/m/{{ .CompanyIconID }}" class="job-icon" alt="{{ .Company }} Logo" title="{{ .Company }} Logo" />
+            {{ end }}
+            <div style="float: left;">
+            <a href="/manage/job/{{ .Slug }}"><b>{{ .JobTitle }}</b> with <b>{{ .Company }}</b></a> &bull; <small>Sponsored</small><br />
+            <b>{{ .Location }}</b> &bull; <code>{{ .SalaryRange }}</code>
+            <br />
+            <small>{{ .TimeAgo }}</small>
+            </div>
+        <div class="clearfix"></div>
+        </article>
+    {{ else }}
+        <article class="line-item">
+            {{ if .CompanyIconID }}
+            <img src="/x/s/m/{{ .CompanyIconID }}" class="job-icon" alt="{{ .Company }} Logo" title="{{ .Company }} Logo" />
+            {{ end }}
+            <div style="float: left;">
+            <a href="/manage/job/{{ .Slug }}"><b>{{ .JobTitle }}</b> with <b>{{ .Company }}</b></a><br />
+            <b>{{ .Location }}</b> &bull; <code>{{ .SalaryRange }}</code>
+            <br />
+            <small>{{ .TimeAgo }}</small>
+            </div>
+            <div class="clearfix"></div>
+        </article>
+    {{ end }}
+    {{ end }}
     <small>Pinned Jobs</small>
     {{ range $i, $j := .PinnedJobs }}
         <article class="line-item line-item-sponsored-1">

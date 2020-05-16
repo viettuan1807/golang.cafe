@@ -585,15 +585,13 @@ func ManageJobBySlugViewPageHandler(svr server.Server) http.HandlerFunc {
 		func(w http.ResponseWriter, r *http.Request) {
 			vars := mux.Vars(r)
 			slug := vars["slug"]
-			jobPost, err := database.JobPostBySlug(svr.Conn, slug)
+			jobPost, err := database.JobPostBySlugAdmin(svr.Conn, slug)
 			if err != nil {
-				svr.Log(err, fmt.Sprintf("unable to find job post ID by slug: %s", slug))
 				svr.JSON(w, http.StatusNotFound, nil)
 				return
 			}
 			jobPostToken, err := database.TokenByJobID(svr.Conn, jobPost.ID)
 			if err != nil {
-				svr.Log(err, fmt.Sprintf("unable to retrieve token by job ID %d", jobPost.ID))
 				svr.JSON(w, http.StatusNotFound, fmt.Sprintf("Job for golang.cafe/manage/job/%s not found", slug))
 				return
 			}

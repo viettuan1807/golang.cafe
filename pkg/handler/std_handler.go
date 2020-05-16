@@ -292,7 +292,7 @@ func ListJobsAsAdminPageHandler(svr server.Server) http.HandlerFunc {
 			loc := r.URL.Query().Get("l")
 			skill := r.URL.Query().Get("s")
 			page := r.URL.Query().Get("p")
-			svr.RenderPageForLocationAndTag(w, loc, skill, page, "list-jobs-admin.html")
+			svr.RenderPageForLocationAndTagAdmin(w, loc, skill, page, "list-jobs-admin.html")
 		},
 	)
 }
