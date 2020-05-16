@@ -562,12 +562,13 @@ func EditJobViewPageHandler(svr server.Server) http.HandlerFunc {
 		if clickoutCount > 0 && viewCount > 0 {
 			conversionRate = fmt.Sprintf("%.2f", float64(float64(clickoutCount)/float64(viewCount)*100))
 		}
-		paymentEvents, err := database.GetPaymentEvents(svr.Conn, jobID)
+		purchaseEvents, err := database.GetPurchaseEvents(svr.Conn, jobID)
 		if err != nil {
 			svr.Log(err, fmt.Sprintf("unable to retrieve job payment events for job id %d", jobID))
 		}
 		svr.Render(w, http.StatusOK, "edit.html", map[string]interface{}{
 			"Job":                        job,
+			"PurchaseEvents":             purchaseEvents,
 			"JobPerksEscaped":            svr.JSEscapeString(job.Perks),
 			"JobInterviewProcessEscaped": svr.JSEscapeString(job.InterviewProcess),
 			"JobDescriptionEscaped":      svr.JSEscapeString(job.JobDescription),

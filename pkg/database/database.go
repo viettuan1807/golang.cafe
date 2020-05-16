@@ -315,22 +315,6 @@ func ApplyToJob(conn *sql.DB, jobID int, cv []byte, email, token string) error {
 	return err
 }
 
-func InitiatePaymentEvent(conn *sql.DB, sessionID string, amount int64, currency string, description string, jobID int) error {
-	stmt := `INSERT INTO purchase_event (stripe_session_id, amount, currency, description, job_id, created_at) VALUES ($1, $2, $3, $4, $5, NOW())`
-	_, err := conn.Exec(stmt, sessionID, amount, currency, description, jobID)
-	return err
-}
-
-func SaveSuccessfulPayment(conn *sql.DB, sessionID string) (int, error) {
-	res := conn.QueryRow(`WITH rows AS (UPDATE purchase_event SET completed_at = NOW() WHERE stripe_session_id = $1 AND completed_at IS NULL RETURNING 1) SELECT count(*) as c FROM rows;`, sessionID)
-	var affected int
-	err := res.Scan(&affected)
-	if err != nil {
-		return 0, err
-	}
-	return affected, nil
-}
-
 func ConfirmApplyToJob(conn *sql.DB, token string) error {
 	_, err := conn.Exec(
 		`UPDATE apply_token SET confirmed_at = NOW() WHERE token = $1`,
@@ -930,7 +914,7 @@ type PurchaseEvent struct {
 	JobID int
 }
 
-func GetPaymentEvents(conn *sql.DB, jobID int) ([]PurchaseEvent, error) {
+func GetPurchaseEvents(conn *sql.DB, jobID int) ([]PurchaseEvent, error) {
 	var purchases []PurchaseEvent
 	rows, err := conn.Query(`SELECT stripe_session_id, created_at, completed_at, amount, currency, type, job_id WHERE job_id = $1 AND completed_at IS NOT NULL`, jobID)
 	if err == sql.ErrNoRows {
@@ -945,6 +929,22 @@ func GetPaymentEvents(conn *sql.DB, jobID int) ([]PurchaseEvent, error) {
 	}
 
 	return purchases, nil
+}
+
+func InitiatePaymentEvent(conn *sql.DB, sessionID string, amount int64, currency string, description string, jobID int) error {
+	stmt := `INSERT INTO purchase_event (stripe_session_id, amount, currency, description, job_id, created_at) VALUES ($1, $2, $3, $4, $5, NOW())`
+	_, err := conn.Exec(stmt, sessionID, amount, currency, description, jobID)
+	return err
+}
+
+func SaveSuccessfulPayment(conn *sql.DB, sessionID string) (int, error) {
+	res := conn.QueryRow(`WITH rows AS (UPDATE purchase_event SET completed_at = NOW() WHERE stripe_session_id = $1 AND completed_at IS NULL RETURNING 1) SELECT count(*) as c FROM rows;`, sessionID)
+	var affected int
+	err := res.Scan(&affected)
+	if err != nil {
+		return 0, err
+	}
+	return affected, nil
 }
 
 func GetClickoutCountForJob(conn *sql.DB, jobID int) (int, error) {
