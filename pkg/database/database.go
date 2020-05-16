@@ -910,19 +910,22 @@ type PurchaseEvent struct {
 	CompletedAt time.Time
 	Amount int
 	Currency string
-	Type string
+	Description string
 	JobID int
 }
 
 func GetPurchaseEvents(conn *sql.DB, jobID int) ([]PurchaseEvent, error) {
 	var purchases []PurchaseEvent
-	rows, err := conn.Query(`SELECT stripe_session_id, created_at, completed_at, amount, currency, type, job_id WHERE job_id = $1 AND completed_at IS NOT NULL`, jobID)
+	rows, err := conn.Query(`SELECT stripe_session_id, created_at, completed_at, amount, currency, description, job_id WHERE job_id = $1 AND completed_at IS NOT NULL`, jobID)
 	if err == sql.ErrNoRows {
 		return purchases, nil
 	}
+	if err != nil {
+		return nil, err
+	}
 	for rows.Next() {
 		var p PurchaseEvent
-		if err := rows.Scan(p.StripeSessionID, p.CreatedAt, p.CompletedAt, p.Amount, p.Currency, p.Type, p.JobID); err != nil {
+		if err := rows.Scan(&p.StripeSessionID, &p.CreatedAt, &p.CompletedAt, &p.Amount, &p.Currency, &p.Description, &p.JobID); err != nil {
 			return purchases, err
 		}
 		purchases = append(purchases, p)
