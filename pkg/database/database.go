@@ -207,7 +207,7 @@ type SEOSkill struct {
 //  amount INTEGER NOT NULL,
 //  currency CHAR(3) NOT NULL,
 // 	created_at TIMESTAMP NOT NULL,
-// 	completed_at TIMESTAMP DEFAULT NULL
+// 	completed_at TIMESTAMP DEFAULT NULL,
 // 	job_id INTEGER NOT NULL REFERENCES job (id)
 // );
 // CREATE UNIQUE INDEX purchase_event_stripe_session_id_idx ON purchase_event (stripe_session_id);
@@ -314,10 +314,20 @@ func ApplyToJob(conn *sql.DB, jobID int, cv []byte, email, token string) error {
 	return err
 }
 
-func SavePaymentEvent(conn *sql.DB, sessionID string, amount int64, currency string, jobID int) error {
+func InitiatePaymentEvent(conn *sql.DB, sessionID string, amount int64, currency string, jobID int) error {
 	stmt := `INSERT INTO purchase_event (stripe_session_id, amount, currency, job_id, created_at) VALUES ($1, $2, $3, $4, NOW())`
 	_, err := conn.Exec(stmt, sessionID, amount, currency, jobID)
 	return err
+}
+
+func SaveSuccessfulPayment(conn *sql.DB, sessionID string) (int, error) {
+	res := conn.QueryRow(`WITH rows AS (UPDATE purchase_event SET completed_at = NOW() WHERE session_id = $1 AND created_at IS NULL RETURNING 1) SELECT count(*) as c FROM rows;`, sessionID)
+	var affected int
+	err := res.Scan(&affected)
+	if err != nil {
+		return 0, err
+	}
+	return affected, nil
 }
 
 func ConfirmApplyToJob(conn *sql.DB, token string) error {

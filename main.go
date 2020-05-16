@@ -104,7 +104,7 @@ func main() {
 	svr.RegisterRoute("/x/s/m/{id}", handler.RetrieveMediaPageHandler(svr), []string{"GET"})
 
 	// stripe payment confirmation webhook
-	svr.RegisterRoute("/x/stripe/webhook", handler.StripePaymentConfirmationWebookHandler(svr), []string{"POST"})
+	svr.RegisterRoute("/x/stripe/checkout/completed", handler.StripePaymentConfirmationWebookHandler(svr), []string{"POST"})
 
 	// track job clickout
 	svr.RegisterRoute("/x/j/c/{id}", handler.TrackJobClickoutPageHandler(svr), []string{"GET"})

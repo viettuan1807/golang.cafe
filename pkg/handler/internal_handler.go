@@ -250,6 +250,10 @@ func SubmitJobPostPageHandler(svr server.Server) http.HandlerFunc {
 			svr.Log(err, "unable to send email to admin while posting job ad")
 		}
 		if sess != nil {
+			err = database.InitiatePaymentEvent(svr.Conn, sess.ID, payment.AdTypeToAmount(jobRq.AdType), jobRq.CurrencyCode, jobID)
+			if err != nil {
+				svr.Log(err, "unable to save payment initiated event")
+			}
 			svr.JSON(w, http.StatusOK, map[string]string{"s_id": sess.ID})
 			return
 		}
