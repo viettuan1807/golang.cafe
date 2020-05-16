@@ -321,7 +321,7 @@ func InitiatePaymentEvent(conn *sql.DB, sessionID string, amount int64, currency
 }
 
 func SaveSuccessfulPayment(conn *sql.DB, sessionID string) (int, error) {
-	res := conn.QueryRow(`WITH rows AS (UPDATE purchase_event SET completed_at = NOW() WHERE stripe_session_id = $1 AND created_at IS NULL RETURNING 1) SELECT count(*) as c FROM rows;`, sessionID)
+	res := conn.QueryRow(`WITH rows AS (UPDATE purchase_event SET completed_at = NOW() WHERE stripe_session_id = $1 AND completed_at IS NULL RETURNING 1) SELECT count(*) as c FROM rows;`, sessionID)
 	var affected int
 	err := res.Scan(&affected)
 	if err != nil {
