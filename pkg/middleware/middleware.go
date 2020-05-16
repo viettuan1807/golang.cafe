@@ -58,38 +58,28 @@ func AdminAuthenticatedMiddleware(sessionStore *sessions.CookieStore, jwtKey []b
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		sess, err := sessionStore.Get(r, "____gc")
 		if err != nil {
-			w.WriteHeader(http.StatusUnauthorized)
-			w.Header().Set("Content-Type", "text/plain")
-			w.Write([]byte("unauthorized"))
+			http.Redirect(w, r, "/auth", http.StatusUnauthorized)
 			return
 		}
 		tk, ok := sess.Values["jwt"].(string)
 		if !ok {
-			w.WriteHeader(http.StatusUnauthorized)
-			w.Header().Set("Content-Type", "text/plain")
-			w.Write([]byte("unauthorized"))
+			http.Redirect(w, r, "/auth", http.StatusUnauthorized)
 			return
 		}
 		token, err := jwt.ParseWithClaims(tk, &MyCustomClaims{}, func(token *jwt.Token) (interface{}, error) {
 			return jwtKey, nil
 		})
 		if !token.Valid {
-			w.WriteHeader(http.StatusUnauthorized)
-			w.Header().Set("Content-Type", "text/plain")
-			w.Write([]byte("unauthorized"))
+			http.Redirect(w, r, "/auth", http.StatusUnauthorized)
 			return
 		}
 		claims, ok := token.Claims.(*MyCustomClaims)
 		if !ok {
-			w.WriteHeader(http.StatusUnauthorized)
-			w.Header().Set("Content-Type", "text/plain")
-			w.Write([]byte("unauthorized"))
+			http.Redirect(w, r, "/auth", http.StatusUnauthorized)
 			return
 		}
 		if !claims.IsAdmin {
-			w.WriteHeader(http.StatusUnauthorized)
-			w.Header().Set("Content-Type", "text/plain")
-			w.Write([]byte("unauthorized"))
+			http.Redirect(w, r, "/auth", http.StatusUnauthorized)
 			return
 		}
 		next(w, r)
