@@ -26,6 +26,7 @@ func StripePaymentConfirmationWebookHandler(svr server.Server) http.HandlerFunc 
 		stripeSig := req.Header.Get("Stripe-Signature")
 		sess, err := payment.HandleCheckoutSessionComplete(body, svr.GetConfig().StripeEndpointSecret, stripeSig)
 		if err != nil {
+			svr.Log(err, "error while handling checkout session complete")
 			svr.JSON(w, http.StatusBadRequest, nil)
 			return
 		}
