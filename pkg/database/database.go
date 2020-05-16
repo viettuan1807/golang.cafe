@@ -395,7 +395,7 @@ func DemoteJobAdsOlderThan(conn *sql.DB, since time.Time, jobAdType JobAdType) (
 }
 
 func UpdateJobAdType(conn *sql.DB, adType int, jobID int) error {
-	_, err := conn.Exec(`UPDATE job SET ad_type = $1 WHERE id = $1`, adType, jobID)
+	_, err := conn.Exec(`UPDATE job SET ad_type = $1 WHERE id = $2`, adType, jobID)
 	return err
 }
 
@@ -981,7 +981,7 @@ func GetPurchaseEventBySessionID(conn *sql.DB, sessionID string) (PurchaseEvent,
 }
 
 func GetJobByStripeSessionID(conn *sql.DB, sessionID string) (JobPost, error) {
-	res := conn.QueryRow(`SELECT id, job_title, company, company_url, salary_range, location, how_to_apply, slug, external_id, approved_at FROM job j INNER JOIN purhcase_event p ON p.job_id = j.id WHERE p.stripe_session_id = $1`, sessionID)
+	res := conn.QueryRow(`SELECT j.id, j.job_title, j.company, j.company_url, j.salary_range, j.location, j.how_to_apply, j.slug, j.external_id, j.approved_at FROM purchase_event p LEFT JOIN job j ON p.job_id = j.id WHERE p.stripe_session_id = $1`, sessionID)
 	var job JobPost
 	var approvedAt sql.NullTime
 	err := res.Scan(&job.ID, &job.JobTitle, &job.Company, &job.CompanyURL, &job.SalaryRange, &job.Location, &job.HowToApply, &job.Slug, &job.ExternalID, &approvedAt)
