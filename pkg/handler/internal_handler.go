@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"regexp"
 	"strings"
 
 	"github.com/0x13a/golang.cafe/pkg/database"
@@ -554,7 +555,8 @@ func TrackJobClickoutAndRedirectToJobPage(svr server.Server) http.HandlerFunc {
 			svr.JSON(w, http.StatusBadRequest, nil)
 			return
 		}
-		job, err := database.GetJobByExternalID(svr.Conn, externalID)
+		reg, _ := regexp.Compile("[^a-zA-Z0-9 ]+")
+		job, err := database.GetJobByExternalID(svr.Conn, reg.ReplaceAllString(externalID, ""))
 		if err != nil {
 			svr.Log(err, fmt.Sprintf("unable to get HowToApply from externalID %s", externalID))
 			svr.JSON(w, http.StatusInternalServerError, nil)
