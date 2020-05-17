@@ -35,7 +35,7 @@ func main() {
 		if err != nil {
 			log.Fatalf("unable to retrieve token for job id %d for email %s: %v", j.ID, j.CompanyEmail, err)
 		} else {
-			err = emailClient.SendEmail("Diego from Golang Cafe <team@golang.cafe>", j.CompanyEmail, email.GolangCafeEmailAddress, "Your Job Ad on Golang Cafe Has Expired", fmt.Sprintf("Your Premium Job Ad has expired and it's no longer pinned to the front-page (although it's still live). If you want to keep your Job Ad on the front-page just upgrade on the Job Edit Page by following this link https://golang.cafe/edit/%s?expired=1", jobToken))
+			err = emailClient.SendEmail("Diego from Golang Cafe <team@golang.cafe>", j.CompanyEmail, email.GolangCafeEmailAddress, "Your Job Ad on Golang Cafe Has Expired", fmt.Sprintf("Your Premium Job Ad has expired and it's no longer pinned to the front-page. If you want to keep your Job Ad on the front-page just upgrade on the Job Edit Page by following this link https://golang.cafe/edit/%s?expired=1", jobToken))
 			if err != nil {
 				log.Fatalf("unable to send email while updating job ad type for job id %d: %v", j.ID, err)
 			}
@@ -52,9 +52,9 @@ func main() {
 	for _, j := range jobs2 {
 		jobToken, err  := database.TokenByJobID(conn, j.ID)
 		if err != nil {
-			log.Fatalf("unable to retrieve token for job id %d: %v", j.ID, err)
+			log.Fatalf("unable to retrieve token for job id %d for email %s: %v", j.ID, j.CompanyEmail, err)
 		} else {
-			err = emailClient.SendEmail("Diego from Golang Cafe <team@golang.cafe>", j.CompanyEmail, email.GolangCafeEmailAddress, "Your Job Ad on Golang Cafe Has Expired", fmt.Sprintf("Your Premium Job Ad has expired and it's no longer pinned to the front-page (although it's still live). If you want to keep your Job Ad on the front-page just upgrade on the Job Edit Page by following this link https://golang.cafe/edit/%s?expired=1", jobToken))
+			err = emailClient.SendEmail("Diego from Golang Cafe <team@golang.cafe>", j.CompanyEmail, email.GolangCafeEmailAddress, "Your Job Ad on Golang Cafe Has Expired", fmt.Sprintf("Your Premium Job Ad has expired and it's no longer pinned to the front-page. If you want to keep your Job Ad on the front-page just upgrade on the Job Edit Page by following this link https://golang.cafe/edit/%s?expired=1", jobToken))
 			if err != nil {
 				log.Fatalf("unable to send email while updating job ad type for job id %d: %v", j.ID, err)
 			}
