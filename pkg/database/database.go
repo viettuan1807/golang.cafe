@@ -394,8 +394,30 @@ func DemoteJobAdsOlderThan(conn *sql.DB, since time.Time, jobAdType JobAdType) (
 	return affected, nil
 }
 
+func GetJobsOlderThan(conn *sql.DB, since time.Time, adType JobAdType) ([]JobPost, error) {
+	var jobs []JobPost
+	rows, err := conn.Query(`SELECT id, job_title, company, company_url, salary_range, location, how_to_apply, slug, external_id, approved_at FROM job j WHERE approved_at <= $1 AND ad_type = $2`, since, adType)
+	if err == sql.ErrNoRows {
+		return jobs, nil
+	}
+	for rows.Next() {
+		var job JobPost
+		var approvedAt sql.NullTime
+		err := rows.Scan(&job.ID, &job.JobTitle, &job.Company, &job.CompanyURL, &job.SalaryRange, &job.Location, &job.HowToApply, &job.Slug, &job.ExternalID, &approvedAt)
+		if err != nil {
+			return jobs, err
+		}
+		if approvedAt.Valid {
+			job.ApprovedAt = &approvedAt.Time
+		}
+		jobs = append(jobs, job)
+	}
+
+	return jobs, nil
+}
+
 func UpdateJobAdType(conn *sql.DB, adType int, jobID int) error {
-	_, err := conn.Exec(`UPDATE job SET ad_type = $1 WHERE id = $2`, adType, jobID)
+	_, err := conn.Exec(`UPDATE job SET ad_type = $1, approved_at = NOW() WHERE id = $2`, adType, jobID)
 	return err
 }
 

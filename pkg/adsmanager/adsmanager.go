@@ -1,11 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"time"
 
 	"github.com/0x13a/golang.cafe/pkg/config"
 	"github.com/0x13a/golang.cafe/pkg/database"
+	"github.com/0x13a/golang.cafe/pkg/email"
 )
 
 func main() {
@@ -19,19 +21,48 @@ func main() {
 		log.Fatalf("unable to connect to postgres: %v", err)
 	}
 	defer database.CloseDbConn(conn)
+	emailClient, err := email.NewClient(cfg.EmailAPIKey)
+	if err != nil {
+		log.Fatalf("unable to connect to sparkpost API: %v", err)
+	}
 	log.Printf("attempting to demote expired sponsored 30days pinned job ads\n")
-	affected, err := database.DemoteJobAdsOlderThan(conn, time.Now().AddDate(0, 0, -30), database.JobAdSponsoredPinnedFor30Days)
+	jobs, err := database.GetJobsOlderThan(conn, time.Now().AddDate(0, 0, -30), database.JobAdSponsoredPinnedFor30Days)
 	if err != nil {
 		log.Fatalf("unable to demote expired sponsored 30days pinned job ads %v", err)
 	}
-	log.Printf("demoted %d expired sponsored 30days pinned job ads\n", affected)
+	for _, j := range jobs {
+		jobToken, err  := database.TokenByJobID(conn, j.ID)
+		if err != nil {
+			log.Fatalf("unable to retrieve token for job id %d: %v", j.ID, err)
+		} else {
+			err = emailClient.SendEmail("Diego from Golang Cafe <team@golang.cafe>", j.CompanyEmail, email.GolangCafeEmailAddress, "Your Job Ad on Golang Cafe Has Expired", fmt.Sprintf("Your Premium Job Ad has expired and it's no longer pinned to the front-page (although it's still live). If you want to keep your Job Ad on the front-page just upgrade on the Job Edit Page by following this link https://golang.cafe/edit/%s?expired=1", jobToken))
+			if err != nil {
+				log.Fatalf("unable to send email while updating job ad type for job id %d: %v", j.ID, err)
+			}
+		}
+		database.UpdateJobAdType(conn, database.JobAdBasic, j.ID)
+		log.Printf("demoted job id %d expired sponsored 30days pinned job ads\n", j.ID)
+	}
 
 	log.Printf("attempting to demote expired sponsored 7days pinned job ads\n")
-	affected, err = database.DemoteJobAdsOlderThan(conn, time.Now().AddDate(0, 0, -7), database.JobAdSponsoredPinnedFor7Days)
+	jobs2, err := database.GetJobsOlderThan(conn, time.Now().AddDate(0, 0, -7), database.JobAdSponsoredPinnedFor7Days)
 	if err != nil {
 		log.Fatalf("unable to demote expired sponsored 7days pinned job ads %v", err)
 	}
-	log.Printf("demoted %d expired sponsored 7days pinned job ads\n", affected)
+	for _, j := range jobs2 {
+		jobToken, err  := database.TokenByJobID(conn, j.ID)
+		if err != nil {
+			log.Fatalf("unable to retrieve token for job id %d: %v", j.ID, err)
+		} else {
+			err = emailClient.SendEmail("Diego from Golang Cafe <team@golang.cafe>", j.CompanyEmail, email.GolangCafeEmailAddress, "Your Job Ad on Golang Cafe Has Expired", fmt.Sprintf("Your Premium Job Ad has expired and it's no longer pinned to the front-page (although it's still live). If you want to keep your Job Ad on the front-page just upgrade on the Job Edit Page by following this link https://golang.cafe/edit/%s?expired=1", jobToken))
+			if err != nil {
+				log.Fatalf("unable to send email while updating job ad type for job id %d: %v", j.ID, err)
+			}
+		}
+		database.UpdateJobAdType(conn, database.JobAdBasic, j.ID)
+		log.Printf("demoted job id %d expired sponsored 7days pinned job ads\n", j.ID)
+	}
+
 	log.Printf("also cleaning up expired apply tokens")
 	err = database.CleanupExpiredApplyTokens(conn)
 	if err != nil {
