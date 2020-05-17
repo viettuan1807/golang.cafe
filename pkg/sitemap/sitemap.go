@@ -231,7 +231,7 @@ func main() {
 			ChangeFreq: sitemap.Daily,
 		})
 		counter++
-		if counter == 3000 {
+		if counter == 1000 {
 			err = SaveSitemap(landingPagesSm, fmt.Sprintf("static/sitemap-%d.xml.gz", last))
 			if err != nil {
 				log.Fatalf("unable to save pages sitemap-%d.xml.gz: %v", last, err)
