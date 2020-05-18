@@ -47,7 +47,7 @@ func main() {
 	)
 
 	svr.RegisterRoute("/sitemap.xml", handler.SitemapIndexHandler, []string{"GET"})
-	svr.RegisterRoute("/sitemap-{n}.xml.gz", handler.SitemapHandler, []string{"GET"})
+	svr.RegisterRoute("/sitemap-{n}.xml", handler.SitemapHandler, []string{"GET"})
 	svr.RegisterRoute("/robots.txt", handler.RobotsTxtHandler, []string{"GET"})
 	svr.RegisterRoute("/.well-known/security.txt", handler.WellKnownSecurityHandler, []string{"GET"})
 
