@@ -6,8 +6,6 @@ import (
 	"os"
 	"time"
 
-	"compress/gzip"
-
 	"github.com/0x13a/golang.cafe/pkg/database"
 	"github.com/0x13a/golang.cafe/pkg/seo"
 	"github.com/snabb/sitemap"
@@ -313,15 +311,15 @@ func SaveSitemap(sm *sitemap.Sitemap, loc string) error {
 		return err
 	}
 	defer f.Close()
-	gzipWriter, err := gzip.NewWriterLevel(f, gzip.DefaultCompression)
+	// gzipWriter, err := gzip.NewWriterLevel(f, gzip.DefaultCompression)
+	// if err != nil {
+	// 	return err
+	// }
+	_, err = sm.WriteTo(f)
 	if err != nil {
 		return err
 	}
-	_, err = sm.WriteTo(gzipWriter)
-	if err != nil {
-		return err
-	}
-	err = gzipWriter.Close()
+	// err = gzipWriter.Close()
 	if err != nil {
 		return err
 	}
