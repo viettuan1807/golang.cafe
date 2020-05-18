@@ -122,12 +122,12 @@ func main() {
 			ChangeFreq: sitemap.Daily,
 		})
 	}
-	err = SaveSitemap(jobSm, "static/sitemap-1.xml.gz")
+	err = SaveSitemap(jobSm, "static/sitemap-1.xml")
 	if err != nil {
-		log.Fatalf("unable to save blog sitemap-1.xml.gz: %v", err)
+		log.Fatalf("unable to save blog sitemap-1.xml: %v", err)
 	}
 	index.Add(&sitemap.URL{
-		Loc:     `https://golang.cafe/sitemap-1.xml.gz`,
+		Loc:     `https://golang.cafe/sitemap-1.xml`,
 		LastMod: &n,
 	})
 	fmt.Printf("generated %d entries for job sitemap\n", len(jobs))
@@ -142,12 +142,12 @@ func main() {
 			ChangeFreq: sitemap.Weekly,
 		})
 	}
-	err = SaveSitemap(blogSm, "static/sitemap-2.xml.gz")
+	err = SaveSitemap(blogSm, "static/sitemap-2.xml")
 	if err != nil {
-		log.Fatalf("unable to save blog sitemap-2.xml.gz: %v", err)
+		log.Fatalf("unable to save blog sitemap-2.xml: %v", err)
 	}
 	index.Add(&sitemap.URL{
-		Loc:     `https://golang.cafe/sitemap-2.xml.gz`,
+		Loc:     `https://golang.cafe/sitemap-2.xml`,
 		LastMod: &n,
 	})
 	fmt.Printf("generated %d entries for blog sitemap\n", len(blogPosts))
@@ -167,12 +167,12 @@ func main() {
 			ChangeFreq: sitemap.Daily,
 		})
 	}
-	err = SaveSitemap(pagesSm, "static/sitemap-3.xml.gz")
+	err = SaveSitemap(pagesSm, "static/sitemap-3.xml")
 	if err != nil {
-		log.Fatalf("unable to save pages sitemap-3.xml.gz: %v", err)
+		log.Fatalf("unable to save pages sitemap-3.xml: %v", err)
 	}
 	index.Add(&sitemap.URL{
-		Loc:     `https://golang.cafe/sitemap-3.xml.gz`,
+		Loc:     `https://golang.cafe/sitemap-3.xml`,
 		LastMod: &n,
 	})
 	fmt.Printf("generated %d entries for pages sitemap\n", len(pages)+1)
@@ -190,12 +190,12 @@ func main() {
 		})
 		counter++
 		if counter == 1000 {
-			err = SaveSitemap(postJobSm, fmt.Sprintf("static/sitemap-%d.xml.gz", last))
+			err = SaveSitemap(postJobSm, fmt.Sprintf("static/sitemap-%d.xml", last))
 			if err != nil {
-				log.Fatalf("unable to save pages sitemap-%d.xml.gz: %v", last, err)
+				log.Fatalf("unable to save pages sitemap-%d.xml: %v", last, err)
 			}
 			index.Add(&sitemap.URL{
-				Loc:     fmt.Sprintf(`https://golang.cafe/sitemap-%d.xml.gz`, last),
+				Loc:     fmt.Sprintf(`https://golang.cafe/sitemap-%d.xml`, last),
 				LastMod: &n,
 			})
 			fmt.Printf("generated %d entries for post a job sitemap %d\n", counter, last)
@@ -206,12 +206,12 @@ func main() {
 		}
 	}
 	if counter > 0 {
-		err = SaveSitemap(postJobSm, fmt.Sprintf("static/sitemap-%d.xml.gz", last))
+		err = SaveSitemap(postJobSm, fmt.Sprintf("static/sitemap-%d.xml", last))
 		if err != nil {
-			log.Fatalf("unable to postJobSm sitemap-%d.xml.gz: %v", last, err)
+			log.Fatalf("unable to postJobSm sitemap-%d.xml: %v", last, err)
 		}
 		index.Add(&sitemap.URL{
-			Loc:     fmt.Sprintf(`https://golang.cafe/sitemap-%d.xml.gz`, last),
+			Loc:     fmt.Sprintf(`https://golang.cafe/sitemap-%d.xml`, last),
 			LastMod: &n,
 		})
 		fmt.Printf("generated %d entries for post job sitemap %d\n", counter, last)
@@ -230,12 +230,12 @@ func main() {
 		})
 		counter++
 		if counter == 1000 {
-			err = SaveSitemap(salarySm, fmt.Sprintf("static/sitemap-%d.xml.gz", last))
+			err = SaveSitemap(salarySm, fmt.Sprintf("static/sitemap-%d.xml", last))
 			if err != nil {
-				log.Fatalf("unable to save salary sitemap-%d.xml.gz: %v", last, err)
+				log.Fatalf("unable to save salary sitemap-%d.xml: %v", last, err)
 			}
 			index.Add(&sitemap.URL{
-				Loc:     fmt.Sprintf(`https://golang.cafe/sitemap-%d.xml.gz`, last),
+				Loc:     fmt.Sprintf(`https://golang.cafe/sitemap-%d.xml`, last),
 				LastMod: &n,
 			})
 			fmt.Printf("generated %d entries for salary sitemap %d\n", counter, last)
@@ -246,12 +246,12 @@ func main() {
 		}
 	}
 	if counter > 0 {
-		err = SaveSitemap(salarySm, fmt.Sprintf("static/sitemap-%d.xml.gz", last))
+		err = SaveSitemap(salarySm, fmt.Sprintf("static/sitemap-%d.xml", last))
 		if err != nil {
-			log.Fatalf("unable to save pages sitemap-%d.xml.gz: %v", last, err)
+			log.Fatalf("unable to save pages sitemap-%d.xml: %v", last, err)
 		}
 		index.Add(&sitemap.URL{
-			Loc:     fmt.Sprintf(`https://golang.cafe/sitemap-%d.xml.gz`, last),
+			Loc:     fmt.Sprintf(`https://golang.cafe/sitemap-%d.xml`, last),
 			LastMod: &n,
 		})
 		fmt.Printf("generated %d entries for salary sitemap %d\n", counter, last)
@@ -270,12 +270,12 @@ func main() {
 		})
 		counter++
 		if counter == 1000 {
-			err = SaveSitemap(landingPagesSm, fmt.Sprintf("static/sitemap-%d.xml.gz", last))
+			err = SaveSitemap(landingPagesSm, fmt.Sprintf("static/sitemap-%d.xml", last))
 			if err != nil {
-				log.Fatalf("unable to save pages sitemap-%d.xml.gz: %v", last, err)
+				log.Fatalf("unable to save pages sitemap-%d.xml: %v", last, err)
 			}
 			index.Add(&sitemap.URL{
-				Loc:     fmt.Sprintf(`https://golang.cafe/sitemap-%d.xml.gz`, last),
+				Loc:     fmt.Sprintf(`https://golang.cafe/sitemap-%d.xml`, last),
 				LastMod: &n,
 			})
 			fmt.Printf("generated %d entries for landing pages sitemap %d\n", counter, last)
@@ -286,12 +286,12 @@ func main() {
 		}
 	}
 	if counter > 0 {
-		err = SaveSitemap(landingPagesSm, fmt.Sprintf("static/sitemap-%d.xml.gz", last))
+		err = SaveSitemap(landingPagesSm, fmt.Sprintf("static/sitemap-%d.xml", last))
 		if err != nil {
-			log.Fatalf("unable to save pages sitemap-%d.xml.gz: %v", last, err)
+			log.Fatalf("unable to save pages sitemap-%d.xml: %v", last, err)
 		}
 		index.Add(&sitemap.URL{
-			Loc:     fmt.Sprintf(`https://golang.cafe/sitemap-%d.xml.gz`, last),
+			Loc:     fmt.Sprintf(`https://golang.cafe/sitemap-%d.xml`, last),
 			LastMod: &n,
 		})
 		total = total + counter
