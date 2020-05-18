@@ -181,6 +181,8 @@ func main() {
 	total = total + len(pages) + 1
 
 	// post a job landing sitemap
+	last := 4
+	counter := 0
 	postJobSm := sitemap.New()
 	for _, p := range postAJobLandingPages {
 		postJobSm.Add(&sitemap.URL{
@@ -188,19 +190,39 @@ func main() {
 			LastMod:    &n,
 			ChangeFreq: sitemap.Daily,
 		})
+		counter++
+		if counter == 1000 {
+			err = SaveSitemap(postJobSm, fmt.Sprintf("static/sitemap-%d.xml.gz", last))
+			if err != nil {
+				log.Fatalf("unable to save pages sitemap-%d.xml.gz: %v", last, err)
+			}
+			index.Add(&sitemap.URL{
+				Loc:     fmt.Sprintf(`https://golang.cafe/sitemap-%d.xml.gz`, last),
+				LastMod: &n,
+			})
+			fmt.Printf("generated %d entries for post a job sitemap %d\n", counter, last)
+			total = total + counter
+			last++
+			counter = 0
+			postJobSm = sitemap.New()
+		}
 	}
-	err = SaveSitemap(postJobSm, "static/sitemap-4.xml.gz")
-	if err != nil {
-		log.Fatalf("unable to postJobSm sitemap-4.xml.gz: %v", err)
+	if counter > 0 {
+		err = SaveSitemap(postJobSm, fmt.Sprintf("static/sitemap-%d.xml.gz", last))
+		if err != nil {
+			log.Fatalf("unable to postJobSm sitemap-%d.xml.gz: %v", last, err)
+		}
+		index.Add(&sitemap.URL{
+			Loc:     fmt.Sprintf(`https://golang.cafe/sitemap-%d.xml.gz`, last),
+			LastMod: &n,
+		})
+		fmt.Printf("generated %d entries for post job sitemap %d\n", counter, last)
+		total = total + counter
+		last++
 	}
-	index.Add(&sitemap.URL{
-		Loc:     `https://golang.cafe/sitemap-4.xml.gz`,
-		LastMod: &n,
-	})
-	fmt.Printf("generated %d entries for post job landing pages sitemap\n", len(postAJobLandingPages))
-	total = total + len(postAJobLandingPages)
 
 	// salary sitemap
+	counter = 0
 	salarySm := sitemap.New()
 	for _, p := range salaryLandingPages {
 		salarySm.Add(&sitemap.URL{
@@ -208,22 +230,40 @@ func main() {
 			LastMod:    &n,
 			ChangeFreq: sitemap.Daily,
 		})
+		counter++
+		if counter == 1000 {
+			err = SaveSitemap(salarySm, fmt.Sprintf("static/sitemap-%d.xml.gz", last))
+			if err != nil {
+				log.Fatalf("unable to save salary sitemap-%d.xml.gz: %v", last, err)
+			}
+			index.Add(&sitemap.URL{
+				Loc:     fmt.Sprintf(`https://golang.cafe/sitemap-%d.xml.gz`, last),
+				LastMod: &n,
+			})
+			fmt.Printf("generated %d entries for salary sitemap %d\n", counter, last)
+			total = total + counter
+			last++
+			counter = 0
+			salarySm = sitemap.New()
+		}
 	}
-	err = SaveSitemap(salarySm, "static/sitemap-5.xml.gz")
-	if err != nil {
-		log.Fatalf("unable to save pages sitemap-5.xml.gz: %v", err)
+	if counter > 0 {
+		err = SaveSitemap(salarySm, fmt.Sprintf("static/sitemap-%d.xml.gz", last))
+		if err != nil {
+			log.Fatalf("unable to save pages sitemap-%d.xml.gz: %v", last, err)
+		}
+		index.Add(&sitemap.URL{
+			Loc:     fmt.Sprintf(`https://golang.cafe/sitemap-%d.xml.gz`, last),
+			LastMod: &n,
+		})
+		fmt.Printf("generated %d entries for salary sitemap %d\n", counter, last)
+		total = total + counter
+		last++
 	}
-	index.Add(&sitemap.URL{
-		Loc:     `https://golang.cafe/sitemap-5.xml.gz`,
-		LastMod: &n,
-	})
-	fmt.Printf("generated %d entries for salary landing pages sitemap\n", len(salaryLandingPages))
-	total = total + len(salaryLandingPages)
 
 	// landing page sitemap
 	landingPagesSm := sitemap.New()
-	counter := 0
-	last := 6
+	counter = 0
 	for _, p := range landingPages {
 		landingPagesSm.Add(&sitemap.URL{
 			Loc:        fmt.Sprintf(`https://golang.cafe/%s`, p.URI),
@@ -248,16 +288,16 @@ func main() {
 		}
 	}
 	if counter > 0 {
-		err = SaveSitemap(landingPagesSm, fmt.Sprintf("static/sitemap-%d.xml.gz", last+1))
+		err = SaveSitemap(landingPagesSm, fmt.Sprintf("static/sitemap-%d.xml.gz", last))
 		if err != nil {
-			log.Fatalf("unable to save pages sitemap-%d.xml.gz: %v", last+1, err)
+			log.Fatalf("unable to save pages sitemap-%d.xml.gz: %v", last, err)
 		}
 		index.Add(&sitemap.URL{
-			Loc:     fmt.Sprintf(`https://golang.cafe/sitemap-%d.xml.gz`, last+1),
+			Loc:     fmt.Sprintf(`https://golang.cafe/sitemap-%d.xml.gz`, last),
 			LastMod: &n,
 		})
 		total = total + counter
-		fmt.Printf("generated %d entries for landing pages sitemap %d\n", counter, last+1)
+		fmt.Printf("generated %d entries for landing pages sitemap %d\n", counter, last)
 	}
 
 	err = SaveSitemapIndex(index)
