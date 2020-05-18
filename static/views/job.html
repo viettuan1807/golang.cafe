@@ -10,7 +10,7 @@
     footer{padding:10px;width:780px;margin:auto;}.subnav{width: 50%;text-align: left;float: left;font-size: 12pt;}.subnav ul {text-align:left;}input{-webkit-appearance: none;-moz-appearance: none;appearance: none;}
     html{background-image:linear-gradient(45deg,hsla(0,0%,93.7%,.06275),hsla(0,0%,93.7%,.06275)),url(/s/img/dg.png);}#post-btn{width:auto;float:right;margin-right:0;padding-right:25px;padding-left: 25px;}@media only screen and (max-width:768px){.subnav{width: 100%;}#post-btn{width: auto;}}
     .apply-box {display: none;z-index: 2;width: 50%; height: auto;position: fixed;margin: 5% auto; top: 40px; left: 0; right: 0;background: #fff;}@media only screen and (max-width: 768px) {.apply-box{width: 90%;}}
-    .overlay-effect {display: none;width: 100%; height: 100%; position: fixed; top: 0; left: 0;background: rgba(0, 0, 0,0.5);z-index: 1}.upload-file-label:hover{cursor: pointer;}
+    .overlay-effect {display: none;width: 100%; height: 100%; position: fixed; top: 0; left: 0;background: rgba(0, 0, 0,0.5);z-index: 1}.upload-file-label:hover{cursor: pointer;}input[type="checkbox"]{-webkit-appearance: checkbox;-moz-appearance: checkbox;appearance: checkbox;}
     .apply-link {font-size: 18px;font-weight: 400;line-height: 29.7px;border-radius: 3.6px;background: #000090;color: #fff;cursor: pointer;display: inline;margin-bottom: 18px;margin-right: 7.2px;padding: 6.525px 23.4px;text-align: center;}.apply-link:hover {text-decoration:none;background:#0000c5;color:#ffffff;}
     .resp-sharing-button__link,
 .resp-sharing-button__icon {
@@ -280,6 +280,7 @@ background-color: #FF6600
         <input type="text" name="apply-email" id="apply-email" placeholder="Your Email" style="width: 100%;"/><br />
         <input type="file" name="apply-cv" id="apply-cv" style="display: none;"/>
         <label class="upload-file-label" style="width:100%;border: 1px solid #595959; border-radius: 3.6px;border-style:dashed;padding: 5.4px 6.3px;" for="apply-cv">Upload Your CV (PDF file only, max 5MB)</label><br />
+        <input type="checkbox" id="apply-notify-jobs" name="apply-notify-jobs" checked style="margin: 0 10px 0 0;"><small><label for="apply-notify-jobs">Notify me about new job openings</label></small><br />
         <small>For any enquiries on this job please contact the job poster <code><span id="apply-email-poster">team@golang.cafe</span></code></small>
         <br />
         <br />
@@ -455,10 +456,12 @@ background-color: #FF6600
                 alert('Please provide a valid PDF file (max 5MB)');
                 return;
             }
+            var notifyJobs = document.getElementById('apply-notify-jobs').checked;
             var formData = new FormData();
             formData.append('cv', cvFile);
             formData.append('job-id', jobId);
             formData.append('email', email);
+            formData.append('notify-jobs', notifyJobs);
             post('/x/a/e', formData, function(status) {
                 closeApplyPopup();
                 if (status == 200) {

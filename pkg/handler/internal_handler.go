@@ -109,6 +109,11 @@ func ApplyForJobPageHandler(svr server.Server) http.HandlerFunc {
 			svr.JSON(w, http.StatusBadRequest, nil)
 			return
 		}
+		if r.FormValue("notify-jobs") == "true" {
+			if err := svr.SaveSubscriber(emailAddr); err != nil {
+				svr.Log(err, fmt.Sprintf("unable to save subscriber while saving job application %v", err))
+			}
+		}
 		svr.JSON(w, http.StatusOK, nil)
 	}
 }
