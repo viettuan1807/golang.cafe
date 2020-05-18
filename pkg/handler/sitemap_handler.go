@@ -14,5 +14,5 @@ func SitemapIndexHandler(w http.ResponseWriter, r *http.Request) {
 func SitemapHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	n := vars["n"]
-	http.ServeFile(w, r, fmt.Sprintf("static/sitemap-%s.xml.gz", n))
+	http.ServeFile(w, r, fmt.Sprintf("static/sitemap-%s.xml", n))
 }
