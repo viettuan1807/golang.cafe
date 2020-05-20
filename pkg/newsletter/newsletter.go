@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -63,12 +64,12 @@ func processWeekly(conn *sql.DB, jobsToSend int, cfg config.Config) {
 	fmt.Printf("found %d/%d jobs for weekly newsletter\n", len(jobs), jobsToSend)
 	// create campaign
 	jsonMailerliteRq := []byte(fmt.Sprintf(`{
-		"segments": [%d],
+		"segments": [%d, %d],
 		"type": "regular",
-		"subject": "Golang Cafe Weekly Job Alert",
+		"subject": "Newest Go Jobs on Golang Cafe",
 		"from": "team@golang.cafe",
 		"from_name": "Golang Cafe"
-		}`, MailerliteWeeklySegmentID))
+		}`, MailerliteWeeklySegmentID, MailerliteDailySegmentID))
 	client := &http.Client{}
 	req, err := http.NewRequest("POST", "https://api.mailerlite.com/api/v2/campaigns", bytes.NewBuffer(jsonMailerliteRq))
 	if err != nil {
@@ -102,7 +103,6 @@ func processWeekly(conn *sql.DB, jobsToSend int, cfg config.Config) {
 	jobsTXT := strings.Join(jobsTXTArr, "\n")
 	jobsHTML := strings.Join(jobsHTMLArr, " ")
 	campaignContentHTML := `<p>Here's the newest Go jobs on Golang Cafe in the past few weeks,</p>
-	<p>Have a look at the latest Go jobs</p>
 	` + jobsHTML + `
 	<p>Check out more jobs at <a title="Golang Cafe" href="https://golang.cafe">https://golang.cafe</a></p>
 	<p>Always Keep Coding!</p>
@@ -169,6 +169,8 @@ func processWeekly(conn *sql.DB, jobsToSend int, cfg config.Config) {
 		log.Printf("unable to send weekly campaign id %d on mailerlite %v", campaignResponse.ID, err)
 		return
 	}
+	out, _ := ioutil.ReadAll(res.Body)
+	log.Println(string(out))
 	res.Body.Close()
 	log.Printf("sent weekly campaign with %d jobs via mailerlite api\n", len(jobsHTMLArr))
 	lastJobIDStr = strconv.Itoa(lastJobID)
