@@ -20,6 +20,7 @@ import (
 const LastSentJobIDWeeklyKey = `last_sent_job_id_weekly`
 const MailerliteDailySegmentID = 326154
 const MailerliteWeeklySegmentID = 326156
+const EveryoneGroup = 103091230
 
 func main() {
 	jobsToSendStr := os.Getenv("NEWSLETTER_JOBS_TO_SEND")
@@ -64,12 +65,12 @@ func processWeekly(conn *sql.DB, jobsToSend int, cfg config.Config) {
 	fmt.Printf("found %d/%d jobs for weekly newsletter\n", len(jobs), jobsToSend)
 	// create campaign
 	jsonMailerliteRq := []byte(fmt.Sprintf(`{
-		"segments": [%d, %d],
+		"groups": [%d],
 		"type": "regular",
 		"subject": "Newest Go Jobs on Golang Cafe",
 		"from": "team@golang.cafe",
 		"from_name": "Golang Cafe"
-		}`, MailerliteWeeklySegmentID, MailerliteDailySegmentID))
+		}`, EveryoneGroup))
 	client := &http.Client{}
 	req, err := http.NewRequest("POST", "https://api.mailerlite.com/api/v2/campaigns", bytes.NewBuffer(jsonMailerliteRq))
 	if err != nil {
