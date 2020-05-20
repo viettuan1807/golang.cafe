@@ -94,14 +94,13 @@ func processWeekly(conn *sql.DB, jobsToSend int, cfg config.Config) {
 	var jobsHTMLArr []string
 	var jobsTXTArr []string
 	for _, j := range jobs {
-		jobsHTMLArr = append(jobsHTMLArr, fmt.Sprintf("<p>%s with %s - %s | %s<br />https://golang.cafe/job/%s</p>", j.JobTitle, j.Company, j.Location, j.SalaryRange, j.Slug))
+		jobsHTMLArr = append(jobsHTMLArr, fmt.Sprintf(`<p>%s with %s - %s | %s<br /><a href="https://golang.cafe/job/%s">https://golang.cafe/job/%s</a></p>`, j.JobTitle, j.Company, j.Location, j.SalaryRange, j.Slug, j.Slug))
 		jobsTXTArr = append(jobsTXTArr, fmt.Sprintf("%s with %s - %s | %s\nhttps://golang.cafe/job/%s\n", j.JobTitle, j.Company, j.Location, j.SalaryRange, j.Slug))
 		lastJobID = j.ID
 	}
 	jobsTXT := strings.Join(jobsTXTArr, "\n")
 	jobsHTML := strings.Join(jobsHTMLArr, " ")
-	campaignContentHTML := `<p>Hey!</p>
-	<p>It's been a busy week and we have got new Go (Golang) jobs being posted,</p>
+	campaignContentHTML := `<p>Here's the newest Go jobs on Golang Cafe in the past few weeks,</p>
 	<p>Have a look at the latest Go jobs</p>
 	` + jobsHTML + `
 	<p>Check out more jobs at <a title="Golang Cafe" href="https://golang.cafe">https://golang.cafe</a></p>
@@ -139,13 +138,13 @@ func processWeekly(conn *sql.DB, jobsToSend int, cfg config.Config) {
 		return
 	}
 	if !campaignUpdateRes.OK {
-		log.Printf("unable to update weekly campaign content got res %s", campaignUpdateRes)
+		log.Printf("unable to update weekly campaign content got res %v", campaignUpdateRes)
 		return
 	}
 	res.Body.Close()
 	log.Printf("updated weekly campaign with html content\n")
 	// send campaign
-	req, err = http.NewRequest("POST", fmt.Sprintf("http://api.mailerlite.com/api/v2/campaigns/%d/actions/send", campaignResponse.ID), bytes.NewBuffer([]byte{}))
+	req, err = http.NewRequest("POST", fmt.Sprintf("https://api.mailerlite.com/api/v2/campaigns/%d/actions/send", campaignResponse.ID), bytes.NewBuffer([]byte{}))
 	if err != nil {
 		log.Printf("unable to send campaign id %d req for mailerlite: %v", campaignResponse.ID, err)
 		return
