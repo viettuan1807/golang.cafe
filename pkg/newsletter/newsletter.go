@@ -10,6 +10,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/0x13a/golang.cafe/pkg/config"
 	"github.com/0x13a/golang.cafe/pkg/database"
@@ -144,7 +145,19 @@ func processWeekly(conn *sql.DB, jobsToSend int, cfg config.Config) {
 	res.Body.Close()
 	log.Printf("updated weekly campaign with html content\n")
 	// send campaign
-	req, err = http.NewRequest("POST", fmt.Sprintf("https://api.mailerlite.com/api/v2/campaigns/%d/actions/send", campaignResponse.ID), bytes.NewBuffer([]byte{}))
+	sendReqRaw := struct {
+		Type int    `json:"type"`
+		Date string `json:"date"`
+	}{
+		Type: 1,
+		Date: time.Now().Format("2006-01-02 15:04"),
+	}
+	sendReq, err := json.Marshal(sendReqRaw)
+	if err != nil {
+		log.Printf("unable create send req json for campaing id %d: %v", campaignResponse.ID, err)
+		return
+	}
+	req, err = http.NewRequest("POST", fmt.Sprintf("https://api.mailerlite.com/api/v2/campaigns/%d/actions/send", campaignResponse.ID), bytes.NewBuffer(sendReq))
 	if err != nil {
 		log.Printf("unable to send campaign id %d req for mailerlite: %v", campaignResponse.ID, err)
 		return
