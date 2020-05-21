@@ -73,6 +73,10 @@ var blogPosts = []Page{
 		CreatedAt: time.Now().UTC(),
 		Title:     "how-to-url-encode-string-in-golang-example",
 	},
+	{
+		CreatedAt: time.Now().UTC(),
+		Title:     "how-to-make-http-url-form-encoded-request-golang",
+	},
 }
 var pages = []string{
 	"hire-golang-developers",
