@@ -11,6 +11,7 @@ import (
 
 	"github.com/0x13a/golang.cafe/pkg/database"
 	"github.com/0x13a/golang.cafe/pkg/email"
+	"github.com/0x13a/golang.cafe/pkg/imagemeta"
 	"github.com/0x13a/golang.cafe/pkg/ipgeolocation"
 	"github.com/0x13a/golang.cafe/pkg/middleware"
 	"github.com/0x13a/golang.cafe/pkg/payment"
@@ -311,10 +312,31 @@ func RetrieveMediaPageHandler(svr server.Server) http.HandlerFunc {
 		media, err := database.GetMediaByID(svr.Conn, mediaID)
 		if err != nil {
 			svr.Log(err, "unable to retrieve media by ID")
-			svr.MEDIA(w, http.StatusNotFound, media, mediaID)
+			svr.MEDIA(w, http.StatusNotFound, media.Bytes, media.MediaType)
 			return
 		}
-		svr.MEDIA(w, http.StatusOK, media, mediaID)
+		svr.MEDIA(w, http.StatusOK, media.Bytes, media.MediaType)
+	}
+}
+
+func RetrieveMediaMetaPageHandler(svr server.Server) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		vars := mux.Vars(r)
+		jobID := vars["id"]
+		job, err := database.GetJobByExternalID(svr.Conn, jobID)
+		if err != nil {
+			svr.Log(err, "unable to retrieve job by external ID")
+			svr.MEDIA(w, http.StatusNotFound, []byte{}, "image/png")
+			return
+		}
+		media, err := imagemeta.GenerateImageForJob(job)
+		mediaBytes, err := ioutil.ReadAll(media)
+		if err != nil {
+			svr.Log(err, "unable to generate media for job ID")
+			svr.MEDIA(w, http.StatusNotFound, mediaBytes, "image/png")
+			return
+		}
+		svr.MEDIA(w, http.StatusOK, mediaBytes, "image/png")
 	}
 }
 

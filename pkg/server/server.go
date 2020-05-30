@@ -437,11 +437,11 @@ func (s Server) TEXT(w http.ResponseWriter, status int, text string) {
 	w.Write([]byte(text))
 }
 
-func (s Server) MEDIA(w http.ResponseWriter, status int, media database.Media, mediaID string) {
-	w.Header().Set("Content-Type", media.MediaType)
+func (s Server) MEDIA(w http.ResponseWriter, status int, media []byte, mediaType string) {
+	w.Header().Set("Content-Type", mediaType)
 	w.Header().Set("Cache-Control", "max-age=31536000")
 	w.WriteHeader(status)
-	w.Write(media.Bytes)
+	w.Write(media)
 }
 
 func (s Server) Log(err error, msg string) {

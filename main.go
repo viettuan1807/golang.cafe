@@ -106,6 +106,9 @@ func main() {
 	// retrieve media file
 	svr.RegisterRoute("/x/s/m/{id}", handler.RetrieveMediaPageHandler(svr), []string{"GET"})
 
+	// retrieve meta image media file
+	svr.RegisterRoute("/x/s/m/meta/{id}", handler.RetrieveMediaMetaPageHandler(svr), []string{"GET"})
+
 	// stripe payment confirmation webhook
 	svr.RegisterRoute("/x/stripe/checkout/completed", handler.StripePaymentConfirmationWebookHandler(svr), []string{"POST"})
 
