@@ -1,14 +1,15 @@
 package handler
 
 import (
-	"net/http"
-	"strings"
-	"fmt"
-	"regexp"
+	"bytes"
 	"encoding/json"
 	"errors"
-	"bytes"
+	"fmt"
+	"net/http"
+	"regexp"
+	"strings"
 
+	"github.com/0x13a/golang.cafe/pkg/email"
 	"github.com/0x13a/golang.cafe/pkg/server"
 )
 
@@ -32,6 +33,12 @@ func ViewShopPageHandler(svr server.Server) http.HandlerFunc {
 func ViewCommunityNewsletterPageHandler(svr server.Server) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		svr.RenderPageForLocationAndTag(w, "", "", "", "news.html")
+	}
+}
+
+func ViewSlackPageHandler(svr server.Server) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		svr.RenderPageForLocationAndTag(w, "", "", "", "slack.html")
 	}
 }
 
@@ -85,6 +92,22 @@ func SaveMemberToCommunityNewsletterPageHandler(svr server.Server) http.HandlerF
 	}
 }
 
+func SendSlackInviteLink(svr server.Server) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		emailAddr := strings.ToLower(r.URL.Query().Get("email"))
+		emailRe := regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+		if !emailRe.MatchString(emailAddr) {
+			svr.JSON(w, http.StatusBadRequest, nil)
+			return
+		}
+
+		if err := svr.GetEmail().SendEmail("Diego from Golang Cafe <team@golang.cafe>", emailAddr, email.GolangCafeEmailAddress, "Your invite to Golang Cafe Slack", fmt.Sprintf("Thanks for your interest. Here's your invite for Golang Cafe Slack, please follow or copy on your URL bar the link below. %s", svr.GetConfig().SlackInviteURL)); err != nil {
+			svr.JSON(w, http.StatusInternalServerError, nil)
+			return
+		}
+		svr.JSON(w, http.StatusOK, nil)
+	}
+}
 func SaveMemberToNewsletterPageHandler(svr server.Server) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		email := strings.ToLower(r.URL.Query().Get("email"))

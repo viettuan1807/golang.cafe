@@ -458,8 +458,12 @@ func (s Server) Redirect(w http.ResponseWriter, r *http.Request, status int, dst
 }
 
 func (s Server) Run() error {
+	addr := fmt.Sprintf("localhost:%s", s.cfg.Port)
+	if s.cfg.Env != "dev" {
+		addr = fmt.Sprintf(":%s", s.cfg.Port)
+	}
 	return http.ListenAndServe(
-		fmt.Sprintf(":%s", s.cfg.Port),
+		addr,
 		middleware.HTTPSMiddleware(
 			middleware.GzipMiddleware(
 				middleware.HeadersMiddleware(s.router, s.cfg.Env),

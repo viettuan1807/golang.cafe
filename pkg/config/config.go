@@ -25,6 +25,7 @@ type Config struct {
 	MailerLiteAPIKey             string
 	SentryDSN                    string
 	JobsPerPage                  int
+	SlackInviteURL               string
 }
 
 func LoadConfig() (Config, error) {
@@ -92,6 +93,10 @@ func LoadConfig() (Config, error) {
 	if sentryDSN == "" {
 		return Config{}, fmt.Errorf("SENTRY_DSN cannot be empty")
 	}
+	slackInviteURL := os.Getenv("SLACK_INVITE_URL")
+	if slackInviteURL == "" {
+		return Config{}, fmt.Errorf("SLACK_INVITE_URL cannot be empty")
+	}
 
 	return Config{
 		Port:                         port,
@@ -109,5 +114,6 @@ func LoadConfig() (Config, error) {
 		MailerLiteAPIKey:             mailerliteAPIKey,
 		SentryDSN:                    sentryDSN,
 		JobsPerPage:                  20,
+		SlackInviteURL:               slackInviteURL,
 	}, nil
 }

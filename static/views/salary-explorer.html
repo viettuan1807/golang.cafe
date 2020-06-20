@@ -320,8 +320,7 @@ background-color: #FF6600
         <small>
                 <a href="/">Jobs</a> &bull;
                 <a style="text-decoration: underline;" href="/Golang-Developer-Salary-Remote">Insights</a> &bull;
-                
-                
+               	<a href="/slack">Slack</a> &bull; 
                 <a href="/support">Support</a> &bull;
                 <a href="/about">About</a>
           <br>
@@ -349,38 +348,42 @@ background-color: #FF6600
           The average salary as of {{ .MonthAndYear }} appears to be between <b><span id="min-salary">{{ .Currency }}{{ .MeanMin }}</span></b> and <b><span id="max-salary">{{ .Currency }}{{ .MeanMax }}</span></b> per year (before tax).
         </p>
         {{ end }}
-        <h2>How To Read this data</h2>
-        <p>
-          We have two data frames to analyse. The minimum salaries provided for all job adverts and the maximum salaries provided for all job adverts. Please refer to the picture below.<br /><br />
-          <img src="/s/img/salary-example.png" title="Salary Example on Golang Cafe" alt="Salary Example on Golang Cafe"/>
-        </p>
         <h2>Go (Golang) Salary Stats</h2>
         <table>
+	  <tr>
+		  <td>Metric</td>
+		  <td>Salary lower bound</td>
+		  <td>Salary upper bound</td>
+	  </tr>
           <tr>
             <td>Salary Range 10th percentile</td>
-            <td><span style="color: #69b3a2;">{{ .Currency }}{{ .P10Min }}</span> - <span style="color: #6900a2;">{{ .Currency }}{{ .P10Max }}</span></td>
+	    <td><span style="color: #69b3a2;">{{ .Currency }}{{ .P10Min }}</span></td>
+	    <td><span style="color: #6900a2;">{{ .Currency }}{{ .P10Max }}</span></td>
           </tr>
           <tr>
             <td>Salary Range 50th percentile</td>
-            <td><span style="color: #69b3a2;">{{ .Currency }}{{ .P50Min }}</span> - <span style="color: #6900a2;">{{ .Currency }}{{ .P50Max }}</span></td>
+	    <td><span style="color: #69b3a2;">{{ .Currency }}{{ .P50Min }}</span></td>
+	    <td><span style="color: #6900a2;">{{ .Currency }}{{ .P50Max }}</span></td>
           </tr>
           <tr>
             <td>Salary Range 90th percentile</td>
-            <td><span style="color: #69b3a2;">{{ .Currency }}{{ .P90Min }}</span> - <span style="color: #6900a2;">{{ .Currency }}{{ .P90Max }}</span></td>
+	    <td><span style="color: #69b3a2;">{{ .Currency }}{{ .P90Min }}</span></td>
+	    <td><span style="color: #6900a2;">{{ .Currency }}{{ .P90Max }}</span></td>
           </tr>
           <tr>
             <td>Average Salary Range</td>
-            <td><span style="color: #69b3a2;">{{ .Currency }}{{ .MeanMin }}</span> - <span style="color: #6900a2;">{{ .Currency }}{{ .MeanMax }}</span></td>
+	    <td><span style="color: #69b3a2;">{{ .Currency }}{{ .MeanMin }}</span></td>
+	    <td><span style="color: #6900a2;">{{ .Currency }}{{ .MeanMax }}</span></td>
           </tr>
           <tr>
             <td>Salary Standard Deviation</td>
-            <td><span style="color: #69b3a2;">{{ .StdDevMin }}</span> - <span style="color: #6900a2;">{{ .StdDevMax }}</span></td>
-          </tr>
-          <tr>
-            <td>Number of Salaries Quoted</td>
-            <td>{{ .Count }}</td>
+	    <td><span style="color: #69b3a2;">{{ .StdDevMin }}</span></td>
+	    <td><span style="color: #6900a2;">{{ .StdDevMax }}</span></td>
           </tr>
         </table>
+	<p>
+	Number of Salaries Quoted: <b>{{ .Count }}</b>
+	</p>
         <h2>Go (Golang) Salary Distribution</h2>
         <div id="salary-distribution"></div>
         {{ if .ComplimentaryRemote }}
@@ -396,7 +399,7 @@ background-color: #FF6600
         <div id="salary-trends"></div>
         {{ if .ComplimentaryRemote }}
         <p>
-          <p>The Chart below represents the maximum salary trend over time. When data points are available the chart shows outer <span style="background: rgba(127, 127, 255);">p10 p90 percentiles</span>, inner <span style="background: rgba(230, 230, 255);">p25 and p75 percentiles</span> and the <b>median</b> trending over time for Remote based jobs. Data as of {{ .MonthAndYear }}</p>
+          <p>The Chart below represents the maximum salary trend over time. When data points are available the chart shows outer <span style="background: rgba(230, 230, 255)">p10 p90 percentiles</span>, inner <span style="background: rgba(127, 127, 255);">p25 and p75 percentiles</span> and the <b>median</b> trending over time for Remote based jobs. Data as of {{ .MonthAndYear }}</p>
         </p>
         {{ else }}
         <p>

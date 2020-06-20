@@ -64,6 +64,9 @@ func main() {
 	// view newsletter
 	svr.RegisterRoute("/newsletter", handler.ViewNewsletterPageHandler(svr), []string{"GET"})
 
+	// view slack
+	svr.RegisterRoute("/slack", handler.ViewSlackPageHandler(svr), []string{"GET"})
+
 	// view shop
 	svr.RegisterRoute("/shop", handler.ViewShopPageHandler(svr), []string{"GET"})
 
@@ -81,6 +84,9 @@ func main() {
 
 	// newsletter member save
 	svr.RegisterRoute("/x/n/m/s", handler.SaveMemberToNewsletterPageHandler(svr), []string{"GET"})
+
+	// request slack invite
+	svr.RegisterRoute("/x/n/s/s", handler.SendSlackInviteLink(svr), []string{"GET"})
 
 	// community interest member save
 	svr.RegisterRoute("/x/c/m/s", handler.SaveMemberToCommunityNewsletterPageHandler(svr), []string{"GET"})
@@ -131,7 +137,6 @@ func main() {
 	// sign on email link
 	svr.RegisterRoute("/x/auth/link", handler.RequestTokenSignOn(svr), []string{"POST"})
 	svr.RegisterRoute("/x/auth/{token}", handler.VerifyTokenSignOn(svr, cfg.AdminEmail), []string{"GET"})
-
 
 	// forum
 	svr.RegisterRoute("/news", handler.ListNewsItems(svr), []string{"GET"})
