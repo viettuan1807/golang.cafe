@@ -193,6 +193,9 @@ func main() {
 	svr.RegisterRoute("/Hire-Remote-Golang-Developers", handler.PostAJobForLocationPageHandler(svr, "Remote"), []string{"GET"})
 	svr.RegisterRoute("/Hire-Golang-Developers-In-{location}", handler.PostAJobForLocationFromURLPageHandler(svr), []string{"GET"})
 
+	// RSS feed
+	svr.RegisterRoute("/rss", handler.ServeRSSFeed(svr), []string{"GET"})
+
 	//
 	// admin routes
 	// protected by jwt auth
