@@ -24,6 +24,7 @@ require (
 	github.com/getsentry/raven-go v0.1.0
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
 	github.com/golang/protobuf v1.3.2 // indirect
+	github.com/gorilla/feeds v1.1.1
 	github.com/gorilla/mux v1.7.3
 	github.com/gorilla/sessions v1.2.0
 	github.com/gosimple/slug v1.3.0

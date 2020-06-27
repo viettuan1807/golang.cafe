@@ -16,6 +16,7 @@ import (
 	"github.com/0x13a/golang.cafe/pkg/middleware"
 	"github.com/0x13a/golang.cafe/pkg/server"
 	jwt "github.com/dgrijalva/jwt-go"
+	"github.com/gorilla/feeds"
 	"github.com/gorilla/mux"
 	"github.com/segmentio/ksuid"
 )
@@ -394,5 +395,41 @@ func LandingPageForSkillAndLocationPlaceholderHandler(svr server.Server) http.Ha
 		skill := strings.ReplaceAll(vars["skill"], "-", " ")
 		page := r.URL.Query().Get("p")
 		svr.RenderPageForLocationAndTag(w, loc, skill, page, "landing.html")
+	}
+}
+
+func ServeRSSFeed(svr server.Server) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		jobs, err := database.GetLastNJobs(svr.Conn, 20)
+		if err != nil {
+			svr.Log(err, "unable to retrieve jobs for RSS Feed")
+			svr.XML(w, http.StatusInternalServerError, []byte{})
+			return
+		}
+		now := time.Now()
+		feed := &feeds.Feed{
+			Title:       "Golang Cafe Jobs",
+			Link:        &feeds.Link{Href: "https://golang.cafe"},
+			Description: "Golang Cafe Jobs",
+			Author:      &feeds.Author{Name: "Golang Cafe", Email: "team@golang.cafe"},
+			Created:     now,
+		}
+
+		for _, j := range jobs {
+			feed.Items = append(feed.Items, &feeds.Item{
+				Title:       fmt.Sprintf("%s with %s - %s", j.JobTitle, j.Company, j.Location),
+				Link:        &feeds.Link{Href: fmt.Sprintf("https://golang.cafe/job/%s", j.Slug)},
+				Description: j.JobDescription,
+				Author:      &feeds.Author{Name: "Golang Cafe", Email: "team@golang.cafe"},
+				Created:     now,
+			})
+		}
+		rssFeed, err := feed.ToRss()
+		if err != nil {
+			svr.Log(err, "unable to convert rss feed to xml")
+			svr.XML(w, http.StatusInternalServerError, []byte{})
+			return
+		}
+		svr.XML(w, http.StatusOK, []byte(rssFeed))
 	}
 }

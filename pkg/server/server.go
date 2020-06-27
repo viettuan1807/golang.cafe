@@ -423,6 +423,12 @@ func (s Server) Render(w http.ResponseWriter, status int, htmlView string, data 
 	return s.tmpl.Render(w, status, htmlView, data)
 }
 
+func (s Server) XML(w http.ResponseWriter, status int, data []byte) {
+	w.Header().Set("Content-Type", "text/xml")
+	w.WriteHeader(status)
+	w.Write(data)
+}
+
 func (s Server) JSON(w http.ResponseWriter, status int, data interface{}) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
