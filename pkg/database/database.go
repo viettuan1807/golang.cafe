@@ -1473,14 +1473,14 @@ func SetValue(conn *sql.DB, key, val string) error {
 func GetLastNJobs(conn *sql.DB, max int) ([]*JobPost, error) {
 	var jobs []*JobPost
 	var rows *sql.Rows
-	rows, err := conn.Query(`SELECT id, job_title, description, company, salary_range, location, slug, salary_currency, company_icon_image_id, external_id  FROM job WHERE approved_at IS NOT NULL ORDER BY approved_at DESC LIMIT $1`, max)
+	rows, err := conn.Query(`SELECT id, job_title, description, company, salary_range, location, slug, salary_currency, company_icon_image_id, external_id, approved_at  FROM job WHERE approved_at IS NOT NULL ORDER BY approved_at DESC LIMIT $1`, max)
 	if err != nil {
 		return jobs, err
 	}
 	for rows.Next() {
 		job := &JobPost{}
 		var companyIcon sql.NullString
-		err := rows.Scan(&job.ID, &job.JobTitle, &job.JobDescription, &job.Company, &job.SalaryRange, &job.Location, &job.Slug, &job.SalaryCurrency, &companyIcon, &job.ExternalID)
+		err := rows.Scan(&job.ID, &job.JobTitle, &job.JobDescription, &job.Company, &job.SalaryRange, &job.Location, &job.Slug, &job.SalaryCurrency, &companyIcon, &job.ExternalID, &job.ApprovedAt)
 		if companyIcon.Valid {
 			job.CompanyIconID = companyIcon.String
 		}
