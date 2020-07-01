@@ -421,7 +421,7 @@ func ServeRSSFeed(svr server.Server) http.HandlerFunc {
 				Link:        &feeds.Link{Href: fmt.Sprintf("https://golang.cafe/job/%s", j.Slug)},
 				Description: j.JobDescription,
 				Author:      &feeds.Author{Name: "Golang Cafe", Email: "team@golang.cafe"},
-				Created:     now,
+				Created:     j.CreatedAt,
 			})
 		}
 		rssFeed, err := feed.ToRss()
