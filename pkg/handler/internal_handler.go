@@ -1,10 +1,12 @@
 package handler
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"net"
 	"net/http"
 	"regexp"
 	"strings"
@@ -28,6 +30,86 @@ func GenerateKsuIDPageHandler(svr server.Server) http.HandlerFunc {
 			return
 		}
 		svr.Render(w, http.StatusOK, "ksuid.html", map[string]string{"KSUID": id.String()})
+	}
+}
+
+func DNSCheckerPageHandler(svr server.Server) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		svr.Render(w, http.StatusOK, "dns-checker.html", nil)
+	}
+}
+
+func DNSChecker(svr server.Server) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		dnsType := r.URL.Query().Get("t")
+		dnsHost := r.URL.Query().Get("h")
+		switch dnsType {
+		case "A":
+			res, err := net.LookupIP(dnsHost)
+			if err != nil || len(res) == 0 {
+				svr.TEXT(w, http.StatusInternalServerError, "unable to retrieve A record")
+				return
+			}
+			var buffer bytes.Buffer
+			for _, ip := range res {
+				buffer.WriteString(fmt.Sprintf("%s\n", ip.String()))
+			}
+			svr.TEXT(w, http.StatusOK, buffer.String())
+		case "PTR":
+			res, err := net.LookupAddr(dnsHost)
+			if err != nil || len(res) == 0 {
+				svr.TEXT(w, http.StatusInternalServerError, "unable to retrieve PTR record")
+				return
+			}
+			var buffer bytes.Buffer
+			for _, ptr := range res {
+				buffer.WriteString(fmt.Sprintf("%s\n", ptr))
+			}
+			svr.TEXT(w, http.StatusOK, buffer.String())
+		case "MX":
+			res, err := net.LookupMX(dnsHost)
+			if err != nil {
+				svr.TEXT(w, http.StatusInternalServerError, "unable to retrieve CNAME record")
+				return
+			}
+			var buffer bytes.Buffer
+			for _, m := range res {
+				buffer.WriteString(fmt.Sprintf("%s %v\n", m.Host, m.Pref))
+			}
+			svr.TEXT(w, http.StatusOK, buffer.String())
+		case "CNAME":
+			res, err := net.LookupCNAME(dnsHost)
+			if err != nil {
+				svr.TEXT(w, http.StatusInternalServerError, "unable to retrieve CNAME record")
+				return
+			}
+			svr.TEXT(w, http.StatusOK, res)
+		case "NS":
+			res, err := net.LookupNS(dnsHost)
+			if err != nil || len(res) == 0 {
+				svr.TEXT(w, http.StatusInternalServerError, "unable to retrieve NS record")
+				return
+			}
+			var buffer bytes.Buffer
+			for _, ns := range res {
+				buffer.WriteString(fmt.Sprintf("%s\n", ns.Host))
+			}
+			svr.TEXT(w, http.StatusOK, buffer.String())
+		case "TXT":
+			res, err := net.LookupTXT(dnsHost)
+			if err != nil || len(res) == 0 {
+				svr.TEXT(w, http.StatusInternalServerError, "unable to retrieve TXT record")
+				return
+			}
+			var buffer bytes.Buffer
+			for _, t := range res {
+				buffer.WriteString(fmt.Sprintf("%s\n", t))
+			}
+			svr.TEXT(w, http.StatusOK, buffer.String())
+		default:
+			svr.TEXT(w, http.StatusInternalServerError, "invalid dns record type")
+		}
+
 	}
 }
 

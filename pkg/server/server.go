@@ -464,7 +464,7 @@ func (s Server) Redirect(w http.ResponseWriter, r *http.Request, status int, dst
 }
 
 func (s Server) Run() error {
-	addr := fmt.Sprintf("localhost:%s", s.cfg.Port)
+	addr := fmt.Sprintf("0.0.0.0:%s", s.cfg.Port)
 	if s.cfg.Env != "dev" {
 		addr = fmt.Sprintf(":%s", s.cfg.Port)
 	}

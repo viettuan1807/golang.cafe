@@ -76,6 +76,10 @@ func main() {
 	// generate ksuid
 	svr.RegisterRoute("/ksuid", handler.GenerateKsuIDPageHandler(svr), []string{"GET"})
 
+	// DNS Checker
+	svr.RegisterRoute("/dns-checker", handler.DNSCheckerPageHandler(svr), []string{"GET"})
+	svr.RegisterRoute("/x/dns", handler.DNSChecker(svr), []string{"GET"})
+
 	// post a job succeeded
 	svr.RegisterRoute("/x/j/p/1", handler.PostAJobSuccessPageHandler(svr), []string{"GET"})
 
