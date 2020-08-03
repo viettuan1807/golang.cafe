@@ -44,13 +44,12 @@
     </header>
     <section style="margin:30px auto;">
       <article>
-<h1 class="code-line" data-line-start=0 data-line-end=1 ><a id="Golang_Context_WithTimeout_0"></a>Golang Context WithTimeout</h1>
+<h1 class="code-line" data-line-start=0 data-line-end=1 ><a id="Golang_Context_WithTimeout_0"></a>Golang Context WithTimeout Example</h1>
 <p class="has-line-data" data-line-start="2" data-line-end="3">How do we implement a context with a given timeout in Go (Golang)? Thanksfully Go has a lot of functionality built-in into the standard library and in this article we are going to see how it’s possible to define a timeout with the context package.</p>
 <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CE7ITK3J&placement=golangcafe" id="_carbonads_js"></script><br />
 <h2 class="code-line" data-line-start=4 data-line-end=5 ><a id="Golang_HTTP_Request_with_Context_4"></a>Golang HTTP Request with Context</h2>
 <p class="has-line-data" data-line-start="6" data-line-end="7">Let’s first explore a scenario, we have an HTTP request and we want to control the timeout of such request.</p>
-<pre><code class="language-go">
-package main
+<pre><code class="language-go">package main
 
 import "net/http"
 import "log"
@@ -76,8 +75,7 @@ func main () {
 </code></pre>
 <p class="has-line-data" data-line-start="33" data-line-end="34">Ok, what if we want to make sure this request completes within 80ms? We just need to use <strong><a href="https://golang.org/pkg/context/#WithTimeout">context.WithTimeout</a></strong>!</p>
 <p class="has-line-data" data-line-start="35" data-line-end="36">Here’s the addition we need to do to our code sample</p>
-<pre><code class="language-go">
-ctx, cancel := context.WithTimeout(context.Background(), time.Duration(time.Millisecond*80))
+<pre><code class="language-go">ctx, cancel := context.WithTimeout(context.Background(), time.Duration(time.Millisecond*80))
 defer cancel()
 req = req.WithContext(ctx)
 </code></pre>
@@ -86,14 +84,12 @@ req = req.WithContext(ctx)
 <p class="has-line-data" data-line-start="45" data-line-end="46">Calling the CancelFunc cancels the child and its children, removes the parent’s reference to the child, and stops any associated timers. Failing to call the CancelFunc leaks the child and its children until the parent is canceled or the timer fires. The go vet tool checks that CancelFuncs are used on all control-flow paths.</p>
 </blockquote>
 <p class="has-line-data" data-line-start="47" data-line-end="48">You can also define a http request with a context using <strong><a href="https://pkg.go.dev/net/http?tab=doc#NewRequestWithContext">NewRequestWithContext</a></strong></p>
-<pre><code class="language-go">
-ctx, cancel := context.WithTimeout(context.Background(), time.Duration(time.Millisecond*80))
+<pre><code class="language-go">ctx, cancel := context.WithTimeout(context.Background(), time.Duration(time.Millisecond*80))
 defer cancel()
 req, err := http.NewRequestWithContext(ctx, http.MethodGet, "http://httpbin.org/get", nil)
 </code></pre>
 <p class="has-line-data" data-line-start="56" data-line-end="57"><strong>Here’s the final example</strong></p>
-<pre><code class="language-go">
-package main
+<pre><code class="language-go">package main
 
 import "net/http"
 import "log"
