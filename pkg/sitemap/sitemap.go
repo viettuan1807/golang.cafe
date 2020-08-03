@@ -77,6 +77,10 @@ var blogPosts = []Page{
 		CreatedAt: time.Now().UTC(),
 		Title:     "how-to-make-http-url-form-encoded-request-golang",
 	},
+	{
+		CreatedAt: time.Now().UTC(),
+		Title:     "golang-context-with-timeout-example",
+	},
 }
 var pages = []string{
 	"hire-golang-developers",
