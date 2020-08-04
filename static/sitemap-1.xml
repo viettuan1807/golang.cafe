@@ -1,98 +1,243 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://golang.cafe/job/backend-engineer-cuvva-1595699710</loc>
+    <lastmod>2020-07-25T17:55:10Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/software-engineer-improbable-1595157767</loc>
+    <lastmod>2020-07-19T11:22:47Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/senior-software-engineer-credit-kudos-1595157328</loc>
+    <lastmod>2020-07-19T11:15:28Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/golang-engineer-sky-betting-and-gaming-1595157189</loc>
+    <lastmod>2020-07-19T11:13:09Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/machine-learning-engineer-back-1595156944</loc>
+    <lastmod>2020-07-19T11:09:04Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/remote-protocol-software-engineer-audius-1595156733</loc>
+    <lastmod>2020-07-19T11:05:33Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/software-engineer-emitwise-1595156526</loc>
+    <lastmod>2020-07-19T11:02:07Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/go-engineer-part-time-or-full-time-cyza-inc-1594644147</loc>
+    <lastmod>2020-07-13T12:42:27Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/backend-engineer-qonto-1593785992</loc>
+    <lastmod>2020-07-03T14:19:52Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/senior-software-engineer-go-form3-1593710108</loc>
+    <lastmod>2020-07-02T17:15:09Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/backend-developer-third-light-1593376002</loc>
+    <lastmod>2020-06-28T20:26:42Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/backend-engineer-thought-machine-1592676052</loc>
+    <lastmod>2020-06-20T18:00:52Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/full-stack-engineer-naontek-ag-1592675311</loc>
+    <lastmod>2020-06-20T17:48:31Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/go-backend-developer-applike-group-1592675086</loc>
+    <lastmod>2020-06-20T17:44:46Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/senior-backend-engineer-golang-m-f-x-hello-fresh-1592674662</loc>
+    <lastmod>2020-06-20T17:37:42Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/golang-backend-engineer-hiveway-1592674411</loc>
+    <lastmod>2020-06-20T17:33:31Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/fullstack-developer-oscatel-1592673987</loc>
+    <lastmod>2020-06-20T17:26:27Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/senior-software-engineer-back-end-bouncex-soon-to-be-wunderkind-1591888293</loc>
+    <lastmod>2020-06-11T15:11:33Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/senior-software-engineer-backend-docker-1591018219</loc>
+    <lastmod>2020-06-01T13:30:19Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/cto-golioth-1590688950</loc>
+    <lastmod>2020-05-28T18:02:30Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/backend-developer-futurehome-1590664720</loc>
+    <lastmod>2020-05-28T11:18:40Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/senior-go-backend-engineer-beat-1590662834</loc>
+    <lastmod>2020-05-28T10:47:14Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/software-engineer-cash-payment-solutions-gmbh-1590661766</loc>
+    <lastmod>2020-05-28T10:29:26Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/fullstack-developer-octopus-energy-1590661520</loc>
+    <lastmod>2020-05-28T10:25:20Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/senior-backend-engineer-finn-auto-1590661272</loc>
+    <lastmod>2020-05-28T10:21:12Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/blockchain-network-engineer-bison-trails-co-1590248596</loc>
+    <lastmod>2020-05-23T15:43:16Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/staff-software-engineer-quizlet-1590087925</loc>
+    <lastmod>2020-05-21T19:05:25Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/go-developer-core-blockchain-energi-cryptocurrency-1589831431</loc>
+    <lastmod>2020-05-18T19:50:31Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://golang.cafe/job/senior-software-engineer-deliveroo-1589830940</loc>
+    <lastmod>2020-05-18T19:42:20Z</lastmod>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
     <loc>https://golang.cafe/job/senior-backend-engineer-compensate-1589798391</loc>
-    <lastmod>2020-05-18T11:39:51+01:00</lastmod>
+    <lastmod>2020-05-18T10:39:51Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-backend-engineer-delivery-hero-1589640412</loc>
-    <lastmod>2020-05-16T15:46:52+01:00</lastmod>
+    <lastmod>2020-05-16T14:46:52Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/devops-engineer-vchain-1589549384</loc>
-    <lastmod>2020-05-15T14:29:44+01:00</lastmod>
+    <lastmod>2020-05-15T13:29:44Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/fullstack-engineer-fuzzbuzz-1589448755</loc>
-    <lastmod>2020-05-14T10:32:35+01:00</lastmod>
+    <lastmod>2020-05-14T09:32:35Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-developer-stream-1589298374</loc>
-    <lastmod>2020-05-12T16:46:14+01:00</lastmod>
+    <lastmod>2020-05-12T15:46:14Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-engineer-primer-1588181326</loc>
-    <lastmod>2020-04-29T18:28:46+01:00</lastmod>
+    <lastmod>2020-04-29T17:28:46Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-kramp-hub-1588094373</loc>
-    <lastmod>2020-04-28T18:19:33+01:00</lastmod>
+    <lastmod>2020-04-28T17:19:33Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-backend-developer-b2match-1588091643</loc>
-    <lastmod>2020-04-28T17:34:03+01:00</lastmod>
+    <lastmod>2020-04-28T16:34:03Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/fullstack-engineer-katana-labs-1588000660</loc>
-    <lastmod>2020-04-27T16:17:40+01:00</lastmod>
+    <lastmod>2020-04-27T15:17:40Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-back-1587996448</loc>
-    <lastmod>2020-04-27T15:07:28+01:00</lastmod>
+    <lastmod>2020-04-27T14:07:28Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-backend-software-engineer-fast-1586890602</loc>
-    <lastmod>2020-04-14T19:56:42+01:00</lastmod>
+    <lastmod>2020-04-14T18:56:42Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/blockchain-developer-spacemesh-1586882493</loc>
-    <lastmod>2020-04-14T17:41:33+01:00</lastmod>
+    <lastmod>2020-04-14T16:41:33Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/head-of-engineering-bezos-1586868732</loc>
-    <lastmod>2020-04-14T13:52:12+01:00</lastmod>
+    <lastmod>2020-04-14T12:52:12Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/go-engineer-benchkram-plyd-io-1586153190</loc>
-    <lastmod>2020-04-06T07:06:30+01:00</lastmod>
+    <lastmod>2020-04-06T06:06:30Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-100-remote-uk-eu-only-form3-1585931475</loc>
-    <lastmod>2020-04-03T17:31:15+01:00</lastmod>
+    <lastmod>2020-04-03T16:31:15Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-go-developer-amboss-1585596913</loc>
-    <lastmod>2020-03-30T20:35:13+01:00</lastmod>
+    <lastmod>2020-03-30T19:35:13Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-backend-prontopro-1585596604</loc>
-    <lastmod>2020-03-30T20:30:04+01:00</lastmod>
+    <lastmod>2020-03-30T19:30:04Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/head-of-engineering-corsearch-1585596472</loc>
-    <lastmod>2020-03-30T20:27:52+01:00</lastmod>
+    <lastmod>2020-03-30T19:27:52Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-go-engineer-architect-avantgarde-1585596238</loc>
-    <lastmod>2020-03-30T20:23:58+01:00</lastmod>
+    <lastmod>2020-03-30T19:23:58Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
@@ -177,7 +322,7 @@
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-site-reliability-engineer-core-netflix-1589475560</loc>
-    <lastmod>2020-05-14T17:59:20+01:00</lastmod>
+    <lastmod>2020-05-14T16:59:20Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
@@ -282,772 +427,767 @@
   </url>
   <url>
     <loc>https://golang.cafe/job/software-developer-payments-sezzle-1572101713</loc>
-    <lastmod>2019-10-26T15:55:13+01:00</lastmod>
+    <lastmod>2019-10-26T14:55:13Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-kramp-hub-1572016148</loc>
-    <lastmod>2019-10-25T16:09:08+01:00</lastmod>
+    <lastmod>2019-10-25T15:09:08Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/go-backend-engineer-vizzlo-1572012638</loc>
-    <lastmod>2019-10-25T15:10:38+01:00</lastmod>
+    <lastmod>2019-10-25T14:10:38Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-go-engineer-torus-labs-pte-ltd-1572012506</loc>
-    <lastmod>2019-10-25T15:08:26+01:00</lastmod>
+    <lastmod>2019-10-25T14:08:26Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/go-software-engineer-radio-de-gmbh-1572012348</loc>
-    <lastmod>2019-10-25T15:05:48+01:00</lastmod>
+    <lastmod>2019-10-25T14:05:48Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/back-end-software-engineer-office-for-national-statistics-1571815309</loc>
-    <lastmod>2019-10-23T08:21:49+01:00</lastmod>
+    <lastmod>2019-10-23T07:21:49Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-backend-button-1571419116</loc>
-    <lastmod>2019-10-18T18:18:36+01:00</lastmod>
+    <lastmod>2019-10-18T17:18:36Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-golang-engineer-upguard-1571414052</loc>
-    <lastmod>2019-10-18T16:54:12+01:00</lastmod>
+    <lastmod>2019-10-18T15:54:12Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-or-site-reliability-engineer-micro-1571243556</loc>
-    <lastmod>2019-10-16T17:32:36+01:00</lastmod>
+    <lastmod>2019-10-16T16:32:36Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-ninja-van-1570995414</loc>
-    <lastmod>2019-10-13T20:36:54+01:00</lastmod>
+    <lastmod>2019-10-13T19:36:54Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-full-stack-engineer-pento-1570992580</loc>
-    <lastmod>2019-10-13T19:49:40+01:00</lastmod>
+    <lastmod>2019-10-13T18:49:40Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-developer-compliance-solutions-strategies-1570917701</loc>
-    <lastmod>2019-10-12T23:01:41+01:00</lastmod>
+    <lastmod>2019-10-12T22:01:41Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/lead-infrastructure-engineer-source-d-1570915808</loc>
-    <lastmod>2019-10-12T22:30:08+01:00</lastmod>
+    <lastmod>2019-10-12T21:30:08Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/golang-engineer-seldon-1570895140</loc>
-    <lastmod>2019-10-12T16:45:40+01:00</lastmod>
+    <lastmod>2019-10-12T15:45:40Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/systems-engineer-devops-zego-1570894979</loc>
-    <lastmod>2019-10-12T16:42:59+01:00</lastmod>
+    <lastmod>2019-10-12T15:42:59Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/devops-engineer-altostack-1570894806</loc>
-    <lastmod>2019-10-12T16:40:06+01:00</lastmod>
+    <lastmod>2019-10-12T15:40:06Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/product-engineer-butternut-box-1570894572</loc>
-    <lastmod>2019-10-12T16:36:12+01:00</lastmod>
+    <lastmod>2019-10-12T15:36:12Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-fintech-core-backend-developer-go-cabify-1570894293</loc>
-    <lastmod>2019-10-12T16:31:33+01:00</lastmod>
+    <lastmod>2019-10-12T15:31:33Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/full-stack-software-engineer-waystocap-1570894119</loc>
-    <lastmod>2019-10-12T16:28:39+01:00</lastmod>
+    <lastmod>2019-10-12T15:28:39Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-helix-1570893980</loc>
-    <lastmod>2019-10-12T16:26:20+01:00</lastmod>
+    <lastmod>2019-10-12T15:26:20Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/back-end-software-engineer-conductor-1570893606</loc>
-    <lastmod>2019-10-12T16:20:06+01:00</lastmod>
+    <lastmod>2019-10-12T15:20:06Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-developer-golang-publicsonar-1570893090</loc>
-    <lastmod>2019-10-12T16:11:30+01:00</lastmod>
+    <lastmod>2019-10-12T15:11:30Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-engineer-donotpay-1570892851</loc>
-    <lastmod>2019-10-12T16:07:31+01:00</lastmod>
+    <lastmod>2019-10-12T15:07:31Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-security-team-lob-1570892558</loc>
-    <lastmod>2019-10-12T16:02:38+01:00</lastmod>
+    <lastmod>2019-10-12T15:02:38Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-full-stack-react-go-engineer-akava-1570891868</loc>
-    <lastmod>2019-10-12T15:51:08+01:00</lastmod>
+    <lastmod>2019-10-12T14:51:08Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/technology-officer-saar-aan-huis-1570820877</loc>
-    <lastmod>2019-10-11T20:07:57+01:00</lastmod>
+    <lastmod>2019-10-11T19:07:57Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/go-back-end-engineer-raven-black-1570210371</loc>
-    <lastmod>2019-10-04T18:32:51+01:00</lastmod>
+    <lastmod>2019-10-04T17:32:51Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-core-database-axiom-inc-1568308327</loc>
-    <lastmod>2019-09-12T18:12:07+01:00</lastmod>
+    <lastmod>2019-09-12T17:12:07Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-backend-engineer-attest-1568299951</loc>
-    <lastmod>2019-09-12T15:52:31+01:00</lastmod>
+    <lastmod>2019-09-12T14:52:31Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-go-backend-developer-refurbed-1568058624</loc>
-    <lastmod>2019-09-09T20:50:24+01:00</lastmod>
+    <lastmod>2019-09-09T19:50:24Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-go-100-remote-uk-eu-form3-1567695438</loc>
-    <lastmod>2019-09-05T15:57:19+01:00</lastmod>
+    <lastmod>2019-09-05T14:57:19Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-backend-engineer-who-is-in-for-making-an-impact-speaksee-1567419706</loc>
-    <lastmod>2019-09-02T11:21:46+01:00</lastmod>
+    <lastmod>2019-09-02T10:21:46Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-platform-engineer-watchtower-ai-1567362891</loc>
-    <lastmod>2019-09-01T19:34:51+01:00</lastmod>
+    <lastmod>2019-09-01T18:34:51Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-infrastructure-tooling-segment-1567100637</loc>
-    <lastmod>2019-08-29T18:43:57+01:00</lastmod>
+    <lastmod>2019-08-29T17:43:57Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/go-developer-perkbox-1567030364</loc>
-    <lastmod>2019-08-28T23:12:44+01:00</lastmod>
+    <lastmod>2019-08-28T22:12:44Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/junior-go-developer-advanced-blockchain-ag-1567011007</loc>
-    <lastmod>2019-08-28T17:50:07+01:00</lastmod>
+    <lastmod>2019-08-28T16:50:07Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-ravelin-1567001625</loc>
-    <lastmod>2019-08-28T15:13:45+01:00</lastmod>
+    <lastmod>2019-08-28T14:13:45Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/developer-advocate-tigera-1566496964</loc>
-    <lastmod>2019-08-22T19:02:44+01:00</lastmod>
+    <lastmod>2019-08-22T18:02:44Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-paxos-1566214772</loc>
-    <lastmod>2019-08-19T12:39:32+01:00</lastmod>
+    <lastmod>2019-08-19T11:39:32Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-backend-developer-powerspike-1566169997</loc>
-    <lastmod>2019-08-19T00:13:17+01:00</lastmod>
+    <lastmod>2019-08-18T23:13:17Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/devops-sysops-engineer-fortrabbit-1566169533</loc>
-    <lastmod>2019-08-19T00:05:33+01:00</lastmod>
+    <lastmod>2019-08-18T23:05:33Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-engineer-iflix-1566169218</loc>
-    <lastmod>2019-08-19T00:00:18+01:00</lastmod>
+    <lastmod>2019-08-18T23:00:18Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-engineer-security-monzo-1565970805</loc>
-    <lastmod>2019-08-16T16:53:25+01:00</lastmod>
+    <lastmod>2019-08-16T15:53:25Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-developer-go-mooncascade-1565939804</loc>
-    <lastmod>2019-08-16T08:16:44+01:00</lastmod>
+    <lastmod>2019-08-16T07:16:44Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-developer-fintech-tumelo-1565890465</loc>
-    <lastmod>2019-08-15T18:34:25+01:00</lastmod>
+    <lastmod>2019-08-15T17:34:25Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-backend-engineer-outdoorsy-1565823401</loc>
-    <lastmod>2019-08-14T23:56:41+01:00</lastmod>
+    <lastmod>2019-08-14T22:56:41Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-go-developer-heetch-1565792204</loc>
-    <lastmod>2019-08-14T15:16:45+01:00</lastmod>
+    <lastmod>2019-08-14T14:16:45Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/sr-software-engineer-platform-go-microservices-hallmark-labs-1565732993</loc>
-    <lastmod>2019-08-13T22:49:53+01:00</lastmod>
+    <lastmod>2019-08-13T21:49:53Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-backend-engineer-tutti-1565599084</loc>
-    <lastmod>2019-08-12T09:38:04+01:00</lastmod>
+    <lastmod>2019-08-12T08:38:04Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/remote-golang-developer-springboardvr-1565359167</loc>
-    <lastmod>2019-08-09T14:59:27+01:00</lastmod>
+    <lastmod>2019-08-09T13:59:27Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-go-bud-1565272776</loc>
-    <lastmod>2019-08-08T14:59:36+01:00</lastmod>
+    <lastmod>2019-08-08T13:59:36Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-ninja-van-1565092420</loc>
-    <lastmod>2019-08-06T12:53:40+01:00</lastmod>
+    <lastmod>2019-08-06T11:53:40Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-golang-developer-24metrics-gmbh-1565086874</loc>
-    <lastmod>2019-08-06T11:21:14+01:00</lastmod>
+    <lastmod>2019-08-06T10:21:14Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/go-backend-engineer-m-f-x-optiopay-gmbh-1564733899</loc>
-    <lastmod>2019-08-02T09:18:19+01:00</lastmod>
+    <lastmod>2019-08-02T08:18:19Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-golang-developer-patrongg-gmbh-1564662403</loc>
-    <lastmod>2019-08-01T13:26:43+01:00</lastmod>
+    <lastmod>2019-08-01T12:26:43Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/cloud-architect-ori-1564610940</loc>
-    <lastmod>2019-07-31T23:09:00+01:00</lastmod>
+    <lastmod>2019-07-31T22:09:00Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/kubernetes-veganbase-ltd-1564584573</loc>
-    <lastmod>2019-07-31T15:49:33+01:00</lastmod>
+    <lastmod>2019-07-31T14:49:33Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-brudi-1564582748</loc>
-    <lastmod>2019-07-31T15:19:08+01:00</lastmod>
+    <lastmod>2019-07-31T14:19:08Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/platform-engineer-popsa-1564582136</loc>
-    <lastmod>2019-07-31T15:08:56+01:00</lastmod>
+    <lastmod>2019-07-31T14:08:56Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-engineer-golang-smallpdf-1564494356</loc>
-    <lastmod>2019-07-30T14:45:57+01:00</lastmod>
+    <lastmod>2019-07-30T13:45:57Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-developer-golang-100-remote-uk-eu-only-form3-1564394346</loc>
-    <lastmod>2019-07-29T10:59:06+01:00</lastmod>
+    <lastmod>2019-07-29T09:59:06Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-developer-hdi-systeme-1564037431</loc>
-    <lastmod>2019-07-25T07:50:31+01:00</lastmod>
+    <lastmod>2019-07-25T06:50:31Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-developer-go-mindgeek-1563896954</loc>
-    <lastmod>2019-07-23T16:49:14+01:00</lastmod>
+    <lastmod>2019-07-23T15:49:14Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/lead-backend-engineer-wellthon-1563809178</loc>
-    <lastmod>2019-07-22T16:26:18+01:00</lastmod>
+    <lastmod>2019-07-22T15:26:18Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-engineer-golang-python-m-f-x-hellofresh-se-1563464634</loc>
-    <lastmod>2019-07-18T16:43:54+01:00</lastmod>
+    <lastmod>2019-07-18T15:43:54Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/full-stack-developer-chipmonk-technologies-1563387515</loc>
-    <lastmod>2019-07-17T19:18:35+01:00</lastmod>
+    <lastmod>2019-07-17T18:18:35Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/golang-engineer-gravitational-1563387508</loc>
-    <lastmod>2019-07-17T19:18:28+01:00</lastmod>
+    <lastmod>2019-07-17T18:18:28Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/full-stack-developer-platform-freedom-financial-network-1563387484</loc>
-    <lastmod>2019-07-17T19:18:04+01:00</lastmod>
+    <lastmod>2019-07-17T18:18:04Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-zumata-1563387476</loc>
-    <lastmod>2019-07-17T19:17:56+01:00</lastmod>
+    <lastmod>2019-07-17T18:17:56Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/golang-software-engineer-world-open-network-1563387468</loc>
-    <lastmod>2019-07-17T19:17:48+01:00</lastmod>
+    <lastmod>2019-07-17T18:17:48Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/devops-engineer-world-open-network-1563387461</loc>
-    <lastmod>2019-07-17T19:17:41+01:00</lastmod>
+    <lastmod>2019-07-17T18:17:41Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/lead-product-engineer-mech-mocha-1563387452</loc>
-    <lastmod>2019-07-17T19:17:32+01:00</lastmod>
+    <lastmod>2019-07-17T18:17:32Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/lead-blockchain-developer-elyps-1563387440</loc>
-    <lastmod>2019-07-17T19:17:20+01:00</lastmod>
+    <lastmod>2019-07-17T18:17:20Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/blockchain-developer-specializing-in-hyperledger-troops-1563387432</loc>
-    <lastmod>2019-07-17T19:17:12+01:00</lastmod>
+    <lastmod>2019-07-17T18:17:12Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/golang-developer-queppelin-1563387425</loc>
-    <lastmod>2019-07-17T19:17:05+01:00</lastmod>
+    <lastmod>2019-07-17T18:17:05Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-engineer-gamezop-1563387417</loc>
-    <lastmod>2019-07-17T19:16:57+01:00</lastmod>
+    <lastmod>2019-07-17T18:16:57Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-web-moovup-1563387393</loc>
-    <lastmod>2019-07-17T19:16:33+01:00</lastmod>
+    <lastmod>2019-07-17T18:16:33Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/full-stack-native-developer-numadic-1563387385</loc>
-    <lastmod>2019-07-17T19:16:25+01:00</lastmod>
+    <lastmod>2019-07-17T18:16:25Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-generalist-stackrox-1563387376</loc>
-    <lastmod>2019-07-17T19:16:16+01:00</lastmod>
+    <lastmod>2019-07-17T18:16:16Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-dev-ops-engineer-emagine-consulting-1563387368</loc>
-    <lastmod>2019-07-17T19:16:08+01:00</lastmod>
+    <lastmod>2019-07-17T18:16:08Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-engineer-bread-1563387336</loc>
-    <lastmod>2019-07-17T19:15:36+01:00</lastmod>
+    <lastmod>2019-07-17T18:15:36Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-partnerstack-1563387327</loc>
-    <lastmod>2019-07-17T19:15:27+01:00</lastmod>
+    <lastmod>2019-07-17T18:15:27Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-developer-careerninja-1563387310</loc>
-    <lastmod>2019-07-17T19:15:10+01:00</lastmod>
+    <lastmod>2019-07-17T18:15:10Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-less-bits-1563387302</loc>
-    <lastmod>2019-07-17T19:15:02+01:00</lastmod>
+    <lastmod>2019-07-17T18:15:02Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-engineer-back-end-elblox-1563347663</loc>
-    <lastmod>2019-07-17T08:14:23+01:00</lastmod>
+    <lastmod>2019-07-17T07:14:23Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-backend-developer-golang-for-blockchain-fintech-in-part-time-or-full-time-herdius-1563266481</loc>
-    <lastmod>2019-07-16T09:41:21+01:00</lastmod>
+    <lastmod>2019-07-16T08:41:21Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-engineer-tools-and-platforms-sre-digital-ocean-1563023078</loc>
-    <lastmod>2019-07-13T14:04:38+01:00</lastmod>
+    <lastmod>2019-07-13T13:04:38Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-pivotal-1562936470</loc>
-    <lastmod>2019-07-12T14:01:10+01:00</lastmod>
+    <lastmod>2019-07-12T13:01:10Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-backend-mercari-inc-1562812949</loc>
-    <lastmod>2019-07-11T03:42:29+01:00</lastmod>
+    <lastmod>2019-07-11T02:42:29Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-software-engineer-defrag-labs-1562800906</loc>
-    <lastmod>2019-07-11T00:21:46+01:00</lastmod>
+    <lastmod>2019-07-10T23:21:46Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-zenaton-1562800898</loc>
-    <lastmod>2019-07-11T00:21:38+01:00</lastmod>
+    <lastmod>2019-07-10T23:21:38Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/staff-software-engineer-external-apis-bestow-1562800884</loc>
-    <lastmod>2019-07-11T00:21:24+01:00</lastmod>
+    <lastmod>2019-07-10T23:21:24Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-golang-engineer-bestow-1562800876</loc>
-    <lastmod>2019-07-11T00:21:16+01:00</lastmod>
+    <lastmod>2019-07-10T23:21:16Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/sr-software-engineer-koho-1562800852</loc>
-    <lastmod>2019-07-11T00:20:52+01:00</lastmod>
+    <lastmod>2019-07-10T23:20:52Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/algo-trader-developer-qcp-capital-1562800836</loc>
-    <lastmod>2019-07-11T00:20:36+01:00</lastmod>
+    <lastmod>2019-07-10T23:20:36Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-developer-freelancer-contractor-fstack-1563387538</loc>
-    <lastmod>2019-07-17T19:18:58+01:00</lastmod>
+    <lastmod>2019-07-17T18:18:58Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/full-stack-engineer-golang-react-javascript-gravitational-1563387499</loc>
-    <lastmod>2019-07-17T19:18:19+01:00</lastmod>
+    <lastmod>2019-07-17T18:18:19Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-cash-payment-solutions-gmbh-1562697734</loc>
-    <lastmod>2019-07-09T19:42:14+01:00</lastmod>
+    <lastmod>2019-07-09T18:42:14Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-backend-engineer-simprints-technology-ltd-1562697500</loc>
-    <lastmod>2019-07-09T19:38:20+01:00</lastmod>
+    <lastmod>2019-07-09T18:38:20Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-software-engineer-engel-and-volkers-technology-gmbh-1562697400</loc>
-    <lastmod>2019-07-09T19:36:40+01:00</lastmod>
+    <lastmod>2019-07-09T18:36:40Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-developer-java-and-go-teknei-1562697634</loc>
-    <lastmod>2019-07-09T19:40:34+01:00</lastmod>
+    <lastmod>2019-07-09T18:40:34Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-engineer-data-retrieval-source-d-1562688115</loc>
-    <lastmod>2019-07-09T17:01:55+01:00</lastmod>
+    <lastmod>2019-07-09T16:01:55Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/devops-engineering-consultant-armakuni-1562687997</loc>
-    <lastmod>2019-07-09T16:59:57+01:00</lastmod>
-    <changefreq>daily</changefreq>
-  </url>
-  <url>
-    <loc>https://golang.cafe/job/backend-api-engineer-idagio-1562686936</loc>
-    <lastmod>2019-07-09T16:42:16+01:00</lastmod>
+    <lastmod>2019-07-09T15:59:57Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/cloud-native-engineer-container-solutions-1562686660</loc>
-    <lastmod>2019-07-09T16:37:40+01:00</lastmod>
+    <lastmod>2019-07-09T15:37:40Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-go-account-team-with-bluelabs-software-remote</loc>
-    <lastmod>2019-07-09T16:18:54+01:00</lastmod>
+    <lastmod>2019-07-09T15:18:54Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-developer-fe-es6-vue-or-be-golang-postgress-with-adacado-vancouver</loc>
-    <lastmod>2019-07-09T15:56:11+01:00</lastmod>
+    <lastmod>2019-07-09T14:56:11Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-developer-with-hasty-ai-berlin</loc>
-    <lastmod>2019-07-09T15:56:04+01:00</lastmod>
+    <lastmod>2019-07-09T14:56:04Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/iot-solution-engineer-with-clearblade-austin</loc>
-    <lastmod>2019-07-09T15:55:57+01:00</lastmod>
+    <lastmod>2019-07-09T14:55:57Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-internship-backend-and-infrastructure-with-passbase-berlin</loc>
-    <lastmod>2019-07-09T15:54:34+01:00</lastmod>
+    <lastmod>2019-07-09T14:54:34Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-back-end-developer-with-advanced-blockchain-ag-berlin</loc>
-    <lastmod>2019-07-09T15:54:25+01:00</lastmod>
+    <lastmod>2019-07-09T14:54:25Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-full-stack-developer-with-yptokey-berlin</loc>
-    <lastmod>2019-07-09T15:54:18+01:00</lastmod>
+    <lastmod>2019-07-09T14:54:18Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/java-developer-d-m-f-with-bayes-esports-solutions-berlin-mitte-berlin</loc>
-    <lastmod>2019-07-09T15:54:12+01:00</lastmod>
+    <lastmod>2019-07-09T14:54:12Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-general-software-engineer-m-f-d-with-ree-technology-berlin</loc>
-    <lastmod>2019-07-09T15:53:59+01:00</lastmod>
+    <lastmod>2019-07-09T14:53:59Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/site-reliability-engineer-with-gtmhub-sofia</loc>
-    <lastmod>2019-07-09T15:53:52+01:00</lastmod>
+    <lastmod>2019-07-09T14:53:52Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-moneysmart-group-1562800960</loc>
-    <lastmod>2019-07-11T00:22:40+01:00</lastmod>
+    <lastmod>2019-07-10T23:22:40Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/block-chain-developer-moonx-1562800950</loc>
-    <lastmod>2019-07-11T00:22:30+01:00</lastmod>
+    <lastmod>2019-07-10T23:22:30Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-with-blokur-london-united-kingdom</loc>
-    <lastmod>2019-07-05T16:51:22+01:00</lastmod>
+    <lastmod>2019-07-05T15:51:22Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/full-stack-developer-careerninja-1563387317</loc>
-    <lastmod>2019-07-17T19:15:17+01:00</lastmod>
+    <lastmod>2019-07-17T18:15:17Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/go-developer-with-swiftcomply-us-opco-inc-remote</loc>
-    <lastmod>2019-07-02T11:11:33+01:00</lastmod>
+    <lastmod>2019-07-02T10:11:33Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-developer-koho-1562800845</loc>
-    <lastmod>2019-07-11T00:20:45+01:00</lastmod>
+    <lastmod>2019-07-10T23:20:45Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-engineer-with-risk-ledger-london-uk</loc>
-    <lastmod>2019-07-01T17:00:28+01:00</lastmod>
+    <lastmod>2019-07-01T16:00:28Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/golang-developer-with-activestate-vancouver-bc-remote-ok</loc>
-    <lastmod>2019-06-25T16:15:13+01:00</lastmod>
+    <lastmod>2019-06-25T15:15:13Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/go-developer-remote-with-x-team-remote</loc>
-    <lastmod>2019-06-25T10:34:09+01:00</lastmod>
+    <lastmod>2019-06-25T09:34:09Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-go-backend-engineer-chennai-with-toyota-connected-chennai</loc>
-    <lastmod>2019-06-18T08:32:53+01:00</lastmod>
+    <lastmod>2019-06-18T07:32:53Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/back-end-developer-can-learn-go-golang-remote-within-uk-or-cambridge-with-third-light-cambridge-united-kingdom-remote</loc>
-    <lastmod>2019-06-10T15:42:00+01:00</lastmod>
+    <lastmod>2019-06-10T14:42:00Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-go-developer-with-sparkfly-atlanta-ga-usa</loc>
-    <lastmod>2019-06-07T12:21:53+01:00</lastmod>
+    <lastmod>2019-06-07T11:21:53Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-devops-engineer-with-travel-audience-berlin-germany</loc>
-    <lastmod>2019-06-05T11:04:18+01:00</lastmod>
+    <lastmod>2019-06-05T10:04:18Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-engineer-with-onefootball-berlin-germany</loc>
-    <lastmod>2019-06-05T11:01:46+01:00</lastmod>
+    <lastmod>2019-06-05T10:01:46Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-engineer-with-monzo-london-united-kingdom</loc>
-    <lastmod>2019-06-05T10:57:39+01:00</lastmod>
+    <lastmod>2019-06-05T09:57:39Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-backend-developer-m-f-d-with-upvest-berlin-germany</loc>
-    <lastmod>2019-06-05T10:54:11+01:00</lastmod>
+    <lastmod>2019-06-05T09:54:11Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-go-developer-who-loves-writing-microservices-with-rocaccion-inc-remote</loc>
-    <lastmod>2019-05-30T15:49:31+01:00</lastmod>
+    <lastmod>2019-05-30T14:49:31Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-backend-engineer-go-with-teamwork-ireland-netherlands-uk-spain-poland-bulgaria-argentina</loc>
-    <lastmod>2019-05-28T15:23:07+01:00</lastmod>
+    <lastmod>2019-05-28T14:23:07Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/golang-go-backend-engineer-to-transform-healthcare-and-improve-health-outcomes-at-healum-with-healum-london</loc>
-    <lastmod>2019-05-23T13:24:12+01:00</lastmod>
+    <lastmod>2019-05-23T12:24:12Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-backend-with-cb-insights-new-york-city-usa</loc>
-    <lastmod>2019-05-23T10:06:33+01:00</lastmod>
+    <lastmod>2019-05-23T09:06:33Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-backend-engineer-golang-with-findhotel-amsterdam</loc>
-    <lastmod>2019-05-22T17:27:49+01:00</lastmod>
+    <lastmod>2019-05-22T16:27:49Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-infrastructure-with-dollar-shave-club-los-angeles-ca-usa</loc>
-    <lastmod>2019-05-21T21:28:28+01:00</lastmod>
+    <lastmod>2019-05-21T20:28:28Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/site-reliability-engineer-with-dollar-shave-club-los-angeles-ca-usa</loc>
-    <lastmod>2019-05-21T21:22:50+01:00</lastmod>
+    <lastmod>2019-05-21T20:22:50Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-backend-engineer-with-over-100-remote-london-cape-town</loc>
-    <lastmod>2019-05-21T15:14:32+01:00</lastmod>
+    <lastmod>2019-05-21T14:14:32Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-back-end-engineer-go-with-vidsy-london</loc>
-    <lastmod>2019-05-20T15:31:32+01:00</lastmod>
+    <lastmod>2019-05-20T14:31:32Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/go-software-engineer-multi-robots-with-stanleey-robotics-11th-paris-france</loc>
-    <lastmod>2019-05-16T15:25:55+01:00</lastmod>
+    <lastmod>2019-05-16T14:25:55Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/game-backend-developer-with-awesome-prototype-berlin</loc>
-    <lastmod>2019-05-16T14:54:50+01:00</lastmod>
+    <lastmod>2019-05-16T13:54:50Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/porting-golang-to-tilegx-platform-sanctum-networks-1562800829</loc>
-    <lastmod>2019-07-11T00:20:29+01:00</lastmod>
+    <lastmod>2019-07-10T23:20:29Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-payments-team-with-housinganywhere-rotterdam-netherlands</loc>
-    <lastmod>2019-05-06T16:00:00+01:00</lastmod>
+    <lastmod>2019-05-06T15:00:00Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-go-uk-remote-only-with-utility-warehouse-colindale-london-or-remote</loc>
-    <lastmod>2019-04-29T11:54:11+01:00</lastmod>
+    <lastmod>2019-04-29T10:54:11Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-development-engineer-golang-with-speechmatics-cambridge</loc>
-    <lastmod>2019-04-16T11:17:23+01:00</lastmod>
+    <lastmod>2019-04-16T10:17:23Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-go-with-vidsy-london</loc>
-    <lastmod>2019-04-15T16:29:16+01:00</lastmod>
+    <lastmod>2019-04-15T15:29:16Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/golang-developer-s-with-virtusa-corp-phoenix-az-new-york-city-ny</loc>
-    <lastmod>2019-04-12T23:40:24+01:00</lastmod>
+    <lastmod>2019-04-12T22:40:24Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/machine-learning-infrastructure-engineer-with-cortex-labs-oakland-usa-remote</loc>
-    <lastmod>2019-04-11T12:54:22+01:00</lastmod>
+    <lastmod>2019-04-11T11:54:22Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-team-lead-with-housing-anywhere-rotterdam-netherlands</loc>
-    <lastmod>2019-04-10T17:22:50+01:00</lastmod>
+    <lastmod>2019-04-10T16:22:50Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-back-end-engineer-with-somo-london</loc>
-    <lastmod>2019-04-09T18:03:39+01:00</lastmod>
+    <lastmod>2019-04-09T17:03:39Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/back-end-developer-m-f-with-quoori-hamburg-germany</loc>
-    <lastmod>2019-04-02T21:46:20+01:00</lastmod>
+    <lastmod>2019-04-02T20:46:20Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/consulting-software-engineer-with-tyk-technologies-ltd-remote-uk-eu-canada-southamerica</loc>
-    <lastmod>2019-04-02T11:34:49+01:00</lastmod>
+    <lastmod>2019-04-02T10:34:49Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/go-golang-platform-backend-developer-at-seed-stage-fintech-startup-with-wise-menlo-park-ca</loc>
-    <lastmod>2019-03-31T22:28:46+01:00</lastmod>
+    <lastmod>2019-03-31T21:28:46Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
@@ -1302,827 +1442,827 @@
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-with-fundapps-london-uk</loc>
-    <lastmod>2018-10-25T23:14:16+01:00</lastmod>
+    <lastmod>2018-10-25T22:14:16Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-with-luno-london-uk</loc>
-    <lastmod>2018-10-24T15:19:03+01:00</lastmod>
+    <lastmod>2018-10-24T14:19:03Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-with-synthace-london-uk</loc>
-    <lastmod>2018-10-23T21:27:08+01:00</lastmod>
+    <lastmod>2018-10-23T20:27:08Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/principal-software-engineer-customer-growth-with-sendgrid-denver</loc>
-    <lastmod>2018-10-20T19:13:41+01:00</lastmod>
+    <lastmod>2018-10-20T18:13:41Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-devops-engineer-with-fullcontact-denver</loc>
-    <lastmod>2018-10-20T19:13:31+01:00</lastmod>
+    <lastmod>2018-10-20T18:13:31Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-full-stack-developer-with-ample-organics-toronto</loc>
-    <lastmod>2018-10-20T19:13:22+01:00</lastmod>
+    <lastmod>2018-10-20T18:13:22Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/full-stack-engineer-with-admiral-adblock-publisher-solutions-gainesville-denver</loc>
-    <lastmod>2018-10-20T19:13:06+01:00</lastmod>
+    <lastmod>2018-10-20T18:13:06Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/distributed-systems-engineer-with-ably-realtime-london-uk</loc>
-    <lastmod>2018-10-20T14:31:00+01:00</lastmod>
+    <lastmod>2018-10-20T13:31:00Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-with-risk-ledger-london-uk</loc>
-    <lastmod>2018-10-17T21:10:33+01:00</lastmod>
+    <lastmod>2018-10-17T20:10:33Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/back-end-engineer-with-pluspeter-berlin-germany</loc>
-    <lastmod>2018-10-15T23:16:25+01:00</lastmod>
+    <lastmod>2018-10-15T22:16:25Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-innovation-with-vodafone-london-uk</loc>
-    <lastmod>2018-10-15T23:15:26+01:00</lastmod>
+    <lastmod>2018-10-15T22:15:26Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/cloud-engineer-kubernetes-engineer-with-container-solutions-berlin-germany</loc>
-    <lastmod>2018-10-15T23:13:50+01:00</lastmod>
+    <lastmod>2018-10-15T22:13:50Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/back-end-developer-with-catawiki-amsterdam-netherlands</loc>
-    <lastmod>2018-10-15T19:00:10+01:00</lastmod>
+    <lastmod>2018-10-15T18:00:10Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-developer-with-lanxess-berlin</loc>
-    <lastmod>2018-10-15T18:57:30+01:00</lastmod>
+    <lastmod>2018-10-15T17:57:30Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-developer-with-expa-vancouver</loc>
-    <lastmod>2018-10-14T00:39:30+01:00</lastmod>
+    <lastmod>2018-10-13T23:39:30Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-full-stack-with-hack-capital-canada-vancouver</loc>
-    <lastmod>2018-10-14T00:38:56+01:00</lastmod>
+    <lastmod>2018-10-13T23:38:56Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/blockchain-software-engineer-with-blockluxe-network-vancouver</loc>
-    <lastmod>2018-10-14T00:38:40+01:00</lastmod>
+    <lastmod>2018-10-13T23:38:40Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-golang-developer-contract-with-etherparty-vancouver</loc>
-    <lastmod>2018-10-14T00:38:30+01:00</lastmod>
+    <lastmod>2018-10-13T23:38:30Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-engineer-golang-with-etherparty-vancouver</loc>
-    <lastmod>2018-10-14T00:38:23+01:00</lastmod>
+    <lastmod>2018-10-13T23:38:23Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-with-cto-ai-vancouver</loc>
-    <lastmod>2018-10-14T00:38:06+01:00</lastmod>
+    <lastmod>2018-10-13T23:38:06Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-developer-with-kisi-stockholm-new-york-city-remote</loc>
-    <lastmod>2018-10-14T00:36:13+01:00</lastmod>
+    <lastmod>2018-10-13T23:36:13Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/financial-backend-developer-with-anyfin-stockholm</loc>
-    <lastmod>2018-10-14T00:35:55+01:00</lastmod>
+    <lastmod>2018-10-13T23:35:55Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/technology-lead-with-rokk3r-miami</loc>
-    <lastmod>2018-10-14T00:32:14+01:00</lastmod>
+    <lastmod>2018-10-13T23:32:14Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-backend-with-live-planet-san-jose</loc>
-    <lastmod>2018-10-14T00:30:39+01:00</lastmod>
+    <lastmod>2018-10-13T23:30:39Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/systems-software-engineer-camera-team-with-live-planet-san-jose</loc>
-    <lastmod>2018-10-14T00:30:22+01:00</lastmod>
+    <lastmod>2018-10-13T23:30:22Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/back-end-software-engineer-with-nexgent-san-jose-san-francisco</loc>
-    <lastmod>2018-10-14T00:30:04+01:00</lastmod>
+    <lastmod>2018-10-13T23:30:04Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-full-stack-software-engineer-with-nexgent-san-francisco-san-jose</loc>
-    <lastmod>2018-10-14T00:29:47+01:00</lastmod>
+    <lastmod>2018-10-13T23:29:47Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-go-and-cloud-integrations-with-wanclouds-dallas-san-jose-raleigh</loc>
-    <lastmod>2018-10-14T00:29:30+01:00</lastmod>
+    <lastmod>2018-10-13T23:29:30Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/devops-engineer-with-steady-atlanta</loc>
-    <lastmod>2018-10-14T00:28:15+01:00</lastmod>
+    <lastmod>2018-10-13T23:28:15Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/junior-gopher-with-clutch-technologies-atlanta</loc>
-    <lastmod>2018-10-14T00:27:58+01:00</lastmod>
+    <lastmod>2018-10-13T23:27:58Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-with-deputy-atlanta-sydney</loc>
-    <lastmod>2018-10-14T00:27:49+01:00</lastmod>
+    <lastmod>2018-10-13T23:27:49Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-developer-with-flourish-software-atlanta</loc>
-    <lastmod>2018-10-14T00:27:42+01:00</lastmod>
+    <lastmod>2018-10-13T23:27:42Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/sr-platform-engineer-aws-with-pagely-phoenix-remote</loc>
-    <lastmod>2018-10-14T00:25:47+01:00</lastmod>
+    <lastmod>2018-10-13T23:25:47Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-with-bitfusion-io-austin-remote</loc>
-    <lastmod>2018-10-14T00:25:30+01:00</lastmod>
+    <lastmod>2018-10-13T23:25:30Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/systems-software-engineer-with-bitmed-austin</loc>
-    <lastmod>2018-10-14T00:24:56+01:00</lastmod>
+    <lastmod>2018-10-13T23:24:56Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-back-end-developer-with-network-perception-chicago</loc>
-    <lastmod>2018-10-14T00:21:11+01:00</lastmod>
+    <lastmod>2018-10-13T23:21:11Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-architect-with-precognitive-chicago</loc>
-    <lastmod>2018-10-14T00:20:54+01:00</lastmod>
+    <lastmod>2018-10-13T23:20:54Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-backend-engineer-with-reviewtrackers-chicago</loc>
-    <lastmod>2018-10-14T00:20:37+01:00</lastmod>
+    <lastmod>2018-10-13T23:20:37Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/full-stack-software-engineer-with-canceriq-chicago</loc>
-    <lastmod>2018-10-14T00:20:20+01:00</lastmod>
+    <lastmod>2018-10-13T23:20:20Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-java-go-c-with-taloflow-vancouver-los-angeles-sunnyvale</loc>
-    <lastmod>2018-10-13T19:10:46+01:00</lastmod>
+    <lastmod>2018-10-13T18:10:46Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/full-stack-engineer-with-cluster-los-angeles</loc>
-    <lastmod>2018-10-13T19:10:29+01:00</lastmod>
+    <lastmod>2018-10-13T18:10:29Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/go-engineer-authentication-services-fox-dcg-contract-role-with-fox-interactive-media-los-angeles-remote</loc>
-    <lastmod>2018-10-13T19:10:13+01:00</lastmod>
+    <lastmod>2018-10-13T18:10:13Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-devops-engineer-sf-or-remote-pst-with-dronedeploy-san-francisco-los-angeles-portland-remote</loc>
-    <lastmod>2018-10-13T19:09:56+01:00</lastmod>
+    <lastmod>2018-10-13T18:09:56Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/lead-developper-go-angular-with-creme-de-la-creme-paris</loc>
-    <lastmod>2018-10-13T19:04:58+01:00</lastmod>
+    <lastmod>2018-10-13T18:04:58Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-developer-with-gitguardian-paris</loc>
-    <lastmod>2018-10-13T19:04:25+01:00</lastmod>
+    <lastmod>2018-10-13T18:04:25Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/reliability-engineer-software-with-agricool-paris</loc>
-    <lastmod>2018-10-13T19:03:50+01:00</lastmod>
+    <lastmod>2018-10-13T18:03:50Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-developer-in-go-in-remote-in-europe-or-on-site-in-paris-for-cycloid-a-devops-platform-at-cycloid-with-cycloid-france-spain-italy-remote</loc>
-    <lastmod>2018-10-13T19:03:00+01:00</lastmod>
+    <lastmod>2018-10-13T18:03:00Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-with-breathe-life-montreal</loc>
-    <lastmod>2018-10-13T18:54:58+01:00</lastmod>
+    <lastmod>2018-10-13T17:54:58Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-data-with-eos-canada-montreal</loc>
-    <lastmod>2018-10-13T18:54:41+01:00</lastmod>
+    <lastmod>2018-10-13T17:54:41Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/cto-with-mlg-blockchain-toronto-new-york-city-san-francisco-remote</loc>
-    <lastmod>2018-10-13T18:54:24+01:00</lastmod>
+    <lastmod>2018-10-13T17:54:24Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/tech-lead-in-blockchain-consulting-with-mlg-blockchain-toronto-boston-san-francisco-remote</loc>
-    <lastmod>2018-10-13T18:54:08+01:00</lastmod>
+    <lastmod>2018-10-13T17:54:08Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/back-end-developer-with-payment-rails-montreal</loc>
-    <lastmod>2018-10-13T18:53:58+01:00</lastmod>
+    <lastmod>2018-10-13T17:53:58Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-with-ai-automotive-sydney-los-angeles-new-york-city-remote</loc>
-    <lastmod>2018-10-13T18:38:26+01:00</lastmod>
+    <lastmod>2018-10-13T17:38:26Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-software-engineer-with-lynk-global-hong-kong</loc>
-    <lastmod>2018-10-13T18:37:53+01:00</lastmod>
+    <lastmod>2018-10-13T17:37:53Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-api-with-beeswax-new-york-city</loc>
-    <lastmod>2018-10-13T18:37:19+01:00</lastmod>
+    <lastmod>2018-10-13T17:37:19Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/full-stack-software-engineer-with-coursehorse-new-york-city</loc>
-    <lastmod>2018-10-13T18:37:02+01:00</lastmod>
+    <lastmod>2018-10-13T17:37:02Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-backend-engineer-with-pager-new-york-city</loc>
-    <lastmod>2018-10-13T18:36:45+01:00</lastmod>
+    <lastmod>2018-10-13T17:36:45Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-with-cadence-new-york-city</loc>
-    <lastmod>2018-10-13T18:33:04+01:00</lastmod>
+    <lastmod>2018-10-13T17:33:04Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/blockchain-engineer-with-cadence-new-york-city</loc>
-    <lastmod>2018-10-13T18:32:48+01:00</lastmod>
+    <lastmod>2018-10-13T17:32:48Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-backend-with-fubotv-new-york-city</loc>
-    <lastmod>2018-10-13T18:32:38+01:00</lastmod>
+    <lastmod>2018-10-13T17:32:38Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-engineer-with-jodel-berlin</loc>
-    <lastmod>2018-10-13T18:27:18+01:00</lastmod>
+    <lastmod>2018-10-13T17:27:18Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/2nd-platform-engineer-go-lang-with-aicumen-technologies-california-bengaluru-berlin-remote</loc>
-    <lastmod>2018-10-13T18:27:00+01:00</lastmod>
+    <lastmod>2018-10-13T17:27:00Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-m-f-with-smarttrade-hennigsdorf-berlin-leipzig-halle-saale</loc>
-    <lastmod>2018-10-13T18:26:05+01:00</lastmod>
+    <lastmod>2018-10-13T17:26:05Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-dapp-and-smart-contracts-with-centrifuge-berlin</loc>
-    <lastmod>2018-10-13T18:25:48+01:00</lastmod>
+    <lastmod>2018-10-13T17:25:48Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-core-infrastructure-with-centrifuge-berlin-berlin-berlin</loc>
-    <lastmod>2018-10-13T18:25:15+01:00</lastmod>
+    <lastmod>2018-10-13T17:25:15Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/golang-blockchain-engineer-m-w-with-herdius-berlin-berlin</loc>
-    <lastmod>2018-10-13T18:24:57+01:00</lastmod>
+    <lastmod>2018-10-13T17:24:57Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-with-synergist-io-berlin-berlin-remote</loc>
-    <lastmod>2018-10-13T18:24:47+01:00</lastmod>
+    <lastmod>2018-10-13T17:24:47Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-databases-with-tendermint-san-francisco-berlin-toronto-remote</loc>
-    <lastmod>2018-10-13T18:24:24+01:00</lastmod>
+    <lastmod>2018-10-13T17:24:24Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-sdk-with-tendermint-san-francisco-berlin-toronto</loc>
-    <lastmod>2018-10-13T18:24:07+01:00</lastmod>
+    <lastmod>2018-10-13T17:24:07Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-ethermint-with-tendermint-san-francisco-berlin-toronto</loc>
-    <lastmod>2018-10-13T18:23:50+01:00</lastmod>
+    <lastmod>2018-10-13T17:23:50Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-site-reliability-engineer-with-tendermint-san-francisco-berlin-toronto</loc>
-    <lastmod>2018-10-13T18:23:40+01:00</lastmod>
+    <lastmod>2018-10-13T17:23:40Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-systems-engineer-with-swish-toronto-san-francisco-remote</loc>
-    <lastmod>2018-10-13T18:23:33+01:00</lastmod>
+    <lastmod>2018-10-13T17:23:33Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/blockchain-engineer-protocol-level-with-swish-toronto-san-francisco-remote-remote</loc>
-    <lastmod>2018-10-13T18:23:22+01:00</lastmod>
+    <lastmod>2018-10-13T17:23:22Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-backend-engineer-devops-go-at-glassnode-with-glassnode-berlin</loc>
-    <lastmod>2018-10-13T18:22:58+01:00</lastmod>
+    <lastmod>2018-10-13T17:22:58Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-developer-with-wiredcraft-shanghai</loc>
-    <lastmod>2018-10-13T18:22:48+01:00</lastmod>
+    <lastmod>2018-10-13T17:22:48Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-backend-engineer-m-f-for-new-fintech-venture-with-finleap-berlin</loc>
-    <lastmod>2018-10-13T18:22:38+01:00</lastmod>
+    <lastmod>2018-10-13T17:22:38Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-engineer-m-f-with-optiopay-berlin</loc>
-    <lastmod>2018-10-13T18:22:28+01:00</lastmod>
+    <lastmod>2018-10-13T17:22:28Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-developer-golang-with-careibu-amsterdam</loc>
-    <lastmod>2018-10-13T18:22:11+01:00</lastmod>
+    <lastmod>2018-10-13T17:22:11Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/site-reliability-engineer-with-pubnative-berlin</loc>
-    <lastmod>2018-10-13T18:21:57+01:00</lastmod>
+    <lastmod>2018-10-13T17:21:57Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/intern-m-f-full-stack-software-engineer-at-a-smart-building-platform-startup-funded-by-innogy-ventures-with-innogy-innovation-hub-berlin-berlin-berlin</loc>
-    <lastmod>2018-10-13T18:21:50+01:00</lastmod>
+    <lastmod>2018-10-13T17:21:50Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-backend-engineer-with-trecker-com-berlin</loc>
-    <lastmod>2018-10-13T18:21:43+01:00</lastmod>
+    <lastmod>2018-10-13T17:21:43Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/devops-cloud-platform-engineer-m-f-x-with-flixbus-berlin</loc>
-    <lastmod>2018-10-13T18:21:16+01:00</lastmod>
+    <lastmod>2018-10-13T17:21:16Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-f-m-with-olx-group-berlin-berlin-germany</loc>
-    <lastmod>2018-10-13T18:21:08+01:00</lastmod>
+    <lastmod>2018-10-13T17:21:08Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-with-beaconinside-berlin</loc>
-    <lastmod>2018-10-13T18:20:58+01:00</lastmod>
+    <lastmod>2018-10-13T17:20:58Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/site-reliability-engineer-with-kiwi-ki-berlin</loc>
-    <lastmod>2018-10-13T18:20:51+01:00</lastmod>
+    <lastmod>2018-10-13T17:20:51Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-m-f-with-collectai-berlin</loc>
-    <lastmod>2018-10-13T18:20:43+01:00</lastmod>
+    <lastmod>2018-10-13T17:20:43Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/site-reliability-go-software-engineer-f-m-with-collectai-berlin</loc>
-    <lastmod>2018-10-13T18:20:33+01:00</lastmod>
+    <lastmod>2018-10-13T17:20:33Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/trading-systems-engineer-with-hackmind-berlin</loc>
-    <lastmod>2018-10-13T18:20:08+01:00</lastmod>
+    <lastmod>2018-10-13T17:20:08Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-engineer-with-spilly-berlin</loc>
-    <lastmod>2018-10-13T18:19:51+01:00</lastmod>
+    <lastmod>2018-10-13T17:19:51Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/platform-and-devops-engineer-with-fatmap-london-berlin</loc>
-    <lastmod>2018-10-13T18:19:34+01:00</lastmod>
+    <lastmod>2018-10-13T17:19:34Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-full-stack-developer-blockchain-with-ares-tech-berlin</loc>
-    <lastmod>2018-10-13T18:19:17+01:00</lastmod>
+    <lastmod>2018-10-13T17:19:17Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/solution-architect-boston-ma-or-remote-within-the-us-with-newstore-boston-united-states-remote</loc>
-    <lastmod>2018-10-13T18:19:07+01:00</lastmod>
+    <lastmod>2018-10-13T17:19:07Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-developer-f-m-with-newstore-berlin-erfurt-region-hannover</loc>
-    <lastmod>2018-10-13T18:18:38+01:00</lastmod>
+    <lastmod>2018-10-13T17:18:38Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/platform-engineer-or-architect-with-wanderu-boston-remote</loc>
-    <lastmod>2018-10-13T18:13:05+01:00</lastmod>
+    <lastmod>2018-10-13T17:13:05Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/sr-full-stack-developer-with-tv-time-santa-monica</loc>
-    <lastmod>2018-10-13T18:12:48+01:00</lastmod>
+    <lastmod>2018-10-13T17:12:48Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-and-fullstack-developer-with-azumo-argentina-chile-uruguay-remote</loc>
-    <lastmod>2018-10-13T18:12:23+01:00</lastmod>
+    <lastmod>2018-10-13T17:12:23Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/lead-software-engineer-at-wattx-with-wattx-berlin</loc>
-    <lastmod>2018-10-13T18:12:06+01:00</lastmod>
+    <lastmod>2018-10-13T17:12:06Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-developer-with-redmarlin-mountain-view-san-francisco-bay-area</loc>
-    <lastmod>2018-10-13T18:11:50+01:00</lastmod>
+    <lastmod>2018-10-13T17:11:50Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-with-catch-cambridge-boston-massachusetts</loc>
-    <lastmod>2018-10-13T18:10:25+01:00</lastmod>
+    <lastmod>2018-10-13T17:10:25Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-golang-developer-with-graymeta-inc-los-angeles-ca-remote</loc>
-    <lastmod>2018-10-07T23:55:41+01:00</lastmod>
+    <lastmod>2018-10-07T22:55:41Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-engineer-with-wework-san-francisco</loc>
-    <lastmod>2018-10-07T23:52:19+01:00</lastmod>
+    <lastmod>2018-10-07T22:52:19Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/golang-engineer-with-red-ventures-london-uk</loc>
-    <lastmod>2018-10-06T02:09:49+01:00</lastmod>
+    <lastmod>2018-10-06T01:09:49Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-platform-engineer-with-apptentive-seattle-wa</loc>
-    <lastmod>2018-10-06T02:08:27+01:00</lastmod>
+    <lastmod>2018-10-06T01:08:27Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-deployment-infrastructure-with-palantir-technologies-seattle-wa</loc>
-    <lastmod>2018-10-06T02:01:54+01:00</lastmod>
+    <lastmod>2018-10-06T01:01:54Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/lead-devops-consultant-with-contino-london-uk</loc>
-    <lastmod>2018-10-06T01:07:23+01:00</lastmod>
+    <lastmod>2018-10-06T00:07:23Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-engineer-with-meshify-austin-tx</loc>
-    <lastmod>2018-10-05T14:58:04+01:00</lastmod>
+    <lastmod>2018-10-05T13:58:04Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/full-stack-engineer-w-devops-focus-with-factset-norwalk-ct</loc>
-    <lastmod>2018-10-05T13:10:20+01:00</lastmod>
+    <lastmod>2018-10-05T12:10:20Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/oss-software-engineer-with-datawire-io-boston-remote</loc>
-    <lastmod>2018-10-03T22:36:22+01:00</lastmod>
+    <lastmod>2018-10-03T21:36:22Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-architect-with-twitch-san-francisco</loc>
-    <lastmod>2018-10-03T22:35:12+01:00</lastmod>
+    <lastmod>2018-10-03T21:35:12Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/distributed-systems-engineer-with-monax-london-uk</loc>
-    <lastmod>2018-10-03T22:09:37+01:00</lastmod>
+    <lastmod>2018-10-03T21:09:37Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-developer-with-yoti-london-uk</loc>
-    <lastmod>2018-10-03T22:08:28+01:00</lastmod>
+    <lastmod>2018-10-03T21:08:28Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/site-reliability-engineer-with-contiamo-berlin-germany</loc>
-    <lastmod>2018-10-03T22:06:43+01:00</lastmod>
+    <lastmod>2018-10-03T21:06:43Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-with-uswitch-london-uk</loc>
-    <lastmod>2018-10-03T22:05:12+01:00</lastmod>
+    <lastmod>2018-10-03T21:05:12Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-backend-with-kraken-berlin-remote</loc>
-    <lastmod>2018-10-03T22:00:53+01:00</lastmod>
+    <lastmod>2018-10-03T21:00:53Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/lead-backend-engineer-with-social-point-barcelona-spain</loc>
-    <lastmod>2018-09-30T22:32:47+01:00</lastmod>
+    <lastmod>2018-09-30T21:32:47Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-backend-software-engineer-with-verse-technologies-barcelona-spain</loc>
-    <lastmod>2018-09-30T22:31:31+01:00</lastmod>
+    <lastmod>2018-09-30T21:31:31Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/full-stack-engineer-with-trustory-los-angeles</loc>
-    <lastmod>2018-09-30T01:38:08+01:00</lastmod>
+    <lastmod>2018-09-30T00:38:08Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-back-end-with-tradesy-los-angeles-santa-monica</loc>
-    <lastmod>2018-09-30T01:36:01+01:00</lastmod>
+    <lastmod>2018-09-30T00:36:01Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-backend-engineer-with-pink-technologies-los-angeles</loc>
-    <lastmod>2018-09-30T01:29:55+01:00</lastmod>
+    <lastmod>2018-09-30T00:29:55Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/full-stack-software-developer-with-ntwrk-los-angeles</loc>
-    <lastmod>2018-09-30T01:27:12+01:00</lastmod>
+    <lastmod>2018-09-30T00:27:12Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/full-stack-engineer-at-omaze-with-omaze-los-angeles</loc>
-    <lastmod>2018-09-30T01:25:52+01:00</lastmod>
+    <lastmod>2018-09-30T00:25:52Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-back-end-developer-with-the-ticket-fairy-los-angeles-london</loc>
-    <lastmod>2018-09-30T01:23:50+01:00</lastmod>
+    <lastmod>2018-09-30T00:23:50Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-with-routefire-san-francisco</loc>
-    <lastmod>2018-09-04T20:58:56+01:00</lastmod>
+    <lastmod>2018-09-04T19:58:56Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-go-with-spaceship-financial-services-sydney-australia</loc>
-    <lastmod>2018-09-02T09:14:09+01:00</lastmod>
+    <lastmod>2018-09-02T08:14:09Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/distributed-systems-tls-api-engineer-with-fastly-san-francisco-remote</loc>
-    <lastmod>2018-08-31T19:53:16+01:00</lastmod>
+    <lastmod>2018-08-31T18:53:16Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/fullstack-engineer-with-lodge-technology-pty-ltd-sydney</loc>
-    <lastmod>2018-08-31T06:23:43+01:00</lastmod>
+    <lastmod>2018-08-31T05:23:43Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-platform-with-invision-remote</loc>
-    <lastmod>2018-08-31T02:17:47+01:00</lastmod>
+    <lastmod>2018-08-31T01:17:47Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-backend-with-sysdig-san-francisco-ca</loc>
-    <lastmod>2018-08-31T02:12:17+01:00</lastmod>
+    <lastmod>2018-08-31T01:12:17Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-golang-engineer-with-blockchain-interest-with-verisart-inc-london-uk</loc>
-    <lastmod>2018-08-30T16:15:00+01:00</lastmod>
+    <lastmod>2018-08-30T15:15:00Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-with-corti-copenhagen-denmark</loc>
-    <lastmod>2018-08-30T10:27:50+01:00</lastmod>
+    <lastmod>2018-08-30T09:27:50Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-engineer-with-consensys-new-york-remote</loc>
-    <lastmod>2018-08-30T00:54:12+01:00</lastmod>
+    <lastmod>2018-08-29T23:54:12Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-engineer-with-resin-london-uk-remote</loc>
-    <lastmod>2018-08-30T00:39:50+01:00</lastmod>
+    <lastmod>2018-08-29T23:39:50Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-with-hashicorp-charlotte-nc-remote</loc>
-    <lastmod>2018-08-30T00:35:36+01:00</lastmod>
+    <lastmod>2018-08-29T23:35:36Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/systems-developer-with-brankas-jakarta-indonesia-remote</loc>
-    <lastmod>2018-08-30T00:23:53+01:00</lastmod>
+    <lastmod>2018-08-29T23:23:53Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-engineer-search-with-soundcloud-berlin-germany</loc>
-    <lastmod>2018-08-29T22:01:02+01:00</lastmod>
+    <lastmod>2018-08-29T21:01:02Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-go-language-platform-with-uber-san-francisco-ca</loc>
-    <lastmod>2018-08-29T21:57:17+01:00</lastmod>
+    <lastmod>2018-08-29T20:57:17Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/kubernetes-engineer-with-arangodb-cologne-remote</loc>
-    <lastmod>2018-08-29T21:52:34+01:00</lastmod>
+    <lastmod>2018-08-29T20:52:34Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-with-general-motors-san-francisco</loc>
-    <lastmod>2018-08-29T21:51:07+01:00</lastmod>
+    <lastmod>2018-08-29T20:51:07Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/distributed-systems-engineer-with-mlab-san-francisco</loc>
-    <lastmod>2018-08-29T21:42:30+01:00</lastmod>
+    <lastmod>2018-08-29T20:42:30Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/blockchain-developer-with-hypergrowth-london-berlin-remote</loc>
-    <lastmod>2018-08-29T21:40:22+01:00</lastmod>
+    <lastmod>2018-08-29T20:40:22Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-with-hashnode-san-francisco-new-york-city-remote</loc>
-    <lastmod>2018-08-29T21:37:31+01:00</lastmod>
+    <lastmod>2018-08-29T20:37:31Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/back-end-engineer-with-ravelin-london-uk</loc>
-    <lastmod>2018-08-29T21:21:09+01:00</lastmod>
+    <lastmod>2018-08-29T20:21:09Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/junior-blockchain-developer-with-karatcoin-london-uk-remote</loc>
-    <lastmod>2018-08-29T21:17:10+01:00</lastmod>
+    <lastmod>2018-08-29T20:17:10Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/golang-engineer-with-blk-io-london-uk</loc>
-    <lastmod>2018-08-29T21:14:52+01:00</lastmod>
+    <lastmod>2018-08-29T20:14:52Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-backend-engineer-with-pusher-london-uk</loc>
-    <lastmod>2018-08-29T20:33:24+01:00</lastmod>
+    <lastmod>2018-08-29T19:33:24Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-backend-engineer-with-hello-fresh-berlin</loc>
-    <lastmod>2018-08-29T20:31:14+01:00</lastmod>
+    <lastmod>2018-08-29T19:31:14Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-backend-with-hoteltonight-san-francisco</loc>
-    <lastmod>2018-08-29T20:28:38+01:00</lastmod>
+    <lastmod>2018-08-29T19:28:38Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/distributed-systems-engineer-with-flare-london-uk</loc>
-    <lastmod>2018-08-29T20:24:15+01:00</lastmod>
+    <lastmod>2018-08-29T19:24:15Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/golang-engineer-with-beamery-london-uk</loc>
-    <lastmod>2018-08-29T20:23:18+01:00</lastmod>
+    <lastmod>2018-08-29T19:23:18Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/golang-developer-with-mashroom-london-uk</loc>
-    <lastmod>2018-08-29T20:22:24+01:00</lastmod>
+    <lastmod>2018-08-29T19:22:24Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-engineer-with-hinge-new-york-city</loc>
-    <lastmod>2018-08-29T20:18:58+01:00</lastmod>
+    <lastmod>2018-08-29T19:18:58Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-with-algorithmia-seattle-san-francisco-vancouver-remote</loc>
-    <lastmod>2018-08-29T20:17:21+01:00</lastmod>
+    <lastmod>2018-08-29T19:17:21Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-go-developer-with-geckoboard-london-uk</loc>
-    <lastmod>2018-08-29T01:52:41+01:00</lastmod>
+    <lastmod>2018-08-29T00:52:41Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-with-fat-llama-london-uk</loc>
-    <lastmod>2018-08-29T00:19:13+01:00</lastmod>
+    <lastmod>2018-08-28T23:19:13Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-developer-with-curve-london-uk</loc>
-    <lastmod>2018-08-29T00:16:26+01:00</lastmod>
+    <lastmod>2018-08-28T23:16:26Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/beats-golang-engineer-with-elastic-remote</loc>
-    <lastmod>2018-08-29T00:13:20+01:00</lastmod>
+    <lastmod>2018-08-28T23:13:20Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-software-engineer-spatialos-with-improbable-london-uk</loc>
-    <lastmod>2018-08-29T00:10:36+01:00</lastmod>
+    <lastmod>2018-08-28T23:10:36Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-go-software-engineer-with-paddle-london-uk</loc>
-    <lastmod>2018-08-28T23:59:02+01:00</lastmod>
+    <lastmod>2018-08-28T22:59:02Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-with-mongodb-new-york</loc>
-    <lastmod>2018-08-28T23:23:48+01:00</lastmod>
+    <lastmod>2018-08-28T22:23:48Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/open-source-software-engineer-with-datadog-new-york-paris-remote</loc>
-    <lastmod>2018-08-28T23:19:06+01:00</lastmod>
+    <lastmod>2018-08-28T22:19:06Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/senior-go-engineer-with-machinemax-london-uk</loc>
-    <lastmod>2018-08-28T16:51:51+01:00</lastmod>
+    <lastmod>2018-08-28T15:51:51Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-engineer-with-monzo-london-uk</loc>
-    <lastmod>2018-08-27T16:31:30+01:00</lastmod>
+    <lastmod>2018-08-27T15:31:30Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/backend-engineer-with-cuvva-london-uk</loc>
-    <lastmod>2018-08-27T16:27:52+01:00</lastmod>
+    <lastmod>2018-08-27T15:27:52Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/platform-engineer-with-paradino-london-uk</loc>
-    <lastmod>2018-08-27T16:25:54+01:00</lastmod>
+    <lastmod>2018-08-27T15:25:54Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
   <url>
     <loc>https://golang.cafe/job/software-engineer-with-brightcove-london-uk</loc>
-    <lastmod>2018-08-27T16:25:44+01:00</lastmod>
+    <lastmod>2018-08-27T15:25:44Z</lastmod>
     <changefreq>daily</changefreq>
   </url>
 </urlset>
